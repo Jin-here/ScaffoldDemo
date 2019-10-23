@@ -97,7 +97,7 @@ scaffold module
       4. tab选中/非选中样式；
    2. 底部indicator内置如下两种，开发者可通过实现BaseIndicator抽象类来自定义绘制；
 
-   ![](../gallery/compoment_tab_indicator_style.png)
+   ![](https://github.com/VolodymyrCj/ScaffoldDemo/blob/develop/gallery/compoment_tab_indicator_style.png)
 4. viewpager：
    1. 封装adapter，使用示例如下，仅需实现该方法即可：
    ```java
@@ -113,16 +113,18 @@ scaffold module
 5. other：
    1. toolbar：支持以下四种样式：
 
-   ![](../gallery/compoment_other_toolbar.png)
+   ![](https://github.com/VolodymyrCj/ScaffoldDemo/blob/develop/gallery/compoment_other_toolbar.png)
    2. checkable imagebutton：支持src选中和background选中：
 
-   ![](../gallery/compoment_other_checkable_imagebutton.png)
+   ![](https://github.com/VolodymyrCj/ScaffoldDemo/blob/develop/gallery/compoment_other_checkable_imagebutton.png)
    3. setting item：支持以下5中样式：
 
-   ![](../gallery/compoment_other_setting.png)
+   ![](https://github.com/VolodymyrCj/ScaffoldDemo/blob/develop/gallery/compoment_other_setting.png)
    4. count edittext：计数edittext，如下：
 
-   ![](../gallery/compoment_other_count_edittext.png)
+   ![](https://github.com/VolodymyrCj/ScaffoldDemo/blob/develop/gallery/compoment_other_count_edittext.png)
+   
+   5. 其他；
 
 ### 内置页面
 具体使用可下载源码查看；
