@@ -154,7 +154,7 @@ scaffold module
 ```
 
 ### 架构模式
-mvvm + livedata + lifecycle，具体使用请查阅源码；
+MVVM + DataBinding + LivaData + Lifecycle，具体使用请查阅源码；
 
 ### 内置常用类
 1. ContextManager：上下文管理，包括以下功能：
