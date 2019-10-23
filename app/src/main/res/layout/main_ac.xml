@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
+
+    <FrameLayout
+        android:id="@+id/main_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <com.vgaw.scaffold.view.bottomnavigation.BottomNavigationLayout
+        android:id="@+id/main_bottom_nav_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.vgaw.scaffold.view.bottomnavigation.BottomNavigationItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:bottomNavName="组件介绍"
+            app:bottomNavIcon="@drawable/main_bottom_nav_icon"
+            app:bottomNavIconChecked="@drawable/main_bottom_nav_icon_checked"/>
+
+        <com.vgaw.scaffold.view.bottomnavigation.BottomNavigationItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:bottomNavName="内置页面"
+            app:bottomNavIcon="@drawable/main_bottom_nav_icon"
+            app:bottomNavIconChecked="@drawable/main_bottom_nav_icon_checked"/>
+
+        <com.vgaw.scaffold.view.bottomnavigation.BottomNavigationItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:bottomNavName="使用示例"
+            app:bottomNavIcon="@drawable/main_bottom_nav_icon"
+            app:bottomNavIconChecked="@drawable/main_bottom_nav_icon_checked"/>
+    </com.vgaw.scaffold.view.bottomnavigation.BottomNavigationLayout>
+</LinearLayout>

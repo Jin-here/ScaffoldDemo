@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="base_lack_permission">缺少必要的权限</string>
+    <string name="base_dialog_cancel">取消</string>
+    <string name="base_dialog_ok">确定</string>
+    <string name="base_set_suc">设置成功</string>
+    <string name="base_hint">提示</string>
+    <string name="base_unknown">未知</string>
+    <string name="base_http_server_error">服务器错误</string>
+    <string name="base_http_failed">请求失败</string>
+    <string name="base_http_time_out">请求超时</string>
+    <string name="base_loading">正在加载…</string>
+    <string name="base_no_more">没有更多啦</string>
+    <string name="base_load_error">加载出错，请点击重试</string>
+    <string name="base_navigation_drawer_open">打开抽屉</string>
+    <string name="base_navigation_drawer_close">关闭抽屉</string>
+
+    <string name="listview_header_hint_normal">下拉刷新</string>
+    <string name="listview_header_hint_release">释放立即刷新</string>
+    <string name="listview_loading">正在加载...</string>
+    <string name="nomore_loading">没有了</string>
+    <string name="refreshing">正在刷新...</string>
+    <string name="refresh_done">刷新完成</string>
+    <string name="loading_done">加载完成</string>
+    <string name="listview_header_last_time">上次更新时间：</string>
+
+    <string name="copy_link">复制链接</string>
+
+    <string name="upgrade_dialog_title">新版本v%1$s</string>
+    <string name="upgrade_dialog_size">大小：%1$dM</string>
+
+    <string name="errcode_success">发送成功</string>
+    <string name="errcode_cancel">发送取消</string>
+    <string name="errcode_deny">发送被拒绝</string>
+    <string name="errcode_unsupported">不支持错误</string>
+    <string name="errcode_unknown">发送返回</string>
+
+    <string name="picture_from_camera">拍照</string>
+    <string name="picture_from_album">从相册中选择</string>
+
+    <string name="qrcode_generate_fail">二维码生成出错，请稍后再试</string>
+    <string name="qrcode_scan">二维码识别</string>
+    <string name="qrcode_scan_hint">将二维码放入框内，即可自动识别</string>
+    <string name="turn_on_torch">打开手电筒</string>
+    <string name="turn_off_torch">关闭手电筒</string>
+
+    <string name="share_media_qq">QQ</string>
+    <string name="share_media_qq_zone">空间</string>
+    <string name="share_media_wx">微信</string>
+    <string name="share_media_wx_circle">朋友圈</string>
+    <string name="share_media_wb">微博</string>
+
+    <string name="feedback">反馈</string>
+</resources>

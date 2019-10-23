@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#9013FE</color>
+    <color name="colorPrimaryDark">#9013FE</color>
+    <color name="colorAccent">#9013FE</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="white1">#FAFAFA</color>
+    <!--60%-->
+    <color name="white2">#99FFFFFF</color>
+    <!--38%-->
+    <color name="white3">#61FFFFFF</color>
+    <color name="white4">#D8D8D8</color>
+    <color name="white5">#E0E0E0</color>
+
+    <color name="black">#000000</color>
+    <color name="black1">#66000000</color>
+    <color name="black2">#979797</color>
+    <!--dialog bg-->
+    <color name="black3">#99191919</color>
+    <!--54%-->
+    <color name="black4">#8A000000</color>
+    <!--60%-->
+    <color name="black5">#99000000</color>
+    <!--87%-->
+    <color name="black6">#DE000000</color>
+    <!--38%-->
+    <color name="black7">#61000000</color>
+    <!--20%-->
+    <color name="black8">#33000000</color>
+    <color name="black9">#99191919</color>
+</resources>
