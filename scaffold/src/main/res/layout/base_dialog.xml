@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black3"
+    android:clickable="true">
+
+    <LinearLayout
+        android:id="@+id/base_dialog_content"
+        android:layout_width="268dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@drawable/primary_small_corner_bg">
+
+        <TextView
+            android:id="@+id/base_dialog_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Body1.White.High.Left"
+            android:inputType="textMultiLine"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:id="@+id/base_dialog_cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/base_dialog_ok"
+                android:background="@drawable/dialog_cancel_button_bg"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                android:textColor="@color/white1"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textAllCaps="true"/>
+
+            <TextView
+                android:id="@+id/base_dialog_ok"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@id/base_dialog_cancel"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/dialog_ok_button_bg"
+                android:textColor="@color/white1"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textAllCaps="true"/>
+
+            <TextView
+                android:id="@+id/base_dialog_single"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/dialog_single_bg"
+                android:textColor="@color/white1"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textAllCaps="true"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</FrameLayout>

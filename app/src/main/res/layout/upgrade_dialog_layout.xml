@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black3">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="274dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/primary_small_corner_bg"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:tag="beta_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:tag="beta_upgrade_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:tag="beta_upgrade_feature"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/upgrade_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Subtitle1.White.High.Left"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/upgrade_dialog_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Overline.White.High.Right"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/upgrade_dialog_feature"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/Body2.Black.Medium.Left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upgrade_dialog_title"
+            android:background="@drawable/white_small_corner_bg"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="12dp"
+            android:padding="8dp"/>
+
+        <TextView
+            android:id="@+id/dialog_upgrade_cancel_btn"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:tag="beta_cancel_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dialog_upgrade_ok_btn"
+            app:layout_constraintTop_toBottomOf="@id/upgrade_dialog_feature"
+            android:background="@drawable/dialog_cancel_button_bg"
+            android:layout_marginTop="24dp"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            android:textColor="@color/white1"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textAllCaps="true"/>
+
+        <TextView
+            android:id="@+id/dialog_upgrade_ok_btn"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:tag="beta_confirm_button"
+            app:layout_constraintStart_toEndOf="@id/dialog_upgrade_cancel_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dialog_upgrade_cancel_btn"
+            android:background="@drawable/dialog_ok_button_bg"
+            android:textColor="@color/white1"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textAllCaps="true"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

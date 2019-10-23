@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/other_root">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:clickable="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:paddingStart="10dp"
+            android:background="@android:color/darker_gray"
+            style="@style/Subtitle1.White.High"
+            android:gravity="center_vertical|start"
+            android:text="toolbar"/>
+
+        <com.vgaw.scaffold.view.TitleLayout
+            android:id="@+id/other_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleCaption="示例1"/>
+
+        <com.vgaw.scaffold.view.TitleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleCaption="示例2"
+            app:titleBackIcon="@android:drawable/ic_menu_close_clear_cancel"/>
+
+        <com.vgaw.scaffold.view.TitleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleCaption="示例3"
+            app:titleMenuEnabled="true"
+            app:titleMenu="提交"/>
+
+        <com.vgaw.scaffold.view.TitleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleCaption="示例4（阴影）"
+            app:titleShowShadow="true"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:paddingStart="10dp"
+            android:background="@android:color/darker_gray"
+            style="@style/Subtitle1.White.High"
+            android:gravity="center_vertical|start"
+            android:text="checkable imagebutton"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="128dp"
+                android:layout_height="match_parent"
+                android:paddingStart="10dp"
+                style="@style/Subtitle1.Black.High"
+                android:gravity="center_vertical|start"
+                android:text="src:"/>
+
+            <com.vgaw.scaffold.view.CheckedImageButton
+                android:id="@+id/other_checkedib"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="128dp"
+                android:layout_height="match_parent"
+                android:paddingStart="10dp"
+                style="@style/Subtitle1.Black.High"
+                android:gravity="center_vertical|start"
+                android:text="background:"/>
+
+            <com.vgaw.scaffold.view.CheckedImageButton
+                android:id="@+id/other_checkedib1"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:paddingStart="10dp"
+            android:background="@android:color/darker_gray"
+            style="@style/Subtitle1.White.High"
+            android:gravity="center_vertical|start"
+            android:text="setting"/>
+
+        <com.vgaw.scaffold.view.SettingItemView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:settingName="示例1"/>
+
+        <com.vgaw.scaffold.view.SettingItemView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:settingName="示例2"
+            app:settingIcon="@android:drawable/btn_star_big_off"/>
+
+        <com.vgaw.scaffold.view.SettingItemView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:settingName="示例3"
+            app:settingIcon="@android:drawable/btn_star_big_off"
+            app:settingDes="描述"/>
+
+        <com.vgaw.scaffold.view.SettingCheckView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:settingCheckName="示例4"
+            app:settingCheckDes="描述"
+            app:settingChecked="true"/>
+
+        <com.vgaw.scaffold.view.SettingToggleView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:settingToggleName="示例5"
+            app:settingToggleDes="描述"
+            app:settingToggled="true"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:paddingStart="10dp"
+            android:background="@android:color/darker_gray"
+            style="@style/Subtitle1.White.High"
+            android:gravity="center_vertical|start"
+            android:text="count edittext"/>
+
+        <com.vgaw.scaffold.view.CountEditText
+            android:id="@+id/other_countet"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            app:countMaxLength="120"
+            app:countHint="说点什么吧"/>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

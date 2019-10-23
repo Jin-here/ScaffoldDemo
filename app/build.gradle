@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.vgaw.scaffolddemo"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags "-fexceptions"
+                arguments "-DANDROID_STL=c++_shared"
+            }
+            ndk {
+                abiFilters "armeabi-v7a", "x86","arm64-v8a","x86_64"
+            }
+        }
+        // open multiDex
+        /*multiDexEnabled true*/
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+    signingConfigs {
+        keystore_default {
+            keyAlias "volodymyr_debug"
+            keyPassword "keypassword"
+            storeFile file("volodymyr_debug.jks")
+            storePassword "password"
+        }
+    }
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            multiDexKeepProguard file('multidex-config.pro')
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.keystore_default
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+    /*use old http*/
+    /*useLibrary 'org.apache.http.legacy'*/
+    sourceSets {
+        main {
+            res.srcDirs=[
+                    'src/main/res/layout/demo',
+                    'src/main/res/layout',
+                    'src/main/res']
+
+        }}
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // test
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    // multiDex
+    /*implementation 'androidx.multidex:multidex:2.0.1'*/
+    // scaffold
+    implementation project(path: ':scaffold')
+    // bug report only
+    /*implementation 'com.tencent.bugly:crashreport:latest.release'*/
+    // bug report and upgrade
+    implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    // the up two can only choose one
+    // ndk bug report
+    /*implementation 'com.tencent.bugly:nativecrashreport:latest.release'*/
+}

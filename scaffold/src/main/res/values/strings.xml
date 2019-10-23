@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">scaffold</string>
+    <string name="app_name_official">scaffold</string>
+
+    <string name="base_lack_permission">Permission lacked</string>
+    <string name="base_dialog_cancel">Cancel</string>
+    <string name="base_dialog_ok">Ok</string>
+    <string name="base_set_suc">Applied Success</string>
+    <string name="base_hint">Reminder</string>
+    <string name="base_unknown">Unknown</string>
+    <string name="base_http_server_error">Server error</string>
+    <string name="base_http_failed">Connection closed by peer</string>
+    <string name="base_http_time_out">Timed out</string>
+    <string name="base_loading">Loading...</string>
+    <string name="base_no_more">No more data</string>
+    <string name="base_load_error">Error, click to retry</string>
+    <string name="base_navigation_drawer_open">Open navigation drawer</string>
+    <string name="base_navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="listview_header_hint_normal">pull to refresh</string>
+    <string name="listview_header_hint_release">release to start refresh</string>
+    <string name="listview_loading">loading...</string>
+    <string name="nomore_loading">no more to be loaded</string>
+    <string name="refreshing">refreshing...</string>
+    <string name="refresh_done">refresh done</string>
+    <string name="loading_done">loading done</string>
+    <string name="listview_header_last_time">last update：</string>
+
+    <string name="copy_link">Copy link</string>
+
+    <string name="upgrade_dialog_title">New version: %1$s</string>
+    <string name="upgrade_dialog_size">Size：%1$dM</string>
+
+    <string name="errcode_success">Send success</string>
+    <string name="errcode_cancel">Send canceled</string>
+    <string name="errcode_deny">Send denied</string>
+    <string name="errcode_unsupported">Send error: Unsupported</string>
+    <string name="errcode_unknown">Send error: Unknown</string>
+
+    <string name="picture_from_camera">Take a photo</string>
+    <string name="picture_from_album">Choose from album</string>
+
+    <string name="qrcode_generate_fail">error to generate QR code, try later</string>
+    <string name="qrcode_scan">QR code recognition</string>
+    <string name="qrcode_scan_hint">Put the QR code into the box to automatically identify it</string>
+    <string name="turn_on_torch">Turn on the flashlight</string>
+    <string name="turn_off_torch">Turn off the flashlight</string>
+
+    <string name="share_media_qq">QQ</string>
+    <string name="share_media_qq_zone">QQ Zone</string>
+    <string name="share_media_wx">WeChat</string>
+    <string name="share_media_wx_circle">WeChat Circle</string>
+    <string name="share_media_wb">Weibo</string>
+
+    <string name="feedback">Feedback</string>
+</resources>

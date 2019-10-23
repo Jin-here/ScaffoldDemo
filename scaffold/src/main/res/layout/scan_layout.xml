@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/scan_mask"
+        android:layout_width="224dp"
+        android:layout_height="224dp"
+        android:layout_centerInParent="true"/>
+    
+    <View
+        android:id="@+id/scan_top_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/scan_mask"
+        android:background="@color/black9"/>
+
+    <View
+        android:id="@+id/scan_bottom_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/scan_mask"
+        android:background="@color/black9"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/scan_mask"
+        android:layout_below="@id/scan_top_shadow"
+        android:layout_above="@id/scan_bottom_shadow"
+        android:background="@color/black9"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/scan_mask"
+        android:layout_below="@id/scan_top_shadow"
+        android:layout_above="@id/scan_bottom_shadow"
+        android:background="@color/black9"/>
+
+    <View
+        android:id="@+id/scan_line"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignStart="@id/scan_mask"
+        android:layout_alignEnd="@id/scan_mask"
+        android:visibility="gone"/>
+    
+    <ImageView
+        android:id="@+id/scan_scan"
+        android:layout_width="232dp"
+        android:layout_height="232dp"
+        android:background="@drawable/scan_rect"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/qrcode_scan_hint"
+        style="@style/Subtitle1.White.Medium.Center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/scan_scan"
+        android:layout_marginTop="4dp"/>
+
+    <com.vgaw.scaffold.page.qrcode.ScanTorchLayout
+        android:id="@+id/scan_scantorchlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@id/scan_scan"
+        android:layout_marginBottom="8dp"></com.vgaw.scaffold.page.qrcode.ScanTorchLayout>
+</merge>
