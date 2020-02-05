@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.button.MaterialButton;
 import com.vgaw.scaffold.page.BaseFrag;
-import com.vgaw.scaffold.util.DialogUtil;
+import com.vgaw.scaffold.util.dialog.DialogUtil;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 import com.vgaw.scaffold.view.TitleLayout;
 import com.vgaw.scaffold.view.bottomnavigation.BottomNavigationLayout;

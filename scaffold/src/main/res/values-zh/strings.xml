@@ -51,4 +51,6 @@
     <string name="share_media_wb">微博</string>
 
     <string name="feedback">反馈</string>
+
+    <string name="choose_img_size_limit">图片大小不能超过6M</string>
 </resources>

@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import java.util.Locale;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 public class StringUtil {
 
@@ -102,5 +103,35 @@ public class StringUtil {
             }
         }
         return count;
+    }
+
+    public static boolean isChinese(char c) {
+        return c >= 0x4E00 && c <= 0x9FA5;
+    }
+
+    public static boolean containChinese(String str, boolean all) {
+        if (str == null) {
+            return false;
+        }
+        for (char c : str.toCharArray()) {
+            if (isChinese(c)) {
+                if (!all) {
+                    return true;
+                }
+            } else if (all) {
+                return false;
+            }
+        }
+        return all;
+    }
+
+    /**
+     * 判断是否全是数字
+     * @param str
+     * @return
+     */
+    public static boolean isNumeric (String str) {
+        Pattern pattern = Pattern.compile("[0-9]*");
+        return pattern.matcher(str).matches();
     }
 }

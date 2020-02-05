@@ -9,6 +9,9 @@ import java.text.DecimalFormat;
  */
 
 public class LatLngUtil {
+    public static boolean checkGpsCoordinate(double latitude, double longitude) {
+        return (latitude > -90 && latitude < 90 && longitude > -180 && longitude < 180) && (latitude != 0f && longitude != 0f);
+    }
 
     /**
      * 获取两点之间的距离

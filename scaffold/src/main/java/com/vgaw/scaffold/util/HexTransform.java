@@ -1,6 +1,20 @@
 package com.vgaw.scaffold.util;
 
 public class HexTransform {
+	public static boolean hex(char raw) {
+		return raw > 47 && raw < 58 ||
+				raw > 64 && raw < 71 ||
+				raw > 96 && raw < 103;
+	}
+
+	public static int hex2ten(String hexStr) {
+		return Integer.parseInt(hexStr,16);
+	}
+
+	public static String ten2Hex(int raw) {
+		return Integer.toHexString(raw);
+	}
+
 	/**
 	 * 字符串转换成十六进制字符串
 	 * @param str 待转换的ASCII字符串

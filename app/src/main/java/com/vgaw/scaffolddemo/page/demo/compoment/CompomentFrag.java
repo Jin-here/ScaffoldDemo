@@ -14,8 +14,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.vgaw.scaffold.page.BaseFrag;
 import com.vgaw.scaffold.page.MockFrag;
-import com.vgaw.scaffold.util.DialogUtil;
 import com.vgaw.scaffold.util.context.ContextManager;
+import com.vgaw.scaffold.util.dialog.DialogUtil;
 import com.vgaw.scaffold.util.phone.DensityUtil;
 import com.vgaw.scaffolddemo.R;
 import com.vgaw.scaffolddemo.page.demo.compoment.bottomnav.BottomNavFrag;

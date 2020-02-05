@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.vgaw.scaffold.img.ImageLoader;
+import com.vgaw.scaffold.img.ImgLoader;
 import com.vgaw.scaffold.util.Util;
 import com.vgaw.scaffold.view.rcv.BaseNormalRcv;
 import com.vgaw.scaffold.view.rcv.EasyRcvAdapter;
@@ -60,7 +60,7 @@ public class NormalUserList extends BaseNormalRcv<UserInfo> {
                     @Override
                     protected void refreshView(int position, Object item) {
                         UserInfo userInfo = (UserInfo) item;
-                        ImageLoader.load(mContext, userInfo.getAvatar(), mNormalRecyclerviewItemAvatar);
+                        ImgLoader.load(mContext, userInfo.getAvatar(), mNormalRecyclerviewItemAvatar);
                         mNormalRecyclerviewItemName.setText(Util.nullToEmpty(userInfo.getName()));
                     }
                 };

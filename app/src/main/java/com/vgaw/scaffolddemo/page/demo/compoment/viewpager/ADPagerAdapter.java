@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.vgaw.scaffold.img.ImageLoader;
+import com.vgaw.scaffold.img.ImgLoader;
 import com.vgaw.scaffold.view.vp.EasyPagerAdapter;
 import com.vgaw.scaffolddemo.R;
 
@@ -21,7 +21,7 @@ public class ADPagerAdapter extends EasyPagerAdapter<String> {
         View view = LayoutInflater.from(mContext).inflate(R.layout.viewpager_ad_item, null);
         ImageView iv = view.findViewById(R.id.viewpager_ad_item_content);
         String item = getItem(position);
-        ImageLoader.load(mContext, item, iv);
+        ImgLoader.load(mContext, item, iv);
         return view;
     }
 }

@@ -66,6 +66,7 @@ public class App extends Application {
     }
 
     private void initBugly() {
+        Beta.autoDownloadOnWifi = true;
         Beta.upgradeDialogLayoutId = R.layout.upgrade_dialog_layout;
         Beta.upgradeDialogLifecycleListener = new UILifecycleListener<UpgradeInfo>() {
             @Override

@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.vgaw.scaffold.json.JsonUtil;
 import com.vgaw.scaffold.json.TypeBuilder;
+import com.vgaw.scaffolddemo.http.bean.BaseListBean;
 import com.vgaw.scaffolddemo.http.bean.ResponseOverview;
 
 import java.io.IOException;
@@ -36,45 +37,69 @@ public abstract class JsonCallback<T> extends BaseCallback {
             if (responseBody != null) {
                 String body = responseBody.string();
                 if (response.isSuccessful()) {
-                    Type type = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-                    if (type instanceof Class) {
-                        onSuccess((T) JsonUtil.fromJson(body, type));
-                    } else if (type instanceof ParameterizedType) {
-                        ResponseOverview responseOverview = JsonUtil.fromJson(body, ResponseOverview.class);
-
-                        onSuccess((T) JsonUtil.fromJson(responseOverview.getResults(), TypeBuilder.newInstance(List.class)
-                                .addTypeParam(((ParameterizedType) type).getActualTypeArguments()[0])
-                                .build()));
-                    }
-                } else {
                     ResponseOverview responseOverview = JsonUtil.fromJson(body, ResponseOverview.class);
-                    String error = responseOverview.getError();
-                    onError(error);
+                    if (responseOverview != null) {
+                        String body1 = responseOverview.getBody();
+                        Integer code = responseOverview.getCode();
+                        if (code != null) {
+                            if (code == 0) {
+                                Type type = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+                                if (type instanceof Class) {
+                                    T result = (T) JsonUtil.fromJson(body1, type);
+                                    if (result != null) {
+                                        onSuccess(result);
+                                    }
+                                } else if (type instanceof ParameterizedType) {
+                                    String aClass = ((ParameterizedType) type).getRawType().toString();
+                                    T result = null;
+                                    if (body1 == null) {
+                                        onSuccess(null);
+                                        return;
+                                    }
+                                    if ("interface java.util.List".equals(aClass)) {
+                                        result = (T) JsonUtil.fromJson(body1, TypeBuilder.newInstance(List.class)
+                                                .addTypeParam(((ParameterizedType) type).getActualTypeArguments()[0])
+                                                .build());
+                                    } else {
+                                        result = (T) JsonUtil.fromJson(body1, TypeBuilder.newInstance(BaseListBean.class)
+                                                .addTypeParam(((ParameterizedType) type).getActualTypeArguments()[0])
+                                                .build());
+                                    }
+                                    if (result != null) {
+                                        onSuccess(result);
+                                    }
+                                }
+                                return;
+                            } else {
+                                onFail(code, mapError(code));
+                                return;
+                            }
+                        }
+                    }
                 }
-            } else {
-                ResponseBody errorBody = response.errorBody();
-                if (errorBody != null) {
-                    ResponseOverview responseOverview = JsonUtil.fromJson(errorBody.string(), ResponseOverview.class);
-                    String error = responseOverview.getError();
-                    onError(error);
-                }
+            }
+
+            ResponseBody errorBody = response.errorBody();
+            if (errorBody != null) {
+                String error = errorBody.string();
+                onFail(response.code(), error);
             }
         } catch (IOException e) {
             e.printStackTrace();
-            onError(BaseCallback.mapError(ERROR_UNKNOWN));
+            onFail(ERROR_UNKNOWN, mapError(ERROR_UNKNOWN));
         }
         onFinished();
     }
 
     @Override
     public void onFailure(Call<ResponseBody> call, Throwable t) {
-        onError(BaseCallback.mapError(ERROR_UNKNOWN));
+        super.onFailure(call, t);
         onFinished();
     }
 
-    public abstract void onSuccess(T response);
+    protected abstract void onSuccess(T response);
 
-    public void onFinished() {
+    private void onFinished() {
         if (mActionView != null) {
             mActionView.setEnabled(true);
         }

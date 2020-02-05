@@ -6,8 +6,8 @@ package com.vgaw.scaffolddemo.http.bean;
 
 public class ResponseOverview {
     private Integer code;
-    private String error;
-    private String results;
+    private String msg;
+    private String body;
 
     public ResponseOverview() {}
 
@@ -19,28 +19,28 @@ public class ResponseOverview {
         this.code = code;
     }
 
-    public String getError() {
-        return error;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setError(String error) {
-        this.error = error;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
-    public String getResults() {
-        return results;
+    public String getBody() {
+        return body;
     }
 
-    public void setResults(String results) {
-        this.results = results;
+    public void setBody(String body) {
+        this.body = body;
     }
 
     @Override
     public String toString() {
         return "ResponseOverview{" +
                 "code=" + code +
-                ", error='" + error + '\'' +
-                ", results='" + results + '\'' +
+                ", msg='" + msg + '\'' +
+                ", body='" + body + '\'' +
                 '}';
     }
 }

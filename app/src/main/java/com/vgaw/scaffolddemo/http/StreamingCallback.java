@@ -55,13 +55,14 @@ public abstract class StreamingCallback extends BaseCallback {
                     if (aBoolean) {
                         onSuccess();
                     } else {
-                        onError(BaseCallback.mapError(ERROR_UNKNOWN));
+                        onFail(ERROR_UNKNOWN, mapError(ERROR_UNKNOWN));
                     }
                     onFinished();
                 }
             }.execute();
         } else {
-            onError(BaseCallback.mapError(response.code()));
+            int code = response.code();
+            onFail(code, mapError(code));
             onFinished();
         }
     }

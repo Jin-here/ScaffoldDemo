@@ -58,12 +58,7 @@ public class ProgressRequestBody extends RequestBody {
                 sink.write(buffer, 0, read);
 
                 final long finalUploaded = uploaded;
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressListener.onProgressUpdate((float) finalUploaded / fileLength, finalUploaded == fileLength);
-                    }
-                });
+                handler.post(() -> progressListener.onProgressUpdate((float) finalUploaded / fileLength, finalUploaded == fileLength));
             }
         } finally {
             if (in != null) {

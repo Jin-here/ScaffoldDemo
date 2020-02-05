@@ -21,11 +21,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.vgaw.scaffold.R;
 import com.vgaw.scaffold.page.BaseAc;
+import com.vgaw.scaffold.util.FileUtil;
 import com.vgaw.scaffold.util.context.FileManager;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
+import com.vgaw.scaffold.view.AppToast;
 
 import java.io.File;
 import java.util.List;
@@ -37,24 +40,46 @@ public class ChooseImgAc extends BaseAc {
     private static final int REQUEST_CODE_IMG_CLIP = 72;
     private static final int REQUEST_CODE_FILE_PERMISSION = 80;
     private static final int REQUEST_CODE_CAMERA_PERMISSION = 81;
-    
+
     private Uri mRawUri = null;
     private Uri mCropUri = null;
     private File mCropFile = null;
+    private File mCameraFile = null;
+
+    private boolean mCrop;
 
     /**
      * intent返回值：
-     * file_path:文件路径，字符串类型
+     * data:文件路径，字符串类型
+     *
+     * 默认对图片进行裁剪
      *
      * @param activity
      * @param requestCode
      */
     public static void startActivityForResult(Activity activity, int requestCode) {
-        activity.startActivityForResult(new Intent(activity, ChooseImgAc.class), requestCode);
+        startActivityForResult(activity, requestCode, true);
     }
 
     public static void startActivityForResult(Fragment fragment, int requestCode) {
-        fragment.startActivityForResult(new Intent(fragment.getContext(), ChooseImgAc.class), requestCode);
+        startActivityForResult(fragment, requestCode, true);
+    }
+
+    public static void startActivityForResult(Activity activity, int requestCode, boolean crop) {
+        Intent intent = new Intent(activity, ChooseImgAc.class);
+        intent.putExtra("crop", crop);
+        activity.startActivityForResult(intent, requestCode);
+        activity.overridePendingTransition(0, 0);
+    }
+
+    public static void startActivityForResult(Fragment fragment, int requestCode, boolean crop) {
+        Intent intent = new Intent(fragment.getContext(), ChooseImgAc.class);
+        intent.putExtra("crop", crop);
+        fragment.startActivityForResult(intent, requestCode);
+        FragmentActivity activity = fragment.getActivity();
+        if (activity != null && !activity.isDestroyed()) {
+            activity.overridePendingTransition(0, 0);
+        }
     }
 
     @Override
@@ -65,6 +90,9 @@ public class ChooseImgAc extends BaseAc {
         View chooseImgBg = findViewById(R.id.choose_img_bg);
         Button chooseImgFromAlbum = findViewById(R.id.choose_img_from_album);
         Button chooseImgFromCamera = findViewById(R.id.choose_img_from_camera);
+
+        mCrop = getIntent().getBooleanExtra("crop", true);
+
         chooseImgBg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,19 +119,43 @@ public class ChooseImgAc extends BaseAc {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case REQUEST_CODE_CHOOSE_IMG_FROM_FILE:
-                    callCrop(data.getData());
+                    if (mCrop) {
+                        callCrop(data.getData());
+                    } else {
+                        onGetResult(FileUtil.getPath(getSelf(), data.getData()), false);
+                    }
                     break;
                 case REQUEST_CODE_CHOOSE_IMG_FROM_CAMERA:
-                    callCrop(null);
+                    if (mCrop) {
+                        callCrop(null);
+                    } else {
+                        if (mCameraFile != null) {
+                            onGetResult(mCameraFile.getAbsolutePath(), false);
+                        }
+                    }
                     break;
                 case REQUEST_CODE_IMG_CLIP:
-                    Intent intent = getIntent();
-                    intent.putExtra("file_path", mCropFile.getAbsolutePath());
-                    setResult(Activity.RESULT_OK, intent);
-                    finish();
+                    onGetResult(mCropFile.getAbsolutePath(), true);
                     break;
             }
         }
+    }
+
+    private void onGetResult(String data, boolean crop) {
+        if (!crop) {
+            // 图片大小限制
+            File file = new File(data);
+            long size = file.length();
+            if (size > 6 * 1024 * 1024) {
+                AppToast.show(R.string.choose_img_size_limit);
+                finish();
+                return;
+            }
+        }
+        Intent intent = getIntent();
+        intent.putExtra("data", data);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
     }
 
     @Override
@@ -140,8 +192,8 @@ public class ChooseImgAc extends BaseAc {
             intent.putExtra("crop", "true");
             intent.putExtra("aspectX", 1);
             intent.putExtra("aspectY", 1);
-            intent.putExtra("outputX", 180);
-            intent.putExtra("outputY", 180);
+            intent.putExtra("outputX", 320);
+            intent.putExtra("outputY", 320);
 
             File photoFile = null;
             photoFile = createImageFile();
@@ -192,38 +244,6 @@ public class ChooseImgAc extends BaseAc {
         startActivityForResult(intent, REQUEST_CODE_CHOOSE_IMG_FROM_FILE);
     }
 
-    /**
-     * 打开相册
-     */
-    private void openAlbum() {
-        Intent intent = null;
-
-        /*intent = new Intent();
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-        intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "选择图片"), 0x71);*/
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-            intent = new Intent();
-            intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-            intent.setType("image/*");
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-        }else{
-            intent = new Intent(
-                    Intent.ACTION_PICK,
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            // MediaStore.Images.Media.EXTERNAL_CONTENT_URI: content://media/external/images/media
-            // NOTE: it will cause exception if you put intent.addCategory(Intent.CATEGORY_OPENABLE) here
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
-            intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-        }
-
-        startActivityForResult(intent, 0x71);
-    }
-
     private void callCamera() {
         // check permission
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -238,6 +258,7 @@ public class ChooseImgAc extends BaseAc {
             // Create the File where the photo should go
             File photoFile = null;
             photoFile = createImageFile();
+            mCameraFile = photoFile;
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -259,7 +280,7 @@ public class ChooseImgAc extends BaseAc {
         return image;
     }
 
-    private static String generateFileName() {
+    public static String generateFileName() {
         return String.format("%d%s", System.currentTimeMillis(), IMG_SUFFIX);
     }
 }

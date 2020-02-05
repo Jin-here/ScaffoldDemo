@@ -1,5 +1,6 @@
 package com.vgaw.scaffolddemo.page.demo.internalpage;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +11,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.tencent.bugly.beta.Beta;
 import com.vgaw.scaffold.page.MockFrag;
+import com.vgaw.scaffold.page.ReqCodeConstant;
 import com.vgaw.scaffold.page.common.ChooseImgAc;
+import com.vgaw.scaffold.page.common.PermissionAc;
 import com.vgaw.scaffold.page.qrcode.ScanAc;
 import com.vgaw.scaffolddemo.R;
 import com.vgaw.scaffolddemo.page.feedback.FeedbackAc;
@@ -26,30 +30,13 @@ public class InternalPageFrag extends MockFrag {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.internal_page_frag, container, false);
-        view.findViewById(R.id.internal_page_scan).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ScanAc.startActivityForResult(getSelf(), REQUEST_CODE_SCAN);
-            }
+        view.findViewById(R.id.internal_page_scan).setOnClickListener(v -> ScanAc.startActivityForResult(getSelf(), REQUEST_CODE_SCAN));
+        view.findViewById(R.id.internal_page_choose_img).setOnClickListener(v -> ChooseImgAc.startActivityForResult(getSelf(), REQUEST_CODE_CHOOSE_IMG));
+        view.findViewById(R.id.internal_page_check_version).setOnClickListener(v -> {
+            Beta.checkUpgrade(true, false);
         });
-        view.findViewById(R.id.internal_page_choose_img).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ChooseImgAc.startActivityForResult(getSelf(), REQUEST_CODE_CHOOSE_IMG);
-            }
-        });
-        view.findViewById(R.id.internal_page_check_version).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // bugly业务调整，暂时无法使用
-            }
-        });
-        view.findViewById(R.id.internal_page_feedback).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FeedbackAc.startActivity(getSelf());
-            }
-        });
+        view.findViewById(R.id.internal_page_feedback).setOnClickListener(v -> FeedbackAc.startActivity(getSelf()));
+        view.findViewById(R.id.internal_page_permission).setOnClickListener(v -> requestPermission());
         return view;
     }
 
@@ -62,6 +49,14 @@ public class InternalPageFrag extends MockFrag {
             } else if (requestCode == REQUEST_CODE_SCAN) {
                 Timber.d("qr msg: %s", data.getStringExtra("qr_msg"));
             }
+        }
+    }
+
+    private void requestPermission() {
+        String[] permissionArray = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA};
+        if (!PermissionAc.hasPermission(mActivity, permissionArray)) {
+            PermissionAc.startActivityForResult(mActivity, ReqCodeConstant.PERMISSION, permissionArray);
         }
     }
 }

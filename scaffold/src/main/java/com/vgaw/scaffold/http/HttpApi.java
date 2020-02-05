@@ -1,6 +1,7 @@
 package com.vgaw.scaffold.http;
 
 import com.vgaw.scaffold.http.callback.OnProgressUpdateListener;
+import com.vgaw.scaffold.http.interceptor.ProxyInterceptor;
 import com.vgaw.scaffold.http.service.HttpService;
 import com.vgaw.scaffold.json.JsonUtil;
 
@@ -10,12 +11,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import okhttp3.internal.proxy.NullProxySelector;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -181,8 +182,12 @@ public class HttpApi {
     }
 
     private OkHttpClient getDefaultOkHttpClient() {
-        return new OkHttpClient.Builder().addInterceptor(new HttpLoggingInterceptor().
-                setLevel(HttpLoggingInterceptor.Level.BODY)).build();
+        OkHttpClient.Builder builder = new OkHttpClient.Builder().proxySelector(new NullProxySelector());
+        builder.addInterceptor(new ProxyInterceptor());
+        if (mHttpConfig.debug()) {
+            builder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
+        }
+        return builder.build();
     }
 
     /**
@@ -192,14 +197,11 @@ public class HttpApi {
      */
     private OkHttpClient getDownloadOkHttpClient(OkHttpClient.Builder builder, final OnProgressUpdateListener listener) {
         return builder
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public okhttp3.Response intercept(Chain chain) throws IOException {
-                        okhttp3.Response originalResponse = chain.proceed(chain.request());
-                        return originalResponse.newBuilder()
-                                .body(new ProgressResponseBody(originalResponse.body(), listener))
-                                .build();
-                    }
+                .addInterceptor(chain -> {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                            .body(new ProgressResponseBody(originalResponse.body(), listener))
+                            .build();
                 }).build();
     }
 

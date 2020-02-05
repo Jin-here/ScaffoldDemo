@@ -220,7 +220,7 @@
 }
 
 # for DexGuard only
--keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+# -keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 
 #ijkplayer
 #-keep class tv.danmaku.ijk.media.** {*;}
@@ -296,9 +296,9 @@
 -dontwarn com.meizu.cloud.pushsdk.**
 
 # status bar
--keep class com.qiandaojie.xiaoshijie.util.StatusBarUtil {*;}
--keep interface com.qiandaojie.xiaoshijie.util.StatusBarUtil {*;}
--keep enum com.qiandaojie.xiaoshijie.util.StatusBarUtil {*;}
+-keep class com.netease.nim.uikit.util.StatusBarUtil {*;}
+-keep interface com.netease.nim.uikit.util.StatusBarUtil {*;}
+-keep enum com.netease.nim.uikit.util.StatusBarUtil {*;}
 
 # flexbox
 -keep class com.google.android.flexbox.** {*;}
@@ -330,5 +330,77 @@
 -dontwarn org.apache.lucene.**
 -keep class org.apache.lucene.** {*;}
 
+# citypicker
+-keep class com.lljjcoder.**{
+	*;
+}
+
+# svga
+-keep class com.squareup.wire.** { *; }
+-keep class com.opensource.svgaplayer.proto.** { *; }
+
+-dontwarn demo.**
+-keep class demo.**{*;}
+-dontwarn net.sourceforge.pinyin4j.**
+-keep class net.sourceforge.pinyin4j.**{*;}
+-keep class net.sourceforge.pinyin4j.format.**{*;}
+-keep class net.sourceforge.pinyin4j.format.exception.**{*;}
+
+# mi push
+-dontwarn com.xiaomi.push.**
+-keep class com.xiaomi.** {*;}
+
+# huawei push
+-ignorewarnings
+-keepattributes *Annotation*
+-keepattributes Exceptions
+-keepattributes Signature
+# hmscore-support: remote transport
+-keep class * extends com.huawei.hms.core.aidl.IMessageEntity { *; }
+# hmscore-support: remote transport
+-keepclasseswithmembers class * implements com.huawei.hms.support.api.transport.DatagramTransport {
+<init>(...); }
+# manifest: provider for updates
+-keep public class com.huawei.hms.update.provider.UpdateProvider { public *; protected *; }
+
+# meizu push
+-dontwarn com.meizu.cloud.**
+-keep class com.meizu.cloud.** {*;}
+
+# oppo push
+-keep class com.netease.nimlib.mixpush.oppo.OppoPush* {*;}
+-keep class com.netease.nimlib.mixpush.oppo.OppoPushService {*;}
+
+# emoji reader
+-keep class com.yy.mobile.emoji.EmojiReader {*;}
+
+#umeng
+-keepclassmembers class * {
+   public <init>(org.json.JSONObject);
+}
+-keep public class com.qiandaojie.xiaoshijie.R$*{
+public static final int *;
+}
+-keep class com.umeng.** {*;}
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+-keep class org.android.spdy.** {*;}
+-keep interface org.android.spdy.** {*;}
+-keep enum org.android.spdy.** {*;}
+## oppo
+-keep public class * extends android.app.Service
+## vivo
+-dontwarn com.vivo.push.**
+-keep class com.vivo.push.**{*; }
+-keep class com.vivo.vms.**{*; }
+-keep class xxx.xxx.xxx.PushMessageReceiverImpl{*;}
+
 #scaffold
+-keep class com.vgaw.scaffold.view.webview.FileChooserWebChromClient {*;}
+
+#App
+-keep class com.vgaw.data.** {*;}
+-keep class com.vgaw.http.bean.** {*;}
 -keep class com.vgaw.scaffold.view.webview.FileChooserWebChromClient {*;}

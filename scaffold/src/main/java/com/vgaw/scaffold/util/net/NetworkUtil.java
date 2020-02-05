@@ -5,8 +5,16 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 
 public class NetworkUtil {
+    public static boolean isWifiProxy() {
+        String proxyAddress = System.getProperty("http.proxyHost");
+        String portStr = System.getProperty("http.proxyPort");
+        int proxyPort = Integer.parseInt((portStr != null ? portStr : "-1"));
+        return (!TextUtils.isEmpty(proxyAddress)) && (proxyPort != -1);
+    }
+
     public static boolean isNetAvailableForNetLocation(Context context) {
         ConnectivityManager connectivity = (ConnectivityManager) context.getApplicationContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);

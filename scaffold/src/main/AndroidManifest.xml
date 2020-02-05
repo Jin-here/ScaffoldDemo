@@ -14,5 +14,10 @@
             android:screenOrientation="userPortrait"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask"/>
+
+        <activity
+            android:name=".page.common.PermissionAc"
+            android:launchMode="singleTop"
+            android:theme="@style/transparent_activity" />
     </application>
 </manifest>
