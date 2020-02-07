@@ -201,7 +201,7 @@ public class ChooseImgAc extends BaseAc {
 
             if (photoFile != null) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    mCropUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider",
+                    mCropUri = FileProvider.getUriForFile(this, getPackageName() + ".scaffold.fileprovider",
                             photoFile);
                     if (fileUri == null) {
                         grantUriPermission(this, intent, mRawUri);
@@ -262,7 +262,7 @@ public class ChooseImgAc extends BaseAc {
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    mRawUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider",
+                    mRawUri = FileProvider.getUriForFile(this, getPackageName() + ".scaffold.fileprovider",
                             photoFile);
                 } else {
                     mRawUri = Uri.fromFile(photoFile);

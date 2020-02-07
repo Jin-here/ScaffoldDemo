@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.vgaw.scaffolddemo">
 
     <!--bugly bug report start-->
@@ -42,23 +41,10 @@
             android:value="2.1" />
 
         <!--base activity start-->
-        <provider
-            android:name=".AppFileProvider"
-            android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true"
-            tools:replace="name,authorities,exported,grantUriPermissions">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"
-                tools:replace="name,resource"/>
-        </provider>
-
         <activity android:name=".page.feedback.FeedbackAc"
             android:screenOrientation="userPortrait"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"/>
-
         <!--base activity end-->
 
         <!--bugly upgrade start-->
