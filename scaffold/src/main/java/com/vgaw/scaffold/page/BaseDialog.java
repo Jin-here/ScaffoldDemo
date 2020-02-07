@@ -1,5 +1,6 @@
 package com.vgaw.scaffold.page;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +21,15 @@ import com.vgaw.scaffold.R;
  */
 public class BaseDialog extends DialogFragment {
     private static final boolean DEFAULT_SHOW_DESCRIPTION = true;
-    private static final @StringRes int DEFAULT_DESCRIPTION = -1;
+    private static final @StringRes
+    int DEFAULT_DESCRIPTION = -1;
     private static final boolean DEFAULT_SINGLE_BTN = false;
-    private static final @StringRes int DEFAULT_SINGLE_BTN_DESCRIPTION = -1;
-    private static final @StringRes int DEFAULT_LEFT_BTN_DESCRIPTION = R.string.base_dialog_cancel;
-    private static final @StringRes int DEFAULT_RIGHT_BTN_DESCRIPTION = R.string.base_dialog_ok;
+    private static final @StringRes
+    int DEFAULT_SINGLE_BTN_DESCRIPTION = -1;
+    private static final @StringRes
+    int DEFAULT_LEFT_BTN_DESCRIPTION = R.string.base_dialog_cancel;
+    private static final @StringRes
+    int DEFAULT_RIGHT_BTN_DESCRIPTION = R.string.base_dialog_ok;
 
     private TextView mBaseDialogDescription;
     private TextView mBaseDialogCancel;
@@ -41,6 +46,7 @@ public class BaseDialog extends DialogFragment {
     private String mLeftBtnDescription;
     private String mRightBtnDescription;
     private View mMainContent;
+    private DialogInterface.OnDismissListener mDismissListener;
 
     public static BaseDialog newInstance(String description) {
         return newInstance(true, description, false, null, null, null);
@@ -55,8 +61,8 @@ public class BaseDialog extends DialogFragment {
     }
 
     private static BaseDialog newInstance(boolean showDescription, String description,
-                                         boolean singleBtn, String singleBtnDescription,
-                                         String leftBtnDescription, String rightBtnDescription) {
+                                          boolean singleBtn, String singleBtnDescription,
+                                          String leftBtnDescription, String rightBtnDescription) {
         Bundle args = new Bundle();
         args.putBoolean("show_description", showDescription);
         if (description != null) {
@@ -145,6 +151,18 @@ public class BaseDialog extends DialogFragment {
         }
 
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mDismissListener != null) {
+            mDismissListener.onDismiss(null);
+        }
+    }
+
+    public void setOnDismissListener(DialogInterface.OnDismissListener listener) {
+        mDismissListener = listener;
     }
 
     public void setOnLeftBtnClickListener(View.OnClickListener listener) {

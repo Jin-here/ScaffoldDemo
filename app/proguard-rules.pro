@@ -295,11 +295,6 @@
 -dontwarn com.xiaomi.push.**
 -dontwarn com.meizu.cloud.pushsdk.**
 
-# status bar
--keep class com.netease.nim.uikit.util.StatusBarUtil {*;}
--keep interface com.netease.nim.uikit.util.StatusBarUtil {*;}
--keep enum com.netease.nim.uikit.util.StatusBarUtil {*;}
-
 # flexbox
 -keep class com.google.android.flexbox.** {*;}
 -keep interface com.google.android.flexbox.** {*;}
@@ -399,8 +394,8 @@ public static final int *;
 
 #scaffold
 -keep class com.vgaw.scaffold.view.webview.FileChooserWebChromClient {*;}
+-keep class com.vgaw.scaffold.util.statusbar.StatusBarUtil {*;}
 
 #App
 -keep class com.vgaw.data.** {*;}
 -keep class com.vgaw.http.bean.** {*;}
--keep class com.vgaw.scaffold.view.webview.FileChooserWebChromClient {*;}

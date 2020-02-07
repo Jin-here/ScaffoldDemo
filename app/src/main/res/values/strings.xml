@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">ScaffoldDemo</string>
+
+    <string name="upgrade_dialog_title">New version: %1$s</string>
+    <string name="upgrade_dialog_size">Size：%1$dM</string>
+
+    <string name="share_media_qq">QQ</string>
+    <string name="share_media_qq_zone">QQ Zone</string>
+    <string name="share_media_wx">WeChat</string>
+    <string name="share_media_wx_circle">WeChat Circle</string>
+    <string name="share_media_wb">Weibo</string>
+
+    <string name="errcode_success">Send success</string>
+    <string name="errcode_cancel">Send canceled</string>
+    <string name="errcode_deny">Send denied</string>
+    <string name="errcode_unsupported">Send error: Unsupported</string>
+    <string name="errcode_unknown">Send error: Unknown</string>
 </resources>

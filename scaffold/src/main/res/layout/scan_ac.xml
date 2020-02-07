@@ -11,6 +11,5 @@
         android:layout_height="wrap_content"
         app:titleBackIcon="@drawable/back_white"
         app:titleCaption="@string/qrcode_scan"
-        app:titleDarkMode="true"
-        app:titleShowShadow="false"></com.vgaw.scaffold.view.TitleLayout>
+        app:titleDarkMode="true"></com.vgaw.scaffold.view.TitleLayout>
 </FrameLayout>

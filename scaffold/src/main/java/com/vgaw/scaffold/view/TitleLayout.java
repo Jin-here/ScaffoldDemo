@@ -20,8 +20,6 @@ public class TitleLayout extends RelativeLayout {
     private TextView mTitleLayoutTitle;
     private TextView mTitleLayoutMenu;
 
-    private boolean mShowShadow;
-
     private TitleLayout(Context context) {
         super(context);
     }
@@ -44,8 +42,7 @@ public class TitleLayout extends RelativeLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int shadowHeight = (mShowShadow ? 4 : 0);
-        int height = DensityUtil.dp2px(getContext(), 52 + shadowHeight);
+        int height = DensityUtil.dp2px(getContext(), 52);
         super.onMeasure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
     }
 
@@ -79,7 +76,6 @@ public class TitleLayout extends RelativeLayout {
         Drawable backIcon = array.getDrawable(R.styleable.TitleLayout_titleBackIcon);
         String menu = array.getString(R.styleable.TitleLayout_titleMenu);
         boolean menuEnabled = array.getBoolean(R.styleable.TitleLayout_titleMenuEnabled, false);
-        mShowShadow = array.getBoolean(R.styleable.TitleLayout_titleShowShadow, false);
         boolean darkMode = array.getBoolean(R.styleable.TitleLayout_titleDarkMode, false);
 
         array.recycle();
@@ -89,23 +85,20 @@ public class TitleLayout extends RelativeLayout {
         mTitleLayoutTitle = view.findViewById(R.id.title_layout_title);
         mTitleLayoutMenu = view.findViewById(R.id.title_layout_menu);
         if (darkMode) {
-            if (mShowShadow) {} else {}
+            setBackgroundColor(getResources().getColor(R.color.dark));
             mTitleLayoutTitle.setTextAppearance(getContext(), R.style.H5_White_High_Left);
             mTitleLayoutMenu.setTextAppearance(getContext(), R.style.Subtitle1_White_High_Right);
         } else {
-            if (mShowShadow) {
-                setBackgroundResource(R.drawable.toolbar_shadow);
-            } else {
-                setBackgroundColor(getResources().getColor(R.color.white));
-            }
+            setBackgroundColor(getResources().getColor(R.color.white));
             mTitleLayoutTitle.setTextAppearance(getContext(), R.style.H5_Black_High_Left);
             mTitleLayoutMenu.setTextAppearance(getContext(), R.style.Subtitle1_Black_High_Right);
         }
 
         setCaption(title);
-        if (backIcon != null) {
-            setBackIcon(backIcon);
+        if (backIcon == null) {
+            backIcon = getResources().getDrawable(darkMode ? R.drawable.back_white : R.drawable.back);
         }
+        setBackIcon(backIcon);
         setMenu(menu);
         setMenuEnabled(menuEnabled);
     }

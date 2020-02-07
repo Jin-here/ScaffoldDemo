@@ -46,6 +46,7 @@ public class LinearDividerItemDecoration extends BaseItemDecoration {
         itemPosition = getActualItmePosition(itemPosition);
         if (lastItem(itemPosition, itemCount)) {
             outRect.set(0, 0, 0, 0);
+            return;
         }
 
         if (mOrientation == LinearLayoutManager.HORIZONTAL) {

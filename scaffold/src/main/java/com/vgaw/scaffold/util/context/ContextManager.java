@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -68,6 +69,17 @@ public class ContextManager {
         return null;
     }
 
+    public Activity getActivity(Class cls) {
+        Iterator<Activity> iterator = mActivityList.iterator();
+        while (iterator.hasNext()) {
+            Activity next = iterator.next();
+            if (next.getClass() == cls) {
+                return next;
+            }
+        }
+        return null;
+    }
+
     public Activity getCurrentActivity() {
         if (mCurrentActivityWeakRef != null) {
             return mCurrentActivityWeakRef.get();
@@ -85,6 +97,14 @@ public class ContextManager {
 
     public void removeActivity(Activity activity) {
         mActivityList.remove(activity);
+    }
+
+    public void removeRemainingActivity(Class me) {
+        for (Activity activity : mActivityList) {
+            if (activity.getClass() != me) {
+                activity.finish();
+            }
+        }
     }
 
     public void removeRemainingActivity(Activity me) {

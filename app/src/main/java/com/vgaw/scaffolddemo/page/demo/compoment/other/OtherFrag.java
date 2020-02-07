@@ -13,7 +13,6 @@ import com.vgaw.scaffold.page.BaseFrag;
 import com.vgaw.scaffold.util.dialog.DialogUtil;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 import com.vgaw.scaffold.view.CheckedImageButton;
-import com.vgaw.scaffold.view.CountEditText;
 import com.vgaw.scaffold.view.TitleLayout;
 import com.vgaw.scaffolddemo.R;
 
@@ -58,10 +57,6 @@ public class OtherFrag extends BaseFrag {
                 mOtherCheckIb1.setChecked(!mOtherCheckIb1.isChecked());
             }
         });
-
-        // count et
-        CountEditText otherCountEt = view.findViewById(R.id.other_countet);
-        otherCountEt.setScrollerView(mOtherRoot);
         return view;
     }
 }

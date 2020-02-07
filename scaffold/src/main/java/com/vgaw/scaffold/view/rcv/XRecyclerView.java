@@ -752,6 +752,10 @@ public class XRecyclerView extends RecyclerView {
         mLoadingListener = listener;
     }
 
+    public LoadingListener getLoadingListener() {
+        return mLoadingListener;
+    }
+
     public interface LoadingListener {
 
         void onRefresh();

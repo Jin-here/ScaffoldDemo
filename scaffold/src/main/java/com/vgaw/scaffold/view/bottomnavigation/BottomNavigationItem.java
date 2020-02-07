@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,7 +19,7 @@ public class BottomNavigationItem extends RelativeLayout {
 
     private ImageView mBottomNavigationItemIv;
     private TextView mBottomNavigationItemTv;
-    private ImageView mBubble;
+    private TextView mBubble;
 
     private Boolean mChecked;
     private OnItemCheckedListener mListener;
@@ -39,8 +38,19 @@ public class BottomNavigationItem extends RelativeLayout {
         mListener = listener;
     }
 
-    public void showBubble(boolean show) {
-        mBubble.setVisibility(show ? VISIBLE : GONE);
+    public void hideBubble() {
+        mBubble.setVisibility(GONE);
+    }
+
+    public void showBubble(int unReadCount) {
+        String s;
+        if (unReadCount < 100) {
+            s = String.valueOf(unReadCount);
+        } else {
+            s = "99+";
+        }
+        mBubble.setText(s);
+        mBubble.setVisibility(VISIBLE);
     }
 
     public void check(boolean check) {

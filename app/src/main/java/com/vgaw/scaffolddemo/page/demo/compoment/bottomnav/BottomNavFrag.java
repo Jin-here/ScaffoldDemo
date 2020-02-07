@@ -82,13 +82,13 @@ public class BottomNavFrag extends BaseFrag {
         mBottomNavShowBubble.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mBottomNavBottomNavLayout.showBubble(0);
+                mBottomNavBottomNavLayout.showBubble(0, 99);
             }
         });
         mBottomNavHideBubble.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mBottomNavBottomNavLayout.clearBubble(0);
+                mBottomNavBottomNavLayout.hideBubble(0);
             }
         });
     }

@@ -52,16 +52,6 @@
         <attr name="upv_itemratio" format="float" />
     </declare-styleable>
 
-    <declare-styleable name="WaveView">
-        <attr name="waveMinRadius" format="dimension"/>
-        <attr name="waveMaxRadius" format="dimension"/>
-        <attr name="waveColor" format="color"/>
-    </declare-styleable>
-
-    <declare-styleable name="MaskView">
-        <attr name="mask" format="boolean"/>
-    </declare-styleable>
-
     <declare-styleable name="BottomNavigationItem">
         <attr name="bottomNavIcon" format="reference"/>
         <attr name="bottomNavIconChecked" format="reference"/>
@@ -79,7 +69,6 @@
         <attr name="titleBackIcon" format="reference"/>
         <attr name="titleMenu" format="string"/>
         <attr name="titleMenuEnabled" format="boolean"/>
-        <attr name="titleShowShadow" format="boolean"/>
         <attr name="titleDarkMode" format="boolean"/>
     </declare-styleable>
 
@@ -94,18 +83,15 @@
         <attr name="settingDes" format="string"/>
     </declare-styleable>
 
-    <declare-styleable name="SettingCheckView">
-        <attr name="settingCheckName" format="string"/>
-        <attr name="settingCheckIcon" format="reference"/>
-        <attr name="settingCheckDes" format="string"/>
-        <attr name="settingChecked" format="boolean"/>
-    </declare-styleable>
-
     <declare-styleable name="SettingToggleView">
         <attr name="settingToggleName" format="string"/>
         <attr name="settingToggleIcon" format="reference"/>
         <attr name="settingToggleDes" format="string"/>
         <attr name="settingToggled" format="boolean"/>
+        <attr name="settingToggleStyle" format="enum">
+            <enum name="toggle" value="0"/>
+            <enum name="checkbox" value="1"/>
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="ImgTxtLayout">
@@ -126,10 +112,5 @@
         <attr name="txtUpColor" format="color"/>
         <attr name="txtBelowColor" format="color"/>
         <attr name="txtPadding" format="dimension"/>
-    </declare-styleable>
-
-    <declare-styleable name="CountEditText">
-        <attr name="countMaxLength" format="integer"/>
-        <attr name="countHint" format="string"/>
     </declare-styleable>
 </resources>

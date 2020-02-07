@@ -16,6 +16,7 @@ public class FileManager {
     private static final String DIR_BUG = "bug";
     private static final String DIR_MOVIE = "movie";
     private static final String DIR_PICTURE = "picture";
+    private static final String DIR_SCREENSHOT = "screenshot";
     private static final String DIR_APK = "apk";
     private static final String DIR_TEMP = "temp";
 
@@ -73,6 +74,14 @@ public class FileManager {
      */
     public static File getPictureDir(){
         File file = new File(getDir().getAbsolutePath() + File.separator + DIR_PICTURE);
+        if (!file.exists()){
+            file.mkdirs();
+        }
+        return format(file);
+    }
+
+    public static File getScreenshotDir(){
+        File file = new File(getDir().getAbsolutePath() + File.separator + DIR_SCREENSHOT);
         if (!file.exists()){
             file.mkdirs();
         }

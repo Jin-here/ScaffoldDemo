@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
@@ -45,12 +46,16 @@ public class ImgTxtLayout extends LinearLayout {
         init(attrs);
     }
 
-    protected void setIcon(Drawable icon) {
+    public void setIcon(Drawable icon) {
         mImgTxtIv.setImageDrawable(icon);
     }
 
     public void setContent(String content) {
         mImgTxtTv.setText(content);
+    }
+
+    public void setContentColor(@ColorInt int color) {
+        mImgTxtTv.setTextColor(color);
     }
 
     private void init(AttributeSet attrs) {

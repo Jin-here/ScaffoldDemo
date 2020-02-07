@@ -25,12 +25,12 @@ public class BottomNavigationLayout extends LinearLayout {
         ((BottomNavigationItem) getChildAt(index)).check(true);
     }
 
-    public void showBubble(int index) {
-        ((BottomNavigationItem) getChildAt(index)).showBubble(true);
+    public void showBubble(int index, int unReadCount) {
+        ((BottomNavigationItem) getChildAt(index)).showBubble(unReadCount);
     }
 
-    public void clearBubble(int index) {
-        ((BottomNavigationItem) getChildAt(index)).showBubble(false);
+    public void hideBubble(int index) {
+        ((BottomNavigationItem) getChildAt(index)).hideBubble();
     }
 
     public void setOnItemCheckedListener(OnItemCheckedListener listener) {

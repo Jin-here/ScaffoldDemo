@@ -2,17 +2,13 @@ package com.vgaw.scaffold.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatImageButton;
 
-import com.google.android.material.internal.CheckableImageButton;
-
-/**
- * 选中图片控件
- */
 public class CheckedImageButton extends AppCompatImageButton {
 
     private boolean checked;
@@ -25,30 +21,23 @@ public class CheckedImageButton extends AppCompatImageButton {
 
     private Drawable checkedImage;
 
-    private int leftPadding, topPadding, rightPadding, bottomPadding;
-
     public CheckedImageButton(Context context) {
         super(context);
+        init();
     }
 
     public CheckedImageButton(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public CheckedImageButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        init();
     }
 
-    public void setPaddingValue(int value) {
-        setPaddingValue(value, value, value, value);
-    }
-
-    public void setPaddingValue(int left, int top, int right, int bottom) {
-        leftPadding = left;
-        topPadding = top;
-        rightPadding = right;
-        bottomPadding = bottom;
-        setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
+    public void setPadding(int padding) {
+        setPadding(padding, padding, padding, padding);
     }
 
     public boolean isChecked() {
@@ -88,7 +77,6 @@ public class CheckedImageButton extends AppCompatImageButton {
     }
 
     public void setNormalImage(Bitmap bitmap) {
-
         this.normalImage = new BitmapDrawable(getResources(), bitmap);
         updateImage(this.normalImage);
     }
@@ -99,13 +87,14 @@ public class CheckedImageButton extends AppCompatImageButton {
 
     private void updateBackground(int resId) {
         setBackgroundResource(resId);
-        setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
-//        int padding = ScreenUtil.dip2px(7);
-//        setPadding(padding, padding, padding, padding);
     }
 
     private void updateImage(Drawable drawable) {
-        //  setScaleType(ScaleType.FIT_CENTER);
         setImageDrawable(drawable);
+    }
+
+    private void init() {
+        setScaleType(ScaleType.CENTER_CROP);
+        setBackgroundColor(Color.TRANSPARENT);
     }
 }

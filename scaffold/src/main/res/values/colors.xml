@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#9013FE</color>
-    <color name="colorPrimaryDark">#9013FE</color>
-    <color name="colorAccent">#9013FE</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
 
     <color name="white">#FFFFFF</color>
     <color name="white1">#FAFAFA</color>
@@ -29,4 +29,8 @@
     <!--20%-->
     <color name="black8">#33000000</color>
     <color name="black9">#99191919</color>
+
+    <color name="dark">#FF1D1D2D</color>
+
+    <color name="iconUnselected">@color/black4</color>
 </resources>

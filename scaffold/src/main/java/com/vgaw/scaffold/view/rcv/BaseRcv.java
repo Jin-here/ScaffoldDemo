@@ -51,6 +51,10 @@ public class BaseRcv<T> extends XRecyclerView {
         setHasFixedSize(fixSize);
     }
 
+    public void notifyDataSetChanged() {
+        mAdapter.notifyDataSetChanged();
+    }
+
     public void clearData() {
         mDataList.clear();
 

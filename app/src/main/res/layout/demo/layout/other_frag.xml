@@ -42,8 +42,8 @@
         <com.vgaw.scaffold.view.TitleLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titleCaption="示例4（阴影）"
-            app:titleShowShadow="true"/>
+            app:titleCaption="示例2"
+            app:titleDarkMode="true"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -121,12 +121,13 @@
             app:settingIcon="@android:drawable/btn_star_big_off"
             app:settingDes="描述"/>
 
-        <com.vgaw.scaffold.view.SettingCheckView
+        <com.vgaw.scaffold.view.SettingToggleView
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            app:settingCheckName="示例4"
-            app:settingCheckDes="描述"
-            app:settingChecked="true"/>
+            app:settingToggleName="示例4"
+            app:settingToggleDes="描述"
+            app:settingToggled="true"
+            app:settingToggleStyle="checkbox"/>
 
         <com.vgaw.scaffold.view.SettingToggleView
             android:layout_width="match_parent"
@@ -134,21 +135,5 @@
             app:settingToggleName="示例5"
             app:settingToggleDes="描述"
             app:settingToggled="true"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:paddingStart="10dp"
-            android:background="@android:color/darker_gray"
-            style="@style/Subtitle1.White.High"
-            android:gravity="center_vertical|start"
-            android:text="count edittext"/>
-
-        <com.vgaw.scaffold.view.CountEditText
-            android:id="@+id/other_countet"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            app:countMaxLength="120"
-            app:countHint="说点什么吧"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

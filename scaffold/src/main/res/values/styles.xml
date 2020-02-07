@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -7,10 +6,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
     <style name="H2.Black.High" parent="TextAppearance.MaterialComponents.Headline2">
         <item name="android:textColor">@color/black6</item>
@@ -333,6 +328,22 @@
     </style>
 
     <style name="Body2.White.High.Right" parent="Body2.White.High">
+        <item name="android:gravity">end</item>
+    </style>
+
+    <style name="Body2.White.Medium" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/white2</item>
+    </style>
+
+    <style name="Body2.White.Medium.Left" parent="Body2.White.Medium">
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="Body2.White.Medium.Center" parent="Body2.White.Medium">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Body2.White.Medium.Right" parent="Body2.White.Medium">
         <item name="android:gravity">end</item>
     </style>
 

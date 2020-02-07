@@ -19,5 +19,11 @@
             android:name=".page.common.PermissionAc"
             android:launchMode="singleTop"
             android:theme="@style/transparent_activity" />
+
+        <activity
+            android:name=".page.common.WebAc"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="userPortrait" />
     </application>
 </manifest>

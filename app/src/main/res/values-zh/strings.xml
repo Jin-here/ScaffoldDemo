@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ScaffoldDemo</string>
+
+    <string name="upgrade_dialog_title">新版本v%1$s</string>
+    <string name="upgrade_dialog_size">大小：%1$dM</string>
+
+    <string name="share_media_qq">QQ</string>
+    <string name="share_media_qq_zone">空间</string>
+    <string name="share_media_wx">微信</string>
+    <string name="share_media_wx_circle">朋友圈</string>
+    <string name="share_media_wb">微博</string>
+
+    <string name="errcode_success">发送成功</string>
+    <string name="errcode_cancel">发送取消</string>
+    <string name="errcode_deny">发送被拒绝</string>
+    <string name="errcode_unsupported">不支持错误</string>
+    <string name="errcode_unknown">发送返回</string>
+</resources>

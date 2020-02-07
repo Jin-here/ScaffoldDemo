@@ -18,11 +18,17 @@
         style="@style/TextAppearance.MaterialComponents.Button"
         android:textColor="@color/black5"/>
 
-    <ImageView
+    <TextView
         android:id="@+id/bottom_navigation_item_bubble"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
-        android:src="@drawable/bubble"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="@drawable/bubble_bg"
+        android:textColor="@color/white"
+        android:autoSizeMaxTextSize="12sp"
+        android:autoSizeMinTextSize="8sp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeStepGranularity="1sp"
+        android:gravity="center"
         android:layout_alignTop="@id/bottom_navigation_item_iv"
         android:layout_alignRight="@id/bottom_navigation_item_iv"
         android:visibility="gone"/>
