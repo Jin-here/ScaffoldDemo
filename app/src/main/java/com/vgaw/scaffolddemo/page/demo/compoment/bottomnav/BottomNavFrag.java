@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.button.MaterialButton;
-import com.vgaw.scaffold.page.BaseFrag;
+import com.vgaw.scaffold.page.ScaffoldFrag;
 import com.vgaw.scaffold.util.dialog.DialogUtil;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 import com.vgaw.scaffold.view.TitleLayout;
@@ -25,13 +25,13 @@ import com.vgaw.scaffolddemo.page.demo.compoment.Tab2Frag;
 
 import java.util.List;
 
-public class BottomNavFrag extends BaseFrag {
+public class BottomNavFrag extends ScaffoldFrag {
     private BottomNavigationLayout mBottomNavBottomNavLayout;
     private TitleLayout mBottomNavTitleLayout;
     private MaterialButton mBottomNavShowBubble;
     private MaterialButton mBottomNavHideBubble;
 
-    private BaseFrag[] mFragmentArray;
+    private ScaffoldFrag[] mFragmentArray;
 
     public static BottomNavFrag newInstance() {
         Bundle args = new Bundle();
@@ -61,7 +61,7 @@ public class BottomNavFrag extends BaseFrag {
     }
 
     private void initData() {
-        mFragmentArray = new BaseFrag[]{new Tab0Frag(), new Tab1Frag(), new Tab2Frag()};
+        mFragmentArray = new ScaffoldFrag[]{new Tab0Frag(), new Tab1Frag(), new Tab2Frag()};
     }
 
     private void initView() {
@@ -97,7 +97,7 @@ public class BottomNavFrag extends BaseFrag {
         String tag = DialogUtil.buildTag(mFragmentArray[index]);
 
         FragmentManager fragmentManager = getChildFragmentManager();
-        BaseFrag fragment = (BaseFrag) fragmentManager.findFragmentByTag(tag);
+        ScaffoldFrag fragment = (ScaffoldFrag) fragmentManager.findFragmentByTag(tag);
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         // hide other

@@ -24,6 +24,7 @@ import java.io.File;
 
 /**
  * Created by caojin on 2017/9/14.
+ * todo cancel request
  */
 
 public class ImgLoader {

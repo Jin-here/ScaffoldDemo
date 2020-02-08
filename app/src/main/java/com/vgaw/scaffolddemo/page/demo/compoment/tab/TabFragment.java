@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.vgaw.scaffold.page.BaseFrag;
+import com.vgaw.scaffold.page.ScaffoldFrag;
 import com.vgaw.scaffold.util.dialog.DialogUtil;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 import com.vgaw.scaffold.view.TitleLayout;
@@ -22,12 +22,12 @@ import com.vgaw.scaffolddemo.page.demo.compoment.Tab0Frag;
 import com.vgaw.scaffolddemo.page.demo.compoment.Tab1Frag;
 import com.vgaw.scaffolddemo.page.demo.compoment.Tab2Frag;
 
-public class TabFragment extends BaseFrag {
+public class TabFragment extends ScaffoldFrag {
     private TitleLayout mTabTitleLayout;
     private SlidingTabLayout mTabTab;
     private ViewPager mTabVp;
 
-    private BaseFrag[] mFragArray;
+    private ScaffoldFrag[] mFragArray;
     private String[] mFragTitleArray;
 
     @Nullable
@@ -45,7 +45,7 @@ public class TabFragment extends BaseFrag {
     }
 
     private void initData() {
-        mFragArray = new BaseFrag[3];
+        mFragArray = new ScaffoldFrag[3];
         mFragArray[0] = new Tab0Frag();
         mFragArray[1] = new Tab1Frag();
         mFragArray[2] = new Tab2Frag();

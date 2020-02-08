@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.vgaw.scaffold.page.BaseAc;
-import com.vgaw.scaffold.page.BaseFrag;
+import com.vgaw.scaffold.page.ScaffoldAc;
+import com.vgaw.scaffold.page.ScaffoldFrag;
 import com.vgaw.scaffold.util.dialog.DialogUtil;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 import com.vgaw.scaffold.view.bottomnavigation.BottomNavigationLayout;
@@ -19,10 +19,10 @@ import com.vgaw.scaffolddemo.page.demo.internalpage.InternalPageFrag;
 
 import java.util.List;
 
-public class MainAc extends BaseAc {
+public class MainAc extends ScaffoldAc {
     private BottomNavigationLayout mMainBottomNavLayout;
 
-    private BaseFrag[] mFragmentArray;
+    private ScaffoldFrag[] mFragmentArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainAc extends BaseAc {
     }
 
     private void initData() {
-        mFragmentArray = new BaseFrag[]{new CompomentFrag(), new InternalPageFrag(), new ExampleFrag()};
+        mFragmentArray = new ScaffoldFrag[]{new CompomentFrag(), new InternalPageFrag(), new ExampleFrag()};
     }
 
     private void initView() {
@@ -52,7 +52,7 @@ public class MainAc extends BaseAc {
         String tag = DialogUtil.buildTag(mFragmentArray[index]);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        BaseFrag fragment = (BaseFrag) fragmentManager.findFragmentByTag(tag);
+        ScaffoldFrag fragment = (ScaffoldFrag) fragmentManager.findFragmentByTag(tag);
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         // hide other

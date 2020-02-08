@@ -8,13 +8,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.vgaw.scaffold.page.BaseFrag;
+import com.vgaw.scaffold.page.ScaffoldFrag;
 import com.vgaw.scaffold.util.dialog.DialogUtil;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 import com.vgaw.scaffold.view.TitleLayout;
 import com.vgaw.scaffolddemo.R;
 
-public class NormalRecyclerViewFrag extends BaseFrag {
+public class NormalRecyclerViewFrag extends ScaffoldFrag {
     private TitleLayout mNormalRecyclerviewTitleLayout;
 
     @Nullable

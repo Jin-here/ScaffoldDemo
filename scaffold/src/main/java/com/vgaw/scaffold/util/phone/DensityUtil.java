@@ -1,10 +1,8 @@
 package com.vgaw.scaffold.util.phone;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
-import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -45,22 +43,19 @@ public final class DensityUtil {
         return (int) (pxValue / getScaledDensity(context) + 0.5f);
     }
 
+    public static int[] getScreenSize(Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return new int[]{displayMetrics.widthPixels, displayMetrics.heightPixels};
+    }
+
     public static int getScreenWidth(Context context) {
         Resources res = context.getResources();
-        if (res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            return res.getDisplayMetrics().widthPixels;
-        }
-        return res.getDisplayMetrics().widthPixels + getNavigationBarHeight(context);
+        return res.getDisplayMetrics().widthPixels;
     }
 
     public static int getScreenHeight(Context context) {
-        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display d = windowManager.getDefaultDisplay();
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        d.getMetrics(displayMetrics);
-
-        return displayMetrics.heightPixels;
+        Resources res = context.getResources();
+        return res.getDisplayMetrics().heightPixels;
     }
 
     public static int getRealScreenHeight(Context context) {

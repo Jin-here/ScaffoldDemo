@@ -8,17 +8,13 @@ import android.view.WindowManager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
-import com.vgaw.scaffold.util.net.Network;
-import com.vgaw.scaffold.util.net.NetworkChange;
-import com.vgaw.scaffold.util.net.NetworkWatcher;
 import com.vgaw.scaffold.util.phone.ImmerseUtil;
+import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 
-import java.util.Observable;
-
-public class BaseAc extends AppCompatActivity {
-    private boolean mImmerse;
-    private boolean mKeepScreenOn;
+public class ScaffoldAc extends AppCompatActivity {
+    protected boolean mImmerse;
+    protected boolean mKeepScreenOn;
+    protected boolean mDarkMode;
 
     protected void enableImmerse() {
         mImmerse = true;
@@ -53,14 +49,15 @@ public class BaseAc extends AppCompatActivity {
             ImmerseUtil.startImmerse(this);
         }
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setLightMode(this);
-
-        NetworkChange.getInstance().addObserver(mNetworkWatcher);
+        if (mDarkMode) {
+            StatusBarUtil.setDarkMode(this);
+        } else {
+            StatusBarUtil.setLightMode(this);
+        }
     }
 
     @Override
     protected void onDestroy() {
-        NetworkChange.getInstance().deleteObserver(mNetworkWatcher);
         // 关闭屏幕常亮
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -71,22 +68,6 @@ public class BaseAc extends AppCompatActivity {
         @Override
         public void run() {
             ImmerseUtil.startImmerse(getSelf());
-        }
-    };
-
-    private NetworkWatcher mNetworkWatcher = new NetworkWatcher() {
-        @Override
-        public void update(Observable observable, Object data) {
-            super.update(observable, data);
-            Network network = (Network) data;
-            if (network.isConnected()) {
-                // connected
-                network.setConnected(true);
-
-            } else {
-                // disconnected
-                network.setConnected(false);
-            }
         }
     };
 }

@@ -26,6 +26,12 @@
             android:launchMode="singleTop"
             android:screenOrientation="userPortrait" />
 
+        <activity
+            android:name=".page.common.ImgPreviewAc"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="userPortrait" />
+
         <provider
             android:name=".ScaffoldFileProvider"
             android:authorities="${applicationId}.scaffold.fileprovider"

@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.vgaw.scaffold.R;
 
-public class BaseFrag extends Fragment {
+public class ScaffoldFrag extends Fragment {
     protected FragmentActivity mActivity;
 
     @Override

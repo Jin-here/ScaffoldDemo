@@ -19,7 +19,7 @@ import com.vgaw.scaffold.R;
  * 1. 如果有自定义View，推荐使用继承方式;
  * 2. 推荐通过newInstance()方式使用，set方法中除了各种listener可以直接使用外，其他set方法建议只在继承类中使用;
  */
-public class BaseDialog extends DialogFragment {
+public class ScaffoldDialog extends DialogFragment {
     private static final boolean DEFAULT_SHOW_DESCRIPTION = true;
     private static final @StringRes
     int DEFAULT_DESCRIPTION = -1;
@@ -48,21 +48,21 @@ public class BaseDialog extends DialogFragment {
     private View mMainContent;
     private DialogInterface.OnDismissListener mDismissListener;
 
-    public static BaseDialog newInstance(String description) {
+    public static ScaffoldDialog newInstance(String description) {
         return newInstance(true, description, false, null, null, null);
     }
 
-    public static BaseDialog newInstance(String description, String leftBtnDescription, String rightBtnDescription) {
+    public static ScaffoldDialog newInstance(String description, String leftBtnDescription, String rightBtnDescription) {
         return newInstance(true, description, false, null, leftBtnDescription, rightBtnDescription);
     }
 
-    public static BaseDialog newInstance(String description, String singleBtnDescription) {
+    public static ScaffoldDialog newInstance(String description, String singleBtnDescription) {
         return newInstance(true, description, true, singleBtnDescription, null, null);
     }
 
-    private static BaseDialog newInstance(boolean showDescription, String description,
-                                          boolean singleBtn, String singleBtnDescription,
-                                          String leftBtnDescription, String rightBtnDescription) {
+    private static ScaffoldDialog newInstance(boolean showDescription, String description,
+                                              boolean singleBtn, String singleBtnDescription,
+                                              String leftBtnDescription, String rightBtnDescription) {
         Bundle args = new Bundle();
         args.putBoolean("show_description", showDescription);
         if (description != null) {
@@ -79,7 +79,7 @@ public class BaseDialog extends DialogFragment {
             args.putString("right_btn_description", rightBtnDescription);
         }
 
-        BaseDialog fragment = new BaseDialog();
+        ScaffoldDialog fragment = new ScaffoldDialog();
         fragment.setArguments(args);
         return fragment;
     }

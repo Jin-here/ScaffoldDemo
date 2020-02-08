@@ -15,10 +15,15 @@ import com.tencent.bugly.beta.Beta;
 import com.vgaw.scaffold.page.MockFrag;
 import com.vgaw.scaffold.page.ReqCodeConstant;
 import com.vgaw.scaffold.page.common.ChooseImgAc;
+import com.vgaw.scaffold.page.common.ImgPreviewAc;
 import com.vgaw.scaffold.page.common.PermissionAc;
 import com.vgaw.scaffold.page.qrcode.ScanAc;
 import com.vgaw.scaffolddemo.R;
 import com.vgaw.scaffolddemo.page.feedback.FeedbackAc;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import timber.log.Timber;
 
@@ -37,6 +42,7 @@ public class InternalPageFrag extends MockFrag {
         });
         view.findViewById(R.id.internal_page_feedback).setOnClickListener(v -> FeedbackAc.startActivity(getSelf()));
         view.findViewById(R.id.internal_page_permission).setOnClickListener(v -> requestPermission());
+        view.findViewById(R.id.internal_page_img_preview).setOnClickListener(v -> ImgPreviewAc.startAc(getSelf(), buildImgList()));
         return view;
     }
 
@@ -50,6 +56,15 @@ public class InternalPageFrag extends MockFrag {
                 Timber.d("qr msg: %s", data.getStringExtra("qr_msg"));
             }
         }
+    }
+
+    private List<String> buildImgList() {
+        List<String> imgList = new ArrayList<>();
+        imgList.add("https://img.xsnvshen.com/album/19572/13044/000.jpg");
+        imgList.add("https://img.xsnvshen.com/album/19572/13044/001.jpg");
+        imgList.add("https://img.xsnvshen.com/album/19572/13044/003.jpg");
+        imgList.add("https://img.xsnvshen.com/album/19572/13044/005.jpg");
+        return imgList;
     }
 
     private void requestPermission() {

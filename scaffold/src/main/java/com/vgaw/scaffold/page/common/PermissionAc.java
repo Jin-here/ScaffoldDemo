@@ -12,8 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
 import com.vgaw.scaffold.R;
-import com.vgaw.scaffold.page.BaseAc;
-import com.vgaw.scaffold.page.BaseDialog;
+import com.vgaw.scaffold.page.ScaffoldAc;
+import com.vgaw.scaffold.page.ScaffoldDialog;
 import com.vgaw.scaffold.page.ReqCodeConstant;
 import com.vgaw.scaffold.util.dialog.DialogUtil;
 import com.vgaw.scaffold.util.phone.SystemPageUtil;
@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PermissionAc extends BaseAc {
+public class PermissionAc extends ScaffoldAc {
     private static Map<String, String> sPermissionDesMap = new HashMap<>();
     private Map<String, Boolean> mPermissionDeniedMap;
 
@@ -132,7 +132,7 @@ public class PermissionAc extends BaseAc {
         }
         if (permissionList.size() > 0) {
             String des = (mDes == null ? String.format("为了正常使用%s，请授予以下权限", getString(R.string.app_name)) : mDes);
-            BaseDialog baseDialog = BaseDialog.newInstance(String.format("%s：\n%s", des,
+            ScaffoldDialog baseDialog = ScaffoldDialog.newInstance(String.format("%s：\n%s", des,
                     sb.substring(0, sb.length() - 1)), "取消", hasAlwaysDenied ? "前往设置" : "开始授权");
             baseDialog.setOnLeftBtnClickListener(v -> {
                 DialogUtil.dismissDialog(getSupportFragmentManager(), "permission_dialog");

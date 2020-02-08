@@ -392,6 +392,11 @@ public static final int *;
 -keep class com.vivo.vms.**{*; }
 -keep class xxx.xxx.xxx.PushMessageReceiverImpl{*;}
 
+## photoview
+-keep class com.github.chrisbanes.photoview.** {*;}
+-keep enum com.github.chrisbanes.photoview.** {*;}
+-keep interface com.github.chrisbanes.photoview.** {*;}
+
 #scaffold
 -keep class com.vgaw.scaffold.view.webview.FileChooserWebChromClient {*;}
 -keep class com.vgaw.scaffold.util.statusbar.StatusBarUtil {*;}

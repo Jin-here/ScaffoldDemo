@@ -9,14 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 
-import com.vgaw.scaffold.page.BaseFrag;
+import com.vgaw.scaffold.page.ScaffoldFrag;
 import com.vgaw.scaffold.util.dialog.DialogUtil;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 import com.vgaw.scaffold.view.CheckedImageButton;
 import com.vgaw.scaffold.view.TitleLayout;
 import com.vgaw.scaffolddemo.R;
 
-public class OtherFrag extends BaseFrag {
+public class OtherFrag extends ScaffoldFrag {
     private NestedScrollView mOtherRoot;
     private CheckedImageButton mOtherCheckIb;
     private CheckedImageButton mOtherCheckIb1;

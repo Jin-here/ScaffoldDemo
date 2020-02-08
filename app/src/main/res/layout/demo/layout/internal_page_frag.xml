@@ -48,4 +48,13 @@
         android:gravity="center_vertical|start"
         android:paddingStart="10dp"
         android:text="用户反馈"/>
+
+    <TextView
+        android:id="@+id/internal_page_img_preview"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        style="@style/Body1.Black.High"
+        android:gravity="center_vertical|start"
+        android:paddingStart="10dp"
+        android:text="图片预览"/>
 </LinearLayout>

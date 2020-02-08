@@ -11,13 +11,13 @@ import android.webkit.WebViewClient;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.vgaw.scaffold.page.BaseAc;
+import com.vgaw.scaffold.page.ScaffoldAc;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 import com.vgaw.scaffold.view.TitleLayout;
 import com.vgaw.scaffold.view.webview.FileChooserWebChromClient;
 import com.vgaw.scaffolddemo.R;
 
-public class FeedbackAc extends BaseAc {
+public class FeedbackAc extends ScaffoldAc {
     private WebView mFeedbackWv;
     private FileChooserWebChromClient mFileChooserWebChromClient;
 

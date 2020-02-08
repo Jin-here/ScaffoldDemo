@@ -16,13 +16,13 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.vgaw.scaffold.R;
-import com.vgaw.scaffold.page.BaseAc;
+import com.vgaw.scaffold.page.ScaffoldAc;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 import com.vgaw.scaffold.view.TitleLayout;
 
 import timber.log.Timber;
 
-public class ScanAc extends BaseAc implements CameraPreview.Delegate {
+public class ScanAc extends ScaffoldAc implements CameraPreview.Delegate {
     private static final int REQUEST_CODE_CAMERA_PERMISSION = 0x77;
     private FrameLayout mScanRoot;
 

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import com.vgaw.scaffold.page.BaseFrag;
+import com.vgaw.scaffold.page.ScaffoldFrag;
 import com.vgaw.scaffold.page.MockFrag;
 import com.vgaw.scaffold.util.context.ContextManager;
 import com.vgaw.scaffold.util.dialog.DialogUtil;
@@ -94,7 +94,7 @@ public class CompomentFrag extends MockFrag {
                 DensityUtil.dp2px(getContext(), 36)));
     }
 
-    private void addContentView(String name, final BaseFrag frag) {
+    private void addContentView(String name, final ScaffoldFrag frag) {
         TextView tv = new TextView(getContext());
         tv.setPadding(DensityUtil.dp2px(getContext(), 10), 0, 0, 0);
         tv.setText(name);
@@ -122,13 +122,13 @@ public class CompomentFrag extends MockFrag {
 
         private int type = -1;
         private String name;
-        private BaseFrag frag;
+        private ScaffoldFrag frag;
 
         public ItemBean(int type, String name) {
             this(type, name, null);
         }
 
-        public ItemBean(int type, String name, BaseFrag frag) {
+        public ItemBean(int type, String name, ScaffoldFrag frag) {
             this.type = type;
             this.name = name;
             this.frag = frag;

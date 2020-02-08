@@ -24,7 +24,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.vgaw.scaffold.R;
-import com.vgaw.scaffold.page.BaseAc;
+import com.vgaw.scaffold.page.ScaffoldAc;
 import com.vgaw.scaffold.util.FileUtil;
 import com.vgaw.scaffold.util.context.FileManager;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
@@ -33,7 +33,7 @@ import com.vgaw.scaffold.view.AppToast;
 import java.io.File;
 import java.util.List;
 
-public class ChooseImgAc extends BaseAc {
+public class ChooseImgAc extends ScaffoldAc {
     private static final String IMG_SUFFIX = ".jpg";
     private static final int REQUEST_CODE_CHOOSE_IMG_FROM_FILE = 70;
     private static final int REQUEST_CODE_CHOOSE_IMG_FROM_CAMERA = 71;

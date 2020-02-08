@@ -12,10 +12,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.vgaw.scaffold.R;
-import com.vgaw.scaffold.page.BaseAc;
+import com.vgaw.scaffold.page.ScaffoldAc;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 
-public class WebAc extends BaseAc {
+public class WebAc extends ScaffoldAc {
     private WebView mWebContent;
 
     public static void startActivity(Fragment fragment, String url) {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config cleartextTrafficPermitted="false">
+        <!--todo replace this with your backend req url-->
         <domain includeSubdomains="true">your backend req url</domain>
     </domain-config>
 
