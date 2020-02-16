@@ -29,7 +29,7 @@ public class FileManager {
     }
 
     public static File getInternalDir(Context context) {
-        return context.getExternalFilesDir(null);
+        return context.getFilesDir();
     }
 
     public static File getTempDir(Context context) {
