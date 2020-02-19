@@ -3,8 +3,8 @@ package com.vgaw.scaffold.util.encryption;
 import android.util.Base64;
 
 import java.io.File;
+import java.security.SecureRandom;
 import java.util.Calendar;
-import java.util.Random;
 
 public class AuthCode {  
   
@@ -137,7 +137,7 @@ public class AuthCode {
                 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };  
         int clens = CharArray.length;  
         String sCode = "";
-        Random random = new Random();
+        SecureRandom random = new SecureRandom();
         for (int i = 0; i < lens; i++) {  
             sCode += CharArray[Math.abs(random.nextInt(clens))];
         }  
@@ -255,11 +255,10 @@ public class AuthCode {
     // / <param name="pass">密钥</param>  
     // / <returns>处理后的字串数组</returns>  
     private static byte[] RC4(byte[] input, String pass) {
-        if (input == null || pass == null)  
-            return null;  
-  
-  
-  
+        if (input == null || pass == null) {
+            return null;
+        }
+
         byte[] output = new byte[input.length];  
         byte[] mBox = GetKey(pass.getBytes(), 256);  
   
@@ -294,15 +293,4 @@ public class AuthCode {
         Calendar cal = Calendar.getInstance();
         return cal.getTimeInMillis() / 1000;  
     }  
-  
-    public static void main(String[] args) {
-        String test = "hello go  to bed";
-        String key = "123456";
-        //String afStr = AuthCode.encode(test, key);
-        //System.out.println("--------encode:" + afStr);  
-        String deStr = AuthCode.authcodeDecode("0084tuF6jOu8bVvO//fcV6fXL/CCcUYVJby2nQOofjRasbvrqYNupR6eQJ2rDnhh1XvxWTft4Ub5TSdZA2Y3Ts0yhH8UrziYy5dXl3MHC5freHTOdAfgfFofcnQvLwo+BvD1hT7J9qw57Ral4NC+KNTc/Vj1CzPpftA5P6qUO3KB", key);
-        System.out.println("--------decode:" + deStr);
-  
-    }  
-  
 }
