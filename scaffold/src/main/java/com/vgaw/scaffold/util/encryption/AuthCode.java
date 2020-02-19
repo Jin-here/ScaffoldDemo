@@ -1,5 +1,7 @@
 package com.vgaw.scaffold.util.encryption;
 
+import android.util.Base64;
+
 import java.io.File;
 import java.util.Calendar;
 import java.util.Random;
@@ -212,17 +214,17 @@ public class AuthCode {
             if (operation == DiscuzAuthcodeMode.Decode) {  
                 byte[] temp;  
                   
-                temp = Base64.decode(CutString(source, ckey_length));
+                temp = Base64.decode(CutString(source, ckey_length), Base64.DEFAULT);
                 result = new String(RC4(temp, cryptkey));
                 if (CutString(result, 10, 16).equals(CutString(MD5(CutString(result, 26) + keyb), 0, 16))) {
                     return CutString(result, 26);
                 } else {
-                    temp = Base64.decode(CutString(source+"=", ckey_length));
+                    temp = Base64.decode(CutString(source+"=", ckey_length), Base64.DEFAULT);
                     result = new String(RC4(temp, cryptkey));
                     if (CutString(result, 10, 16).equals(CutString(MD5(CutString(result, 26) + keyb), 0, 16))) {
                         return CutString(result, 26);
                     } else {
-                        temp = Base64.decode(CutString(source+"==", ckey_length));
+                        temp = Base64.decode(CutString(source+"==", ckey_length), Base64.DEFAULT);
                         result = new String(RC4(temp, cryptkey));
                         if (CutString(result, 10, 16).equals(CutString(MD5(CutString(result, 26) + keyb), 0, 16))) {  
                             return CutString(result, 26);  
@@ -237,7 +239,7 @@ public class AuthCode {
   
                 byte[] temp = RC4(source.getBytes("GBK"), cryptkey);  
   
-                return keyc + Base64.encode(temp);
+                return keyc + Base64.encode(temp, Base64.DEFAULT);
   
             }  
         } catch (Exception e) {
