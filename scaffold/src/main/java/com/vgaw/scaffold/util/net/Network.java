@@ -1,7 +1,7 @@
 package com.vgaw.scaffold.util.net;
 
 public class Network {
-    private static Network sNetwork;
+    private static volatile Network sNetwork;
 
     private boolean wifi;
     private boolean mobile;

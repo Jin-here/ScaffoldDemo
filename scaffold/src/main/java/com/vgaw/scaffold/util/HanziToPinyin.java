@@ -20,7 +20,7 @@ public class HanziToPinyin {
     private static final String FIRST_PINYIN_UNIHAN = "阿";
     private static final String LAST_PINYIN_UNIHAN = "\u9fff";
     private static final Collator COLLATOR;
-    private static HanziToPinyin sInstance;
+    private static volatile HanziToPinyin sInstance;
     private final boolean mHasChinaCollator;
 
     static {
@@ -32,25 +32,24 @@ public class HanziToPinyin {
     }
 
     public static HanziToPinyin getInstance() {
-        Class var0 = HanziToPinyin.class;
-        synchronized(HanziToPinyin.class) {
-            if(sInstance != null) {
-                return sInstance;
-            } else {
-                Locale[] var1 = Collator.getAvailableLocales();
+        if (sInstance == null) {
+            synchronized(HanziToPinyin.class) {
+                if(sInstance == null) {
+                    Locale[] var1 = Collator.getAvailableLocales();
 
-                for(int var2 = 0; var2 < var1.length; ++var2) {
-                    if(var1[var2].equals(Locale.CHINA) || var1[var2].getLanguage().equals("zh") && var1[var2].getCountry().equals("HANS")) {
-                        sInstance = new HanziToPinyin(true);
-                        return sInstance;
+                    for(int var2 = 0; var2 < var1.length; ++var2) {
+                        if(var1[var2].equals(Locale.CHINA) || var1[var2].getLanguage().equals("zh") && var1[var2].getCountry().equals("HANS")) {
+                            sInstance = new HanziToPinyin(true);
+                            return sInstance;
+                        }
                     }
-                }
 
-                Log.e("HanziToPinyin", "There is no Chinese collator, HanziToPinyin is disabled");
-                sInstance = new HanziToPinyin(true);
-                return sInstance;
+                    Log.e("HanziToPinyin", "There is no Chinese collator, HanziToPinyin is disabled");
+                    sInstance = new HanziToPinyin(true);
+                }
             }
         }
+        return sInstance;
     }
 
     private static boolean doSelfValidation() {

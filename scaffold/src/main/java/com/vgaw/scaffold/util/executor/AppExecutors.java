@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class AppExecutors {
     private static final int THREAD_COUNT = 3;
-    private static AppExecutors INSTANCE;
+    private static volatile AppExecutors INSTANCE;
 
     private final Executor diskIO;
 

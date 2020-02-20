@@ -3,7 +3,7 @@ package com.vgaw.scaffolddemo.data.user;
 import com.vgaw.scaffolddemo.data.PreferenceManager;
 
 public class UserInfoCache {
-    private static UserInfoCache sInstance;
+    private static volatile UserInfoCache sInstance;
 
     private UserInfo mUserInfo;
 

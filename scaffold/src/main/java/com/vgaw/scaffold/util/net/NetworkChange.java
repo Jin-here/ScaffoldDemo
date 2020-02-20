@@ -3,7 +3,9 @@ package com.vgaw.scaffold.util.net;
 import java.util.Observable;
 
 public class NetworkChange extends Observable {
-    private static NetworkChange sInstance = null;
+    private static volatile NetworkChange sInstance = null;
+
+    private NetworkChange() {}
 
     public static NetworkChange getInstance() {
         if (null == sInstance) {

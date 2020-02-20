@@ -11,7 +11,7 @@ import java.util.List;
  * @date 2018/6/6
  */
 public class UserRepository implements UserDataSource {
-    private static UserRepository sInstance = null;
+    private static volatile UserRepository sInstance = null;
 
     private UserRepository() {
     }

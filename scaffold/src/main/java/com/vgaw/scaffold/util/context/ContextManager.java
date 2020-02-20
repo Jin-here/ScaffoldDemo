@@ -25,7 +25,7 @@ import java.util.List;
  */
 
 public class ContextManager {
-    private static ContextManager sInstance;
+    private static volatile ContextManager sInstance;
 
     private Context mContext;
     private Handler mHandler;
