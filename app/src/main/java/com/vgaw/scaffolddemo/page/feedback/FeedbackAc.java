@@ -33,7 +33,7 @@ public class FeedbackAc extends ScaffoldAc {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.feedback_ac1);
+        setContentView(R.layout.feedback_ac);
         StatusBarUtil.setColor(this, Color.WHITE);
         mFeedbackWv = findViewById(R.id.feedback_wv);
         TitleLayout feedbackTitleyout = findViewById(R.id.feedback_titlelayout);
