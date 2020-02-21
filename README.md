@@ -115,9 +115,11 @@ scaffold module
    1. toolbar：支持以下四种样式：
 
    ![](https://github.com/VolodymyrCj/ScaffoldDemo/blob/develop/gallery/compoment_other_toolbar.png)
+   
    2. checkable imagebutton：支持src选中和background选中：
 
    ![](https://github.com/VolodymyrCj/ScaffoldDemo/blob/develop/gallery/compoment_other_checkable_imagebutton.png)
+   
    3. setting item：支持以下5中样式：
 
    ![](https://github.com/VolodymyrCj/ScaffoldDemo/blob/develop/gallery/compoment_other_setting.png)
