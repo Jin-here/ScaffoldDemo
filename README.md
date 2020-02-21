@@ -56,6 +56,7 @@ scaffold module
 |[glide](https://github.com/bumptech/glide)|4.10.0|-|
 |[XRecyclerView](https://github.com/XRecyclerView/XRecyclerView)|1.6.0|原版本不支持androidx，因此已直接集成进包内|
 |[UltraViewPager](https://github.com/alibaba/UltraViewPager)|1.0.7.7|原版本不支持androidx，因此已直接集成进包内|
+|[PhotoView](https://github.com/chrisbanes/PhotoView)|2.3.0|-|
 
 
 ### 内置组件
@@ -120,18 +121,18 @@ scaffold module
    3. setting item：支持以下5中样式：
 
    ![](https://github.com/VolodymyrCj/ScaffoldDemo/blob/develop/gallery/compoment_other_setting.png)
-   4. count edittext：计数edittext，如下：
-
-   ![](https://github.com/VolodymyrCj/ScaffoldDemo/blob/develop/gallery/compoment_other_count_edittext.png)
    
-   5. 其他；
+   4. 其他；
 
 ### 内置页面
 具体使用可下载源码查看；
 1. 二维码识别；
 2. 选择相册/拍照；
-3. 软件升级；
+3. 权限申请；
+4. 版本更新检查；
 5. 用户反馈；
+6. 图片预览；
+
 
 ### 内置文字样式
 1. 根据material design设计规范，内置常见样式，例如headline2样式定义如下：
