@@ -51,7 +51,6 @@ scaffold module
 |[CircleImageView](https://github.com/hdodenhof/CircleImageView)|2.2.0|-|
 |[BGAQRCode-Android](https://github.com/bingoogolapple/BGAQRCode-Android)|3.3.3|已直接集成进包内，优化识别速度，增加光线识别动态显示闪光灯图标|
 |[flexbox](https://github.com/google/flexbox-layout)|1.1.0|-|
-|[AndPermission](https://github.com/yanzhenjie/AndPermission)|2.0.1|-|
 |[retrofit](https://github.com/square/retrofit)|2.5.0|-|
 |[glide](https://github.com/bumptech/glide)|4.10.0|-|
 |[XRecyclerView](https://github.com/XRecyclerView/XRecyclerView)|1.6.0|原版本不支持androidx，因此已直接集成进包内|
