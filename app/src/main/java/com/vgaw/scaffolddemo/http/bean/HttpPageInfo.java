@@ -1,12 +1,12 @@
 package com.vgaw.scaffolddemo.http.bean;
 
-public class PageBean {
+public class HttpPageInfo {
     private Integer currentPage;
     private Integer pageSize;
     private Integer totalPage;
     private Integer total;
 
-    public PageBean() {}
+    public HttpPageInfo() {}
 
     public Integer getCurrentPage() {
         return currentPage;
@@ -42,7 +42,7 @@ public class PageBean {
 
     @Override
     public String toString() {
-        return "PageBean{" +
+        return "HttpPageInfo{" +
                 "currentPage=" + currentPage +
                 ", pageSize=" + pageSize +
                 ", totalPage=" + totalPage +

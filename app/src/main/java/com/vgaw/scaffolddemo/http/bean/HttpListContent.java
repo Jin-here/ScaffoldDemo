@@ -2,11 +2,11 @@ package com.vgaw.scaffolddemo.http.bean;
 
 import java.util.List;
 
-public class BaseListBean<T> {
+public class HttpListContent<T> {
     private List<T> list;
-    private PageBean pageInfo;
+    private HttpPageInfo pageInfo;
 
-    public BaseListBean() {}
+    public HttpListContent() {}
 
     public List<T> getList() {
         return list;
@@ -16,17 +16,17 @@ public class BaseListBean<T> {
         this.list = list;
     }
 
-    public PageBean getPageInfo() {
+    public HttpPageInfo getPageInfo() {
         return pageInfo;
     }
 
-    public void setPageInfo(PageBean pageInfo) {
+    public void setPageInfo(HttpPageInfo pageInfo) {
         this.pageInfo = pageInfo;
     }
 
     @Override
     public String toString() {
-        return "BaseListBean{" +
+        return "HttpListContent{" +
                 "list=" + list +
                 ", pageInfo=" + pageInfo +
                 '}';

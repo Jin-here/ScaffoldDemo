@@ -15,7 +15,7 @@ import com.tencent.bugly.beta.ui.UILifecycleListener;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.vgaw.scaffold.util.Util;
 import com.vgaw.scaffold.util.context.ContextManager;
-import com.vgaw.scaffolddemo.http.AppApi;
+import com.vgaw.scaffolddemo.http.api.AppApi;
 
 import timber.log.Timber;
 

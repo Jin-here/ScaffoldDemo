@@ -1,7 +1,6 @@
 package com.vgaw.scaffolddemo.page.demo.compoment.recyclerview;
 
 import android.content.Context;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +21,12 @@ import com.vgaw.scaffolddemo.data.user.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 
 public class PullLoadUserList extends BaseRcv<UserInfo> {
     public PullLoadUserList(Context context) {
@@ -95,23 +98,22 @@ public class PullLoadUserList extends BaseRcv<UserInfo> {
     }
 
     private void fetchData(final boolean refresh) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                List<UserInfo> mockList = new ArrayList<>();
-                mockList.addAll(MockUtil.buildUserList());
-                mockList.addAll(MockUtil.buildUserList());
+        List<UserInfo> mockList = new ArrayList<>();
+        Observable.concat(MockUtil.buildUserList(), MockUtil.buildUserList())
+                .delay(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(userInfos -> {
+                    mockList.addAll(userInfos);
 
-                onOnePageAchieved();
+                    onOnePageAchieved();
 
-                if (refresh) {
-                    updateData(mockList);
-                } else {
-                    addData(mockList);
-                }
+                    if (refresh) {
+                        updateData(mockList);
+                    } else {
+                        addData(mockList);
+                    }
 
-                refreshComplete();
-            }
-        }, 500);
+                    refreshComplete();
+                });
     }
 }

@@ -15,6 +15,8 @@ import com.vgaw.scaffolddemo.data.MockUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+
 public class AdViewPager extends UltraViewPager {
     protected List<String> mDataList = new ArrayList<>();
 
@@ -69,7 +71,9 @@ public class AdViewPager extends UltraViewPager {
     }
 
     private void fetchData() {
-        updateData(MockUtil.buildADList());
+        MockUtil.buildADList()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(strings -> updateData(strings));
     }
 
     private void updateData(List<String> dataList) {

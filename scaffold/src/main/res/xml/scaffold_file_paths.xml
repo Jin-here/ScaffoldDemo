@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <files-path
+    <external-files-path
         name="2"
         path="apk/" />
-    <files-path
+    <external-files-path
         name="3"
         path="temp/"/>
 </paths>

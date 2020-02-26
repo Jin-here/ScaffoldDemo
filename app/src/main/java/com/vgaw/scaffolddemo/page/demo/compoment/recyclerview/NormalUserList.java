@@ -19,7 +19,11 @@ import com.vgaw.scaffolddemo.R;
 import com.vgaw.scaffolddemo.data.MockUtil;
 import com.vgaw.scaffolddemo.data.user.UserInfo;
 
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 
 public class NormalUserList extends BaseNormalRcv<UserInfo> {
     public NormalUserList(Context context) {
@@ -72,6 +76,8 @@ public class NormalUserList extends BaseNormalRcv<UserInfo> {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        addData(MockUtil.buildUserList());
+        MockUtil.buildUserList()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(userInfos -> addData(userInfos));
     }
 }

@@ -397,6 +397,17 @@ public static final int *;
 -keep enum com.github.chrisbanes.photoview.** {*;}
 -keep interface com.github.chrisbanes.photoview.** {*;}
 
+## rx
+-keep class retrofit2.adapter.rxjava2.** {*;}
+-keep enum retrofit2.adapter.rxjava2.** {*;}
+-keep interface retrofit2.adapter.rxjava2.** {*;}
+-keep class io.reactivex.** {*;}
+-keep enum io.reactivex.** {*;}
+-keep interface io.reactivex.** {*;}
+-keep class com.trello.rxlifecycle3.** {*;}
+-keep interface com.trello.rxlifecycle3.** {*;}
+-keep enum com.trello.rxlifecycle3.** {*;}
+
 #scaffold
 -keep class com.vgaw.scaffold.view.webview.FileChooserWebChromClient {*;}
 -keep class com.vgaw.scaffold.util.statusbar.StatusBarUtil {*;}

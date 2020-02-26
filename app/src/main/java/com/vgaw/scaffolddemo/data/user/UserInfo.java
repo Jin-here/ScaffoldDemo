@@ -2,7 +2,6 @@ package com.vgaw.scaffolddemo.data.user;
 
 public class UserInfo {
     private String id;
-    private String token;
     private String name;
     private String avatar;
 
@@ -14,14 +13,6 @@ public class UserInfo {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public String getName() {
@@ -44,7 +35,6 @@ public class UserInfo {
     public String toString() {
         return "UserInfo{" +
                 "id='" + id + '\'' +
-                ", token='" + token + '\'' +
                 ", name='" + name + '\'' +
                 ", avatar='" + avatar + '\'' +
                 '}';

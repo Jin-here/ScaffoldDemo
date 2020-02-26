@@ -1,11 +1,13 @@
 package com.vgaw.scaffolddemo.data.user;
 
-import com.vgaw.scaffolddemo.data.PreferenceManager;
+import com.vgaw.scaffold.util.PreferenceUtil;
+import com.vgaw.scaffolddemo.data.auth.AuthInfo;
 
 public class UserInfoCache {
     private static volatile UserInfoCache sInstance;
 
     private UserInfo mUserInfo;
+    private AuthInfo mAuthInfo;
 
     private UserInfoCache() {}
 
@@ -22,15 +24,29 @@ public class UserInfoCache {
 
     public UserInfo getUserInfo() {
         if (mUserInfo == null) {
-
+            mUserInfo = PreferenceUtil.get("user_info", UserInfo.class);
         }
         return mUserInfo;
+    }
+
+    public AuthInfo getAuthInfo() {
+        if (mAuthInfo == null) {
+            mAuthInfo = PreferenceUtil.get("auth_info", AuthInfo.class);
+        }
+        return mAuthInfo;
     }
 
     public void setUserInfo(UserInfo info) {
         if (info != null) {
             mUserInfo = info;
-            PreferenceManager.setUserInfo(info);
+            PreferenceUtil.set("user_info", info);
+        }
+    }
+
+    public void setAuthInfo(AuthInfo info) {
+        if (info != null) {
+            mAuthInfo = info;
+            PreferenceUtil.set("auth_info", info);
         }
     }
 
@@ -43,9 +59,9 @@ public class UserInfoCache {
     }
 
     public String getToken() {
-        UserInfo userInfo = getUserInfo();
-        if (userInfo != null) {
-            return userInfo.getToken();
+        AuthInfo authInfo = getAuthInfo();
+        if (authInfo != null) {
+            return authInfo.getToken();
         }
         return null;
     }

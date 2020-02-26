@@ -4,12 +4,17 @@ package com.vgaw.scaffolddemo.http.bean;
  * Created by caojin on 2017/6/16.
  */
 
-public class ResponseOverview {
+public class HttpResult<T> {
     private Integer code;
     private String msg;
-    private String body;
+    private T body;
 
-    public ResponseOverview() {}
+    public static boolean success(HttpResult result) {
+        // TODO: 2020/2/28 replace it with your own logic
+        return result.code != null && result.code == 0;
+    }
+
+    public HttpResult() {}
 
     public Integer getCode() {
         return code;
@@ -27,20 +32,20 @@ public class ResponseOverview {
         this.msg = msg;
     }
 
-    public String getBody() {
+    public T getBody() {
         return body;
     }
 
-    public void setBody(String body) {
+    public void setBody(T body) {
         this.body = body;
     }
 
     @Override
     public String toString() {
-        return "ResponseOverview{" +
+        return "HttpResult{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
-                ", body='" + body + '\'' +
+                ", body=" + body +
                 '}';
     }
 }
