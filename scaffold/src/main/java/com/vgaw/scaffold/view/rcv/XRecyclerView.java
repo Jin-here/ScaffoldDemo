@@ -67,6 +67,13 @@ public class XRecyclerView extends RecyclerView {
         init();
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        destroy();
+    }
+
+
     private void init() {
         if (pullRefreshEnabled) {
             mRefreshHeader = new ArrowRefreshHeader(getContext());
@@ -83,7 +90,7 @@ public class XRecyclerView extends RecyclerView {
      * when you call this,better don't call some kind of functions like
      * RefreshHeader,because the reference of mHeaderViews is NULL.
      */
-    public void destroy(){
+    private void destroy(){
         if(mHeaderViews != null){
             mHeaderViews.clear();
             mHeaderViews = null;
