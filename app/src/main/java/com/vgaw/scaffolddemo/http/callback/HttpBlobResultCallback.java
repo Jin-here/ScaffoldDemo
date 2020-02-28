@@ -1,6 +1,8 @@
-package com.vgaw.scaffolddemo.http;
+package com.vgaw.scaffolddemo.http.callback;
 
 import android.os.AsyncTask;
+
+import com.vgaw.scaffolddemo.http.ErrorMap;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -9,24 +11,25 @@ import java.io.InputStream;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
  * Created by caojin on 2017/3/9.
  */
 
-public abstract class StreamingCallback extends BaseCallback {
-    private File file;
+public abstract class HttpBlobResultCallback implements Callback<ResponseBody>, HttpResultInterface<Void> {
+    private File mFile;
 
-    public StreamingCallback(File file) {
-        this.file = file;
+    public HttpBlobResultCallback(File file) {
+        this.mFile = file;
     }
 
-    public StreamingCallback(File dir, String fileName) {
+    public HttpBlobResultCallback(File dir, String fileName) {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        this.file = new File(dir, fileName);
+        this.mFile = new File(dir, fileName);
     }
 
     @Override
@@ -36,7 +39,7 @@ public abstract class StreamingCallback extends BaseCallback {
                 @Override
                 protected Boolean doInBackground(Void... params) {
                     try {
-                        save2File(response, file);
+                        save2File(response, mFile);
                         return true;
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -45,31 +48,21 @@ public abstract class StreamingCallback extends BaseCallback {
                 }
 
                 @Override
-                protected void onProgressUpdate(Integer... values) {
-                    super.onProgressUpdate(values);
-                }
-
-                @Override
                 protected void onPostExecute(Boolean aBoolean) {
                     super.onPostExecute(aBoolean);
                     if (aBoolean) {
-                        onSuccess();
+                        onSuccess(null);
                     } else {
-                        onFail(ERROR_UNKNOWN, mapError(ERROR_UNKNOWN));
+                        onFail(ErrorMap.getUnknownMsg());
                     }
                     onFinished();
                 }
             }.execute();
         } else {
-            int code = response.code();
-            onFail(code, mapError(code));
+            onFail(ErrorMap.getErrorMsg(response.code()));
             onFinished();
         }
     }
-
-    protected abstract void onSuccess();
-
-    protected abstract void onFinished();
 
     private static void save2File(Response<ResponseBody> response, File file) throws IOException {
         InputStream in = null;
