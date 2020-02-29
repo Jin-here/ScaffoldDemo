@@ -2,8 +2,8 @@ package com.vgaw.scaffolddemo.http.rx;
 
 import android.text.TextUtils;
 
-import com.alibaba.fastjson.util.ParameterizedTypeImpl;
 import com.vgaw.scaffold.json.JsonUtil;
+import com.vgaw.scaffold.json.typeimpl.ParameterizedTypeImpl;
 import com.vgaw.scaffold.view.AppToast;
 
 import java.io.IOException;

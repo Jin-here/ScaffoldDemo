@@ -105,6 +105,6 @@ public class TypeBuilder {
         if (args.isEmpty()) {
             return raw;
         }
-        return new ParameterizedTypeImpl(raw, args.toArray(new Type[args.size()]), null);
+        return new ParameterizedTypeImpl(args.toArray(new Type[args.size()]), null, raw);
     }
 }
