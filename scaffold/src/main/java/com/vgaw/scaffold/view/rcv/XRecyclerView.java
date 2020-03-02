@@ -241,7 +241,7 @@ public class XRecyclerView extends RecyclerView {
         }
     }
     public void refresh() {
-        if (pullRefreshEnabled && mLoadingListener != null) {
+        if (pullRefreshEnabled && mLoadingListener != null && mRefreshHeader != null) {
             mRefreshHeader.setState(ArrowRefreshHeader.STATE_REFRESHING);
             mLoadingListener.onRefresh();
         }
@@ -465,9 +465,11 @@ public class XRecyclerView extends RecyclerView {
                     if(mRefreshHeader == null) {
                         break;
                     }
-                    mRefreshHeader.onMove(deltaY / dragRate);
-                    if (mRefreshHeader.getVisibleHeight() > 0 && mRefreshHeader.getState() < ArrowRefreshHeader.STATE_REFRESHING) {
-                        return false;
+                    if (mRefreshHeader != null) {
+                        mRefreshHeader.onMove(deltaY / dragRate);
+                        if (mRefreshHeader.getVisibleHeight() > 0 && mRefreshHeader.getState() < ArrowRefreshHeader.STATE_REFRESHING) {
+                            return false;
+                        }
                     }
                 }
                 break;
