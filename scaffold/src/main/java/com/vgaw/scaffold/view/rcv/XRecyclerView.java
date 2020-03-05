@@ -240,7 +240,7 @@ public class XRecyclerView extends RecyclerView {
         }
     }
     public void refresh() {
-        if (pullRefreshEnabled && mLoadingListener != null) {
+        if (pullRefreshEnabled && mLoadingListener != null && mRefreshHeader != null) {
             mRefreshHeader.setState(ArrowRefreshHeader.STATE_REFRESHING);
             mLoadingListener.onRefresh();
         }
