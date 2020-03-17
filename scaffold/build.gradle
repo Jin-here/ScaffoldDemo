@@ -55,4 +55,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     // photo view
     api 'com.github.chrisbanes:PhotoView:2.3.0'
+    // pull and load
+    api  'com.scwang.smart:refresh-layout-kernel:2.0.0-alpha-1'
+    api  'com.scwang.smart:refresh-header-classics:2.0.0-alpha-1'
+    api  'com.scwang.smart:refresh-footer-classics:2.0.0-alpha-1'
 }
