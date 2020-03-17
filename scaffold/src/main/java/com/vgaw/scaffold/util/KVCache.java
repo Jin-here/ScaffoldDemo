@@ -1,12 +1,35 @@
 package com.vgaw.scaffold.util;
 
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import com.tencent.mmkv.MMKV;
+import com.vgaw.scaffold.json.JsonUtil;
 
+import java.lang.reflect.Type;
 import java.util.Set;
 
 public class KVCache {
+    public static <T> T get(String key, Class<T> cls) {
+        if (!TextUtils.isEmpty(key)) {
+            return JsonUtil.fromJson(getInstance().decodeString(key, null), cls);
+        }
+        return null;
+    }
+
+    public static <T> T get(String key, Type type) {
+        if (!TextUtils.isEmpty(key)) {
+            return JsonUtil.fromJson(getInstance().decodeString(key, null), type);
+        }
+        return null;
+    }
+
+    public static void set(String key, Object o) {
+        if (!TextUtils.isEmpty(key) && o != null) {
+            getInstance().encode(key, JsonUtil.toJson(o));
+        }
+    }
+
     public static void set(String key, Parcelable value) {
         getInstance().encode(key, value);
     }
