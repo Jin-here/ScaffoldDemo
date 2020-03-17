@@ -13,11 +13,10 @@ import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.UpgradeInfo;
 import com.tencent.bugly.beta.ui.UILifecycleListener;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.vgaw.scaffold.BuildConfig;
+import com.vgaw.scaffold.Scaffold;
 import com.vgaw.scaffold.util.Util;
-import com.vgaw.scaffold.util.context.ContextManager;
 import com.vgaw.scaffolddemo.http.api.AppApi;
-
-import timber.log.Timber;
 
 import static android.os.Process.myPid;
 
@@ -30,13 +29,9 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        ContextManager.getInstance().init(this);
-
         // 手机右键退出程序再打开不会再走此处，除非任务管理器关闭
         if (uiProcess()){
-            if (BuildConfig.DEBUG) {
-                Timber.plant(new Timber.DebugTree());
-            }
+            Scaffold.init(this, BuildConfig.DEBUG);
 
             initHttp();
             initBugly();
