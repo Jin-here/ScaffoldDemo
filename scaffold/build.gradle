@@ -59,4 +59,8 @@ dependencies {
     // rx
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     api 'io.reactivex.rxjava2:rxjava:2.2.18'
+    // pull and load
+    api  'com.scwang.smart:refresh-layout-kernel:2.0.0-alpha-1'
+    api  'com.scwang.smart:refresh-header-classics:2.0.0-alpha-1'
+    api  'com.scwang.smart:refresh-footer-classics:2.0.0-alpha-1'
 }

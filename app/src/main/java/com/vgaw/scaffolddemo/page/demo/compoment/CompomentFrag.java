@@ -12,16 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import com.vgaw.scaffold.page.ScaffoldFrag;
 import com.vgaw.scaffold.page.MockFrag;
+import com.vgaw.scaffold.page.ScaffoldFrag;
 import com.vgaw.scaffold.util.context.ContextManager;
 import com.vgaw.scaffold.util.dialog.DialogUtil;
 import com.vgaw.scaffold.util.phone.DensityUtil;
 import com.vgaw.scaffolddemo.R;
 import com.vgaw.scaffolddemo.page.demo.compoment.bottomnav.BottomNavFrag;
 import com.vgaw.scaffolddemo.page.demo.compoment.other.OtherFrag;
-import com.vgaw.scaffolddemo.page.demo.compoment.recyclerview.NormalRecyclerViewFrag;
-import com.vgaw.scaffolddemo.page.demo.compoment.recyclerview.PullLoadRecyclerViewFrag;
 import com.vgaw.scaffolddemo.page.demo.compoment.tab.TabFragment;
 import com.vgaw.scaffolddemo.page.demo.compoment.viewpager.ViewPagerFrag;
 
@@ -43,12 +41,6 @@ public class CompomentFrag extends MockFrag {
         /*mItemList.add(new ItemBean(ItemBean.TYPE_LABEL, "listview"));
         mItemList.add(new ItemBean(ItemBean.TYPE_CONTENT, "基本使用"));
         mItemList.add(new ItemBean(ItemBean.TYPE_CONTENT, "上拉下拉"));*/
-
-        NormalRecyclerViewFrag normalRecyclerViewFrag = new NormalRecyclerViewFrag();
-        PullLoadRecyclerViewFrag pullLoadRecyclerViewFrag = new PullLoadRecyclerViewFrag();
-        mItemList.add(new ItemBean(ItemBean.TYPE_LABEL, "recyclerview"));
-        mItemList.add(new ItemBean(ItemBean.TYPE_CONTENT, "基本使用", normalRecyclerViewFrag));
-        mItemList.add(new ItemBean(ItemBean.TYPE_CONTENT, "上拉下拉", pullLoadRecyclerViewFrag));
 
         TabFragment tabFragment = new TabFragment();
         mItemList.add(new ItemBean(ItemBean.TYPE_LABEL, "tab"));
