@@ -1,6 +1,6 @@
 package com.vgaw.scaffolddemo.data.user;
 
-import com.vgaw.scaffold.util.PreferenceUtil;
+import com.vgaw.scaffold.util.KVCache;
 import com.vgaw.scaffolddemo.data.auth.AuthInfo;
 
 public class UserInfoCache {
@@ -24,14 +24,14 @@ public class UserInfoCache {
 
     public UserInfo getUserInfo() {
         if (mUserInfo == null) {
-            mUserInfo = PreferenceUtil.get("user_info", UserInfo.class);
+            mUserInfo = KVCache.get("user_info", UserInfo.class);
         }
         return mUserInfo;
     }
 
     public AuthInfo getAuthInfo() {
         if (mAuthInfo == null) {
-            mAuthInfo = PreferenceUtil.get("auth_info", AuthInfo.class);
+            mAuthInfo = KVCache.get("auth_info", AuthInfo.class);
         }
         return mAuthInfo;
     }
@@ -39,14 +39,14 @@ public class UserInfoCache {
     public void setUserInfo(UserInfo info) {
         if (info != null) {
             mUserInfo = info;
-            PreferenceUtil.set("user_info", info);
+            KVCache.set("user_info", info);
         }
     }
 
     public void setAuthInfo(AuthInfo info) {
         if (info != null) {
             mAuthInfo = info;
-            PreferenceUtil.set("auth_info", info);
+            KVCache.set("auth_info", info);
         }
     }
 

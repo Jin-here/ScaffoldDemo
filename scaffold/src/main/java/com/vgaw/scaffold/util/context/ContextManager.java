@@ -24,8 +24,8 @@ import java.util.List;
  * Created by caojin on 2016/10/24.
  */
 
-public class ContextManager {
-    private static volatile ContextManager sInstance;
+public enum ContextManager {
+    INSTANCE;
 
     private Context mContext;
     private Handler mHandler;
@@ -33,17 +33,8 @@ public class ContextManager {
     private List<Activity> mActivityList = new ArrayList<>();
     private ContextCallback mContextCallback;
 
-    private ContextManager() {}
-
     public static ContextManager getInstance() {
-        if (sInstance == null) {
-            synchronized (ContextManager.class) {
-                if (sInstance == null) {
-                    sInstance = new ContextManager();
-                }
-            }
-        }
-        return sInstance;
+        return INSTANCE;
     }
 
     public void init(Application context) {
