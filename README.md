@@ -53,7 +53,7 @@ scaffold module
 |[flexbox](https://github.com/google/flexbox-layout)|1.1.0|-|
 |[retrofit](https://github.com/square/retrofit)|2.5.0|-|
 |[glide](https://github.com/bumptech/glide)|4.10.0|-|
-|[XRecyclerView](https://github.com/XRecyclerView/XRecyclerView)|1.6.0|原版本不支持androidx，因此已直接集成进包内|
+|[MMKV](https://github.com/Tencent/MMKV)|1.0.24|用于替换SharePreference|
 |[UltraViewPager](https://github.com/alibaba/UltraViewPager)|1.0.7.7|原版本不支持androidx，因此已直接集成进包内|
 |[PhotoView](https://github.com/chrisbanes/PhotoView)|2.3.0|-|
 

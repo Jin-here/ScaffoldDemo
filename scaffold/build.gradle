@@ -60,5 +60,5 @@ dependencies {
     api  'com.scwang.smart:refresh-header-classics:2.0.0-alpha-1'
     api  'com.scwang.smart:refresh-footer-classics:2.0.0-alpha-1'
     // replacement for sharepreference
-    implementation 'com.tencent:mmkv-static:1.0.24'
+    api 'com.tencent:mmkv-static:1.0.24'
 }
