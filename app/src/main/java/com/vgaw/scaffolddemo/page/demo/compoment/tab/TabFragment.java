@@ -7,16 +7,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.vgaw.scaffold.page.ScaffoldFrag;
 import com.vgaw.scaffold.util.dialog.DialogUtil;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 import com.vgaw.scaffold.view.TitleLayout;
+import com.vgaw.scaffold.view.tab.DefaultTabAdapter;
+import com.vgaw.scaffold.view.tab.DefaultTabStyleBuilder;
 import com.vgaw.scaffold.view.tab.SlidingTabLayout;
 import com.vgaw.scaffold.view.tab.indicator.RoundRectShortIndicator;
+import com.vgaw.scaffold.view.vp.EasyFragmentPagerAdapter;
 import com.vgaw.scaffolddemo.R;
 import com.vgaw.scaffolddemo.page.demo.compoment.Tab0Frag;
 import com.vgaw.scaffolddemo.page.demo.compoment.Tab1Frag;
@@ -54,26 +55,11 @@ public class TabFragment extends ScaffoldFrag {
     }
 
     private void initView() {
-        mTabVp.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
-            @NonNull
-            @Override
-            public Fragment getItem(int position) {
-                return mFragArray[position];
-            }
-
-            @Override
-            public int getCount() {
-                return mFragArray.length;
-            }
-
-            @Nullable
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return mFragTitleArray[position];
-            }
-        });
-        mTabTab.setCustomTabView(R.layout.tab_item, null);
-        mTabTab.setSelectedIndicator(new RoundRectShortIndicator(getContext(), mFragArray.length));
+        mTabVp.setAdapter(new EasyFragmentPagerAdapter(getChildFragmentManager(), mFragArray));
+        mTabTab.setAdapter(new DefaultTabAdapter(mActivity, mFragTitleArray, new DefaultTabStyleBuilder()
+                .txtColor(R.color.black, R.color.black2)
+                .txtSize(16, 22).build()));
+        mTabTab.setSelectedIndicator(new RoundRectShortIndicator(getContext()));
         mTabTab.setViewPager(mTabVp, 0);
 
         mTabTitleLayout.setBackClickListener(new View.OnClickListener() {

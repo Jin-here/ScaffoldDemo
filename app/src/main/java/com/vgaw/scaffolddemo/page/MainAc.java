@@ -11,7 +11,7 @@ import com.vgaw.scaffold.page.ScaffoldFrag;
 import com.vgaw.scaffold.util.dialog.DialogUtil;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 import com.vgaw.scaffold.view.bottomnavigation.BottomNavigationLayout;
-import com.vgaw.scaffold.view.bottomnavigation.OnItemCheckedListener;
+import com.vgaw.scaffold.view.checkable.OnItemCheckedListener;
 import com.vgaw.scaffolddemo.R;
 import com.vgaw.scaffolddemo.page.demo.compoment.CompomentFrag;
 import com.vgaw.scaffolddemo.page.demo.example.ExampleFrag;

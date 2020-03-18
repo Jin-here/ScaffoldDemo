@@ -13,12 +13,12 @@ import com.vgaw.scaffold.util.phone.DensityUtil;
 import com.vgaw.scaffold.view.tab.SlidingTabLayout;
 
 public class RectIndicator extends BaseIndicator {
-    public RectIndicator(Context context, int count) {
-        super(context, count);
+    public RectIndicator(Context context) {
+        super(context);
     }
 
     @Override
-    protected void init(int count) {
+    public void init(int count) {
         int color = getIndicatorColor();
         mIndicatorColors = new int[count];
         for (int i = 0;i < count;i++) {

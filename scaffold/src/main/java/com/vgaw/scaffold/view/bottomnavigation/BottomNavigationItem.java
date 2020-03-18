@@ -11,8 +11,10 @@ import android.widget.TextView;
 
 import com.vgaw.scaffold.R;
 import com.vgaw.scaffold.util.phone.DensityUtil;
+import com.vgaw.scaffold.view.checkable.CheckableItemInterface;
+import com.vgaw.scaffold.view.msgtip.MsgTipItemInterface;
 
-public class BottomNavigationItem extends RelativeLayout {
+public class BottomNavigationItem extends RelativeLayout implements CheckableItemInterface, MsgTipItemInterface {
     private Drawable mBottomNavIcon;
     private Drawable mBottomNavChecked;
     private String mBottomNavName;
@@ -20,9 +22,6 @@ public class BottomNavigationItem extends RelativeLayout {
     private ImageView mBottomNavigationItemIv;
     private TextView mBottomNavigationItemTv;
     private TextView mBubble;
-
-    private Boolean mChecked;
-    private OnItemCheckedListener mListener;
 
     public BottomNavigationItem(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -32,29 +31,6 @@ public class BottomNavigationItem extends RelativeLayout {
     public BottomNavigationItem(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
-    }
-
-    public void setOnItemCheckedListener(OnItemCheckedListener listener) {
-        mListener = listener;
-    }
-
-    public void hideBubble() {
-        mBubble.setVisibility(GONE);
-    }
-
-    public void showBubble(int unReadCount) {
-        String s;
-        if (unReadCount < 100) {
-            s = String.valueOf(unReadCount);
-        } else {
-            s = "99+";
-        }
-        mBubble.setText(s);
-        mBubble.setVisibility(VISIBLE);
-    }
-
-    public void check(boolean check) {
-        onCheckChanged(check);
     }
 
     private void init(AttributeSet attrs) {
@@ -74,39 +50,32 @@ public class BottomNavigationItem extends RelativeLayout {
         mBubble = view.findViewById(R.id.bottom_navigation_item_bubble);
 
         mBottomNavigationItemTv.setText(mBottomNavName);
-        setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean checkedNow = !mChecked;
-
-                if (checkedNow) {
-                    onCheckChanged(checkedNow);
-                }
-            }
-        });
-
-        check(false);
     }
 
-    private void onCheckChanged(boolean checkedNow) {
-        if (mChecked == null || checkedNow != mChecked) {
-            if (checkedNow) {
-                mBottomNavigationItemIv.setImageDrawable(mBottomNavChecked);
-                mBottomNavigationItemTv.setTextColor(getResources().getColor(R.color.colorPrimary));
-
-                callListener();
-            } else {
-                mBottomNavigationItemIv.setImageDrawable(mBottomNavIcon);
-                mBottomNavigationItemTv.setTextColor(getResources().getColor(R.color.black4));
-            }
-
-            mChecked = checkedNow;
+    @Override
+    public void onCheckChanged(boolean checkedNow) {
+        if (checkedNow) {
+            mBottomNavigationItemIv.setImageDrawable(mBottomNavChecked);
+            mBottomNavigationItemTv.setTextColor(getResources().getColor(R.color.colorPrimary));
+        } else {
+            mBottomNavigationItemIv.setImageDrawable(mBottomNavIcon);
+            mBottomNavigationItemTv.setTextColor(getResources().getColor(R.color.black4));
         }
     }
 
-    private void callListener() {
-        if (mListener != null) {
-            mListener.onItemChecked(-1);
+    @Override
+    public void onMsgNumChanged(int msgCountNow) {
+        if (msgCountNow < 1) {
+            mBubble.setVisibility(GONE);
+        } else {
+            String s;
+            if (msgCountNow < 100) {
+                s = String.valueOf(msgCountNow);
+            } else {
+                s = "99+";
+            }
+            mBubble.setText(s);
+            mBubble.setVisibility(VISIBLE);
         }
     }
 }

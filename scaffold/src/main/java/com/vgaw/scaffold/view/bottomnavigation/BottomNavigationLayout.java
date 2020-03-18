@@ -2,15 +2,12 @@ package com.vgaw.scaffold.view.bottomnavigation;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
-import android.widget.LinearLayout;
 
-import com.vgaw.scaffold.R;
 import com.vgaw.scaffold.util.phone.DensityUtil;
+import com.vgaw.scaffold.view.checkable.CheckableLayout;
+import com.vgaw.scaffold.view.msgtip.MsgTipItemInterface;
 
-public class BottomNavigationLayout extends LinearLayout {
-    private OnItemCheckedListener mListener;
-
+public class BottomNavigationLayout extends CheckableLayout {
     public BottomNavigationLayout(Context context) {
         super(context);
         init();
@@ -21,40 +18,13 @@ public class BottomNavigationLayout extends LinearLayout {
         init();
     }
 
-    public void check(int index) {
-        ((BottomNavigationItem) getChildAt(index)).check(true);
+    public BottomNavigationLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init();
     }
 
-    public void showBubble(int index, int unReadCount) {
-        ((BottomNavigationItem) getChildAt(index)).showBubble(unReadCount);
-    }
-
-    public void hideBubble(int index) {
-        ((BottomNavigationItem) getChildAt(index)).hideBubble();
-    }
-
-    public void setOnItemCheckedListener(OnItemCheckedListener listener) {
-        mListener = listener;
-    }
-
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        int size = getChildCount();
-        for (int i = 0;i < size;i++) {
-            View child = getChildAt(i);
-            if (child instanceof BottomNavigationItem) {
-                final int finalI = i;
-                ((BottomNavigationItem) child).setOnItemCheckedListener(new OnItemCheckedListener() {
-                    @Override
-                    public void onItemChecked(int index) {
-                        onOnItemChecked(finalI);
-
-                        callListener(finalI);
-                    }
-                });
-            }
-        }
+    public void setMsgTip(int index, int unReadCount) {
+        ((MsgTipItemInterface) getChildAt(index)).onMsgNumChanged(unReadCount);
     }
 
     @Override
@@ -64,24 +34,5 @@ public class BottomNavigationLayout extends LinearLayout {
 
     private void init() {
         setOrientation(HORIZONTAL);
-        setBackgroundColor(getResources().getColor(R.color.white));
-    }
-
-    private void onOnItemChecked(int index) {
-        int size = getChildCount();
-        for (int i = 0;i < size;i++) {
-            if (i != index) {
-                View child = getChildAt(i);
-                if (child instanceof BottomNavigationItem) {
-                    ((BottomNavigationItem) child).check(false);
-                }
-            }
-        }
-    }
-
-    private void callListener(int index) {
-        if (mListener != null) {
-            mListener.onItemChecked(index);
-        }
     }
 }
