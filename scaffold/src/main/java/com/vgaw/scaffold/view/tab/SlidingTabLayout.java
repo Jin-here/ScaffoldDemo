@@ -128,6 +128,8 @@ public class SlidingTabLayout extends RadioGroup {
         mIndicator = indicator;
 
         setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), mBottomBorderThickness);
+
+        validDraw();
     }
 
     /**
@@ -140,6 +142,8 @@ public class SlidingTabLayout extends RadioGroup {
 
         mDividerPaint = new Paint();
         mDividerPaint.setStrokeWidth(thickness);
+
+        validDraw();
     }
 
     public void setBottomLineColor(int thickness, @ColorRes int color) {
@@ -148,6 +152,8 @@ public class SlidingTabLayout extends RadioGroup {
 
         mBottomBorderPaint = new Paint();
         mBottomBorderPaint.setColor(mBottomLineColor);
+
+        validDraw();
     }
 
     @Override
@@ -177,6 +183,12 @@ public class SlidingTabLayout extends RadioGroup {
                 canvas.drawLine(child.getRight(), separatorTop, child.getRight(),
                         separatorTop + dividerHeightPx, mDividerPaint);
             }
+        }
+    }
+
+    private void validDraw() {
+        if (willNotDraw()) {
+            setWillNotDraw(false);
         }
     }
 
