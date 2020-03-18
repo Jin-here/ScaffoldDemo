@@ -40,7 +40,7 @@
 
     <declare-styleable name="SlidingTabLayout">
         <attr name="tabEqualization" format="boolean"/>
-        <attr name="tabPadding" format="dimension"/>
+        <attr name="tabDividerSize" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="SettingItemView">
@@ -78,5 +78,15 @@
         <attr name="txtUpColor" format="color"/>
         <attr name="txtBelowColor" format="color"/>
         <attr name="txtPadding" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="CheckableLayout">
+        <attr name="checkableOrientation" format="enum">
+            <enum name="horizontal" value="0"/>
+            <enum name="vertical" value="1"/>
+        </attr>
+        <attr name="checkableMultiChoice" format="boolean"/>
+        <attr name="checkableDividerSize" format="dimension"/>
+        <attr name="checkableEqualization" format="boolean"/>
     </declare-styleable>
 </resources>

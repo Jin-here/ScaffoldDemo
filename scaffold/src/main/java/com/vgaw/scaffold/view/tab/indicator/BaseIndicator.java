@@ -13,15 +13,13 @@ public abstract class BaseIndicator {
 
     protected Context mContext;
 
-    public BaseIndicator(Context context, int count) {
+    public BaseIndicator(Context context) {
         mContext = context;
 
         mSelectedIndicatorPaint = new Paint();
-
-        init(count);
     }
 
-    protected abstract void init(int count);
+    public abstract void init(int count);
 
     public abstract void onDraw(Canvas canvas, SlidingTabLayout parent, int selectedPos, float selectedOffset);
 }

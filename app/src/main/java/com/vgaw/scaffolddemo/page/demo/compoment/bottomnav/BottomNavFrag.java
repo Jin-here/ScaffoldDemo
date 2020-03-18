@@ -17,7 +17,7 @@ import com.vgaw.scaffold.util.dialog.DialogUtil;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 import com.vgaw.scaffold.view.TitleLayout;
 import com.vgaw.scaffold.view.bottomnavigation.BottomNavigationLayout;
-import com.vgaw.scaffold.view.bottomnavigation.OnItemCheckedListener;
+import com.vgaw.scaffold.view.checkable.OnItemCheckedListener;
 import com.vgaw.scaffolddemo.R;
 import com.vgaw.scaffolddemo.page.demo.compoment.Tab0Frag;
 import com.vgaw.scaffolddemo.page.demo.compoment.Tab1Frag;
@@ -82,13 +82,13 @@ public class BottomNavFrag extends ScaffoldFrag {
         mBottomNavShowBubble.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mBottomNavBottomNavLayout.showBubble(0, 99);
+                mBottomNavBottomNavLayout.setMsgTip(0, 99);
             }
         });
         mBottomNavHideBubble.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mBottomNavBottomNavLayout.hideBubble(0);
+                mBottomNavBottomNavLayout.setMsgTip(0, 0);
             }
         });
     }
