@@ -22,7 +22,6 @@ import com.vgaw.scaffolddemo.R;
 import com.vgaw.scaffolddemo.page.feedback.FeedbackAc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import timber.log.Timber;
@@ -51,7 +50,7 @@ public class InternalPageFrag extends MockFrag {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_CHOOSE_IMG) {
-                Timber.d("file path: %s", data.getStringExtra("file_path"));
+                Timber.d("file path: %s", data.getStringExtra("data"));
             } else if (requestCode == REQUEST_CODE_SCAN) {
                 Timber.d("qr msg: %s", data.getStringExtra("qr_msg"));
             }
