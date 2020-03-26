@@ -40,5 +40,5 @@
 
     <string name="feedback">反馈</string>
 
-    <string name="choose_img_size_limit">图片大小不能超过6M</string>
+    <string name="choose_img_size_limit">图片太大</string>
 </resources>

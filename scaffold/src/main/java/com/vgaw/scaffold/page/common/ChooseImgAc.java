@@ -2,14 +2,12 @@ package com.vgaw.scaffold.page.common;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -24,29 +22,33 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.vgaw.scaffold.R;
+import com.vgaw.scaffold.ScaffoldSetting;
 import com.vgaw.scaffold.page.ScaffoldAc;
 import com.vgaw.scaffold.util.FileUtil;
-import com.vgaw.scaffold.util.context.FileManager;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
 import com.vgaw.scaffold.view.AppToast;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ChooseImgAc extends ScaffoldAc {
-    private static final String IMG_SUFFIX = ".jpg";
+    private static final String IMG_SUFFIX = ".png";
     private static final int REQUEST_CODE_CHOOSE_IMG_FROM_FILE = 70;
     private static final int REQUEST_CODE_CHOOSE_IMG_FROM_CAMERA = 71;
     private static final int REQUEST_CODE_IMG_CLIP = 72;
-    private static final int REQUEST_CODE_FILE_PERMISSION = 80;
     private static final int REQUEST_CODE_CAMERA_PERMISSION = 81;
 
-    private Uri mRawUri = null;
-    private Uri mCropUri = null;
-    private File mCropFile = null;
+    private Uri mCameraUri = null;
     private File mCameraFile = null;
 
-    private boolean mCrop;
+    private CropConfig mCropConfig;
+
+    private Uri mCropFileUri;
+    private Map<Uri, Integer> mPermissionMap;
 
     /**
      * intent返回值：
@@ -58,23 +60,27 @@ public class ChooseImgAc extends ScaffoldAc {
      * @param requestCode
      */
     public static void startActivityForResult(Activity activity, int requestCode) {
-        startActivityForResult(activity, requestCode, true);
+        startActivityForResult(activity, requestCode, null);
     }
 
     public static void startActivityForResult(Fragment fragment, int requestCode) {
-        startActivityForResult(fragment, requestCode, true);
+        startActivityForResult(fragment, requestCode, null);
     }
 
-    public static void startActivityForResult(Activity activity, int requestCode, boolean crop) {
+    public static void startActivityForResult(Activity activity, int requestCode, @Nullable CropConfig cropConfig) {
         Intent intent = new Intent(activity, ChooseImgAc.class);
-        intent.putExtra("crop", crop);
+        if (CropConfig.valid(cropConfig)) {
+            intent.putExtra("crop_config", cropConfig);
+        }
         activity.startActivityForResult(intent, requestCode);
         activity.overridePendingTransition(0, 0);
     }
 
-    public static void startActivityForResult(Fragment fragment, int requestCode, boolean crop) {
+    public static void startActivityForResult(Fragment fragment, int requestCode, @Nullable CropConfig cropConfig) {
         Intent intent = new Intent(fragment.getContext(), ChooseImgAc.class);
-        intent.putExtra("crop", crop);
+        if (CropConfig.valid(cropConfig)) {
+            intent.putExtra("crop_config", cropConfig);
+        }
         fragment.startActivityForResult(intent, requestCode);
         FragmentActivity activity = fragment.getActivity();
         if (activity != null && !activity.isDestroyed()) {
@@ -91,26 +97,12 @@ public class ChooseImgAc extends ScaffoldAc {
         Button chooseImgFromAlbum = findViewById(R.id.choose_img_from_album);
         Button chooseImgFromCamera = findViewById(R.id.choose_img_from_camera);
 
-        mCrop = getIntent().getBooleanExtra("crop", true);
+        Intent intent = getIntent();
+        mCropConfig = intent.getParcelableExtra("crop_config");
 
-        chooseImgBg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        chooseImgFromAlbum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callFile();
-            }
-        });
-        chooseImgFromCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callCamera();
-            }
-        });
+        chooseImgBg.setOnClickListener(v -> finish());
+        chooseImgFromAlbum.setOnClickListener(v -> callFile());
+        chooseImgFromCamera.setOnClickListener(v -> callCamera());
     }
 
     @Override
@@ -119,15 +111,15 @@ public class ChooseImgAc extends ScaffoldAc {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case REQUEST_CODE_CHOOSE_IMG_FROM_FILE:
-                    if (mCrop) {
-                        callCrop(data.getData());
+                    if (mCropConfig != null) {
+                        callCrop(data.getData(), false);
                     } else {
                         onGetResult(FileUtil.getPath(getSelf(), data.getData()), false);
                     }
                     break;
                 case REQUEST_CODE_CHOOSE_IMG_FROM_CAMERA:
-                    if (mCrop) {
-                        callCrop(null);
+                    if (mCropConfig != null) {
+                        callCrop(mCameraUri, true);
                     } else {
                         if (mCameraFile != null) {
                             onGetResult(mCameraFile.getAbsolutePath(), false);
@@ -135,9 +127,19 @@ public class ChooseImgAc extends ScaffoldAc {
                     }
                     break;
                 case REQUEST_CODE_IMG_CLIP:
-                    onGetResult(mCropFile.getAbsolutePath(), true);
+                    if (mCropFileUri != null) {
+                        onGetResult(mCropFileUri.toString(), true);
+                    }
                     break;
             }
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (isFinishing()) {
+            revokePermission();
         }
     }
 
@@ -146,7 +148,7 @@ public class ChooseImgAc extends ScaffoldAc {
             // 图片大小限制
             File file = new File(data);
             long size = file.length();
-            if (size > 6 * 1024 * 1024) {
+            if (size > ScaffoldSetting.MAX_IMG_UPLOAD_SIZE) {
                 AppToast.show(R.string.choose_img_size_limit);
                 finish();
                 return;
@@ -168,9 +170,7 @@ public class ChooseImgAc extends ScaffoldAc {
             }
         }
         if (granted) {
-            if (requestCode == REQUEST_CODE_FILE_PERMISSION) {
-                callFile();
-            } else if (requestCode == REQUEST_CODE_CAMERA_PERMISSION) {
+            if (requestCode == REQUEST_CODE_CAMERA_PERMISSION) {
                 callCamera();
             }
         }
@@ -182,60 +182,63 @@ public class ChooseImgAc extends ScaffoldAc {
         overridePendingTransition(0, 0);
     }
 
-    private void callCrop(Uri fileUri) {
-        if (fileUri != null) {
-            mRawUri = fileUri;
+    private void grantUriPermission(Intent intent, Uri uri, int permission) {
+        if (mPermissionMap == null) {
+            mPermissionMap = new HashMap<>();
         }
-        if (mRawUri != null) {
-            Intent intent = new Intent("com.android.camera.action.CROP");
-            intent.setDataAndType(mRawUri, "image/*");
-            intent.putExtra("crop", "true");
-            intent.putExtra("aspectX", 1);
-            intent.putExtra("aspectY", 1);
-            intent.putExtra("outputX", 320);
-            intent.putExtra("outputY", 320);
+        mPermissionMap.put(uri, permission);
+        List<ResolveInfo> resolveInfoList = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        for (ResolveInfo resolveInfo : resolveInfoList) {
+            String packageName = resolveInfo.activityInfo.packageName;
+            grantUriPermission(packageName, uri, permission);
+        }
+    }
 
-            File photoFile = null;
-            photoFile = createImageFile();
-            mCropFile = photoFile;
-
-            if (photoFile != null) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    mCropUri = FileProvider.getUriForFile(this, getPackageName() + ".scaffold.fileprovider",
-                            photoFile);
-                    if (fileUri == null) {
-                        grantUriPermission(this, intent, mRawUri);
-                    }
-                    grantUriPermission(this, intent, mCropUri);
-                } else {
-                    mCropUri = Uri.fromFile(photoFile);
-                }
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, mCropUri);
-                intent.putExtra("return-data", false);
-                intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-                intent.putExtra("noFaceDetection", true);
-
-                startActivityForResult(intent, REQUEST_CODE_IMG_CLIP);
+    private void revokePermission() {
+        if (mPermissionMap != null) {
+            Set<Map.Entry<Uri, Integer>> entries = mPermissionMap.entrySet();
+            Iterator<Map.Entry<Uri, Integer>> iterator = entries.iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<Uri, Integer> entry = iterator.next();
+                revokeUriPermission(entry.getKey(), entry.getValue());
             }
         }
     }
 
-    private void grantUriPermission(Context context , Intent intent, Uri uri){
-        List<ResolveInfo> resolveInfoList=context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-        for (ResolveInfo resolveInfo:resolveInfoList){
-            String packageName = resolveInfo.activityInfo.packageName;
-            context.grantUriPermission(packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+    private void callCrop(Uri fileUri, boolean fromCamera) {
+        if (fileUri != null) {
+            Intent intent = new Intent("com.android.camera.action.CROP");
+            intent.setDataAndType(fileUri, "image/*");
+            intent.putExtra("crop", "true");
+            // X方向上的比例
+            intent.putExtra("aspectX", 1);
+            // Y方向上的比例
+            intent.putExtra("aspectY", 1);
+            // scale: 是否保留比例
+            // circleCrop: 是否是圆形裁剪区域
+            if (mCropConfig != null) {
+                intent.putExtra("outputX", mCropConfig.getOutputX());
+                intent.putExtra("outputY", mCropConfig.getOutputY());
+            }
+
+            File cropFile = createAppSpecificImgFile();
+            mCropFileUri = FileProvider.getUriForFile(getSelf(),
+                    getApplicationContext().getPackageName() + ".scaffold.fileprovider", cropFile);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, mCropFileUri);
+            intent.putExtra("return-data", false);
+            intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
+            intent.putExtra("noFaceDetection", true);
+
+            if (fromCamera) {
+                grantUriPermission(intent, fileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            }
+            grantUriPermission(intent, mCropFileUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+            startActivityForResult(intent, REQUEST_CODE_IMG_CLIP);
         }
     }
 
     private void callFile() {
-        // check permission
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_FILE_PERMISSION);
-            return;
-        }
-
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction("android.intent.action.PICK");
@@ -257,25 +260,24 @@ public class ChooseImgAc extends ScaffoldAc {
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             // Create the File where the photo should go
             File photoFile = null;
-            photoFile = createImageFile();
+            photoFile = createAppSpecificImgFile();
             mCameraFile = photoFile;
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    mRawUri = FileProvider.getUriForFile(this, getPackageName() + ".scaffold.fileprovider",
-                            photoFile);
-                } else {
-                    mRawUri = Uri.fromFile(photoFile);
-                }
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mRawUri);
+                mCameraUri = FileProvider.getUriForFile(this, getPackageName() + ".scaffold.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mCameraUri);
             }
         }
 
         startActivityForResult(takePictureIntent, REQUEST_CODE_CHOOSE_IMG_FROM_CAMERA);
     }
 
-    private File createImageFile() {
-        File dir = FileManager.getTempDir(this);
+    private File createAppSpecificImgFile() {
+        File dir = getCacheDir();
+        if (!dir.exists()){
+            dir.mkdirs();
+        }
         File image = new File(dir, generateFileName());
         return image;
     }
