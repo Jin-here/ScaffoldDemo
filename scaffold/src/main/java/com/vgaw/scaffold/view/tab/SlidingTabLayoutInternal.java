@@ -17,7 +17,7 @@ import com.vgaw.scaffold.view.msgtip.MsgTipLayoutInterface;
 import com.vgaw.scaffold.view.tab.indicator.BaseIndicator;
 
 // TODO: 2020/3/30 support vertical
-public class SlidingTabLayoutInternal extends CheckableLayout implements MsgTipLayoutInterface {
+class SlidingTabLayoutInternal extends CheckableLayout implements MsgTipLayoutInterface {
     private int mBottomBorderThickness;
     private Paint mBottomBorderPaint;
     private int mBottomLineColor = -1;
