@@ -10,8 +10,8 @@ import com.vgaw.scaffold.page.ScaffoldAc;
 import com.vgaw.scaffold.page.ScaffoldFrag;
 import com.vgaw.scaffold.util.dialog.DialogUtil;
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil;
+import com.vgaw.scaffold.view.AppToast;
 import com.vgaw.scaffold.view.bottomnavigation.BottomNavigationLayout;
-import com.vgaw.scaffold.view.checkable.OnItemCheckedListener;
 import com.vgaw.scaffolddemo.R;
 import com.vgaw.scaffolddemo.page.demo.compoment.CompomentFrag;
 import com.vgaw.scaffolddemo.page.demo.example.ExampleFrag;
@@ -20,6 +20,9 @@ import com.vgaw.scaffolddemo.page.demo.internalpage.InternalPageFrag;
 import java.util.List;
 
 public class MainAc extends ScaffoldAc {
+    private static final long BACK_TO_EXIT_DURATION = 1400;
+    private long mLstBackTime;
+
     private BottomNavigationLayout mMainBottomNavLayout;
 
     private ScaffoldFrag[] mFragmentArray;
@@ -34,17 +37,23 @@ public class MainAc extends ScaffoldAc {
         initView();
     }
 
+    @Override
+    public void onBackPressed() {
+        long crtTime = System.currentTimeMillis();
+        if (crtTime - mLstBackTime > BACK_TO_EXIT_DURATION) {
+            mLstBackTime = crtTime;
+            AppToast.show(R.string.back_again_to_exit);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     private void initData() {
         mFragmentArray = new ScaffoldFrag[]{new CompomentFrag(), new InternalPageFrag(), new ExampleFrag()};
     }
 
     private void initView() {
-        mMainBottomNavLayout.setOnItemCheckedListener(new OnItemCheckedListener() {
-            @Override
-            public void onItemChecked(int index) {
-                showFragment(index);
-            }
-        });
+        mMainBottomNavLayout.setOnItemCheckedListener(this::showFragment);
         mMainBottomNavLayout.check(0);
     }
 

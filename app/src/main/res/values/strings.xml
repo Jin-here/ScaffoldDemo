@@ -15,4 +15,6 @@
     <string name="errcode_deny">Send denied</string>
     <string name="errcode_unsupported">Send error: Unsupported</string>
     <string name="errcode_unknown">Send error: Unknown</string>
+
+    <string name="back_again_to_exit">Press back again to exit</string>
 </resources>
