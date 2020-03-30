@@ -35,7 +35,7 @@ public class InternalPageFrag extends MockFrag {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.internal_page_frag, container, false);
         view.findViewById(R.id.internal_page_scan).setOnClickListener(v -> ScanAc.startActivityForResult(getSelf(), REQUEST_CODE_SCAN));
-        view.findViewById(R.id.internal_page_choose_img).setOnClickListener(v -> ChooseImgAc.startActivityForResult(getSelf(), REQUEST_CODE_CHOOSE_IMG));
+        view.findViewById(R.id.internal_page_choose_img).setOnClickListener(v -> ChooseImgAc.Companion.startActivityForResult(getSelf(), REQUEST_CODE_CHOOSE_IMG, null));
         view.findViewById(R.id.internal_page_check_version).setOnClickListener(v -> {
             Beta.checkUpgrade(true, false);
         });
