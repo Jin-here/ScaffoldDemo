@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import com.vgaw.scaffold.view.tab.SlidingTabLayout;
+import com.vgaw.scaffold.view.tab.SlidingTabLayoutInternal;
 
 public abstract class BaseIndicator {
     protected int mSelectedIndicatorThickness;
@@ -21,5 +21,5 @@ public abstract class BaseIndicator {
 
     public abstract void init(int count);
 
-    public abstract void onDraw(Canvas canvas, SlidingTabLayout parent, int selectedPos, float selectedOffset);
+    public abstract void onDraw(Canvas canvas, SlidingTabLayoutInternal parent, int selectedPos, float selectedOffset);
 }
