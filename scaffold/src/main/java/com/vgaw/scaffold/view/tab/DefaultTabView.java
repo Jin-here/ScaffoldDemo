@@ -2,15 +2,18 @@ package com.vgaw.scaffold.view.tab;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.Gravity;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
-import androidx.appcompat.widget.AppCompatTextView;
-
-import com.vgaw.scaffold.util.phone.DensityUtil;
+import com.vgaw.scaffold.R;
 import com.vgaw.scaffold.view.checkable.CheckableItemInterface;
 import com.vgaw.scaffold.view.msgtip.MsgTipItemInterface;
 
-public class DefaultTabView extends AppCompatTextView implements CheckableItemInterface, MsgTipItemInterface {
+public class DefaultTabView extends FrameLayout implements CheckableItemInterface, MsgTipItemInterface {
+    private TextView mDefaultTabItemContent;
+    private TextView mDefaultTabItemBubble;
+
     private DefaultTabStyle mStyle;
 
     public DefaultTabView(Context context) {
@@ -28,28 +31,39 @@ public class DefaultTabView extends AppCompatTextView implements CheckableItemIn
         init();
     }
 
+    public void setContent(String content) {
+        mDefaultTabItemContent.setText(content);
+    }
+
     public void setTabStyle(DefaultTabStyle tabStyle) {
         mStyle = tabStyle;
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int width = DensityUtil.dp2px(getContext(), 64);
-        super.onMeasure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY), heightMeasureSpec);
-    }
-
     private void init() {
-        int padding = DensityUtil.dp2px(getContext(), 6);
-        setPadding(padding, 0, padding, 0);
-        setGravity(Gravity.CENTER);
+        View view = View.inflate(getContext(), R.layout.default_tab_item, this);
+        mDefaultTabItemContent = view.findViewById(R.id.default_tab_item_content);
+        mDefaultTabItemBubble = view.findViewById(R.id.default_tab_item_bubble);
     }
 
     @Override
     public void onCheckChanged(boolean checkedNow) {
-        setTextColor(getContext().getResources().getColor(mStyle.getTxtColor(checkedNow)));
-        setTextSize(mStyle.getTxtSize(checkedNow));
+        mDefaultTabItemContent.setTextColor(getContext().getResources().getColor(mStyle.getTxtColor(checkedNow)));
+        mDefaultTabItemContent.setTextSize(mStyle.getTxtSize(checkedNow));
     }
 
     @Override
-    public void onMsgNumChanged(int msgCountNow) {}
+    public void onMsgNumChanged(int msgCountNow) {
+        if (msgCountNow < 1) {
+            mDefaultTabItemBubble.setVisibility(GONE);
+        } else {
+            String s;
+            if (msgCountNow < 100) {
+                s = String.valueOf(msgCountNow);
+            } else {
+                s = "99+";
+            }
+            mDefaultTabItemBubble.setText(s);
+            mDefaultTabItemBubble.setVisibility(VISIBLE);
+        }
+    }
 }

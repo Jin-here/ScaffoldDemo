@@ -27,6 +27,8 @@ public class TabFragment extends ScaffoldFrag {
     private TitleLayout mTabTitleLayout;
     private SlidingTabLayout mTabTab;
     private ViewPager mTabVp;
+    private View mTabShowBubble;
+    private View mTabHideBubble;
 
     private ScaffoldFrag[] mFragArray;
     private String[] mFragTitleArray;
@@ -39,6 +41,8 @@ public class TabFragment extends ScaffoldFrag {
         mTabTitleLayout = view.findViewById(R.id.tab_title_layout);
         mTabTab = view.findViewById(R.id.tab_tab);
         mTabVp = view.findViewById(R.id.tab_vp);
+        mTabShowBubble = view.findViewById(R.id.tab_show_bubble);
+        mTabHideBubble = view.findViewById(R.id.tab_hide_bubble);
 
         initData();
         initView();
@@ -62,11 +66,8 @@ public class TabFragment extends ScaffoldFrag {
         mTabTab.setSelectedIndicator(new RoundRectShortIndicator(getContext()));
         mTabTab.setViewPager(mTabVp, 0);
 
-        mTabTitleLayout.setBackClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogUtil.dismissDialog(getSelf());
-            }
-        });
+        mTabTitleLayout.setBackClickListener(v -> DialogUtil.dismissDialog(getSelf()));
+        mTabShowBubble.setOnClickListener(v -> mTabTab.setMsgTip(0, 100));
+        mTabHideBubble.setOnClickListener(v -> mTabTab.setMsgTip(0, 0));
     }
 }

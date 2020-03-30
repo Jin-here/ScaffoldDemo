@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/default_tab_item_content"
+        android:layout_width="64dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"/>
+
+    <TextView
+        android:id="@+id/default_tab_item_bubble"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="@drawable/bubble_bg"
+        android:textColor="@color/white"
+        android:autoSizeMaxTextSize="12sp"
+        android:autoSizeMinTextSize="8sp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeStepGranularity="1sp"
+        android:layout_gravity="right"
+        android:layout_margin="4dp"
+        android:gravity="center"
+        android:visibility="gone"/>
+</merge>

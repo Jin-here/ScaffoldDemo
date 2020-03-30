@@ -14,9 +14,11 @@ import com.vgaw.scaffold.R;
 import com.vgaw.scaffold.view.checkable.CheckableAdapter;
 import com.vgaw.scaffold.view.checkable.CheckableLayout;
 import com.vgaw.scaffold.view.msgtip.MsgTipItemInterface;
+import com.vgaw.scaffold.view.msgtip.MsgTipLayoutInterface;
 import com.vgaw.scaffold.view.tab.indicator.BaseIndicator;
 
-public class SlidingTabLayout extends CheckableLayout {
+// TODO: 2020/3/30 support vertical
+public class SlidingTabLayout extends CheckableLayout implements MsgTipLayoutInterface {
     private int mBottomBorderThickness;
     private Paint mBottomBorderPaint;
     private int mBottomLineColor = -1;
@@ -48,6 +50,7 @@ public class SlidingTabLayout extends CheckableLayout {
         init(attrs);
     }
 
+    @Override
     public void setMsgTip(int index, int unReadCount) {
         View child = getChildAt(index);
         if (child instanceof MsgTipItemInterface) {

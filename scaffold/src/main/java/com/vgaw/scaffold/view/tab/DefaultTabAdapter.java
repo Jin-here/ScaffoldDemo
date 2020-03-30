@@ -18,7 +18,7 @@ public class DefaultTabAdapter extends CheckableAdapter<String> {
     public View createView(int position) {
         DefaultTabView view = new DefaultTabView(mContext);
         view.setTabStyle(mStyle);
-        view.setText(Util.nullToEmpty(getItem(position)));
+        view.setContent(Util.nullToEmpty(getItem(position)));
         return view;
     }
 }
