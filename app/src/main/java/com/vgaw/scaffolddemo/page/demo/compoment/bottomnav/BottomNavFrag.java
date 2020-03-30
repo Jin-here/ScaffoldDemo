@@ -82,7 +82,7 @@ public class BottomNavFrag extends ScaffoldFrag {
         mBottomNavShowBubble.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mBottomNavBottomNavLayout.setMsgTip(0, 99);
+                mBottomNavBottomNavLayout.setMsgTip(0, 100);
             }
         });
         mBottomNavHideBubble.setOnClickListener(new View.OnClickListener() {
