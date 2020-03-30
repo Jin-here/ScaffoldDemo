@@ -1,6 +1,7 @@
 package com.vgaw.scaffolddemo.data.auth;
 
 import com.vgaw.scaffolddemo.data.user.UserInfoCache;
+import com.vgaw.scaffolddemo.model.AuthInfo;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;

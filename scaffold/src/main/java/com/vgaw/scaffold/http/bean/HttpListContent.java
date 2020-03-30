@@ -1,4 +1,4 @@
-package com.vgaw.scaffolddemo.http.bean;
+package com.vgaw.scaffold.http.bean;
 
 import java.util.List;
 

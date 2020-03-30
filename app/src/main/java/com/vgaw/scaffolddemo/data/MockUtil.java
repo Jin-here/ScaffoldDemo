@@ -1,6 +1,6 @@
 package com.vgaw.scaffolddemo.data;
 
-import com.vgaw.scaffolddemo.data.user.UserInfo;
+import com.vgaw.scaffolddemo.model.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.vgaw.scaffold.http.service;
+package com.vgaw.scaffolddemo.data.auth.remote;
 
 import java.util.Map;
 
@@ -23,7 +23,7 @@ import retrofit2.http.Streaming;
  * Created by caojin on 2017/5/25.
  */
 
-public interface HttpService {
+public interface AuthService {
     @GET("{path}")
     Observable<ResponseBody> get(@Path(value = "path", encoded = true) String path, @HeaderMap Map<String, String> headerMap, @QueryMap Map<String, Object> queryMap);
 

@@ -1,7 +1,8 @@
 package com.vgaw.scaffolddemo.data.user;
 
 import com.vgaw.scaffold.util.KVCache;
-import com.vgaw.scaffolddemo.data.auth.AuthInfo;
+import com.vgaw.scaffolddemo.model.AuthInfo;
+import com.vgaw.scaffolddemo.model.UserInfo;
 
 public class UserInfoCache {
     private static volatile UserInfoCache sInstance;

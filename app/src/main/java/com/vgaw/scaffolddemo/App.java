@@ -16,7 +16,6 @@ import com.tencent.bugly.crashreport.CrashReport;
 import com.vgaw.scaffold.BuildConfig;
 import com.vgaw.scaffold.Scaffold;
 import com.vgaw.scaffold.util.Util;
-import com.vgaw.scaffolddemo.http.api.AppApi;
 
 import static android.os.Process.myPid;
 
@@ -33,7 +32,6 @@ public class App extends Application {
         if (uiProcess()){
             Scaffold.init(this, BuildConfig.DEBUG);
 
-            initHttp();
             initBugly();
         }
     }
@@ -110,9 +108,5 @@ public class App extends Application {
         // for bugly bug report only
         //CrashReport.initCrashReport(getApplicationContext(), getString(R.string.bugly_appid), BuildConfig.DEBUG, userStrategy);
         Bugly.init(getApplicationContext(), getString(R.string.bugly_appid), false, userStrategy);
-    }
-
-    private void initHttp() {
-        AppApi.init();
     }
 }
