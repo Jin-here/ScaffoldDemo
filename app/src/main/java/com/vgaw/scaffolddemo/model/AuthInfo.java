@@ -1,4 +1,4 @@
-package com.vgaw.scaffolddemo.data.auth;
+package com.vgaw.scaffolddemo.model;
 
 public class AuthInfo {
     private String token;

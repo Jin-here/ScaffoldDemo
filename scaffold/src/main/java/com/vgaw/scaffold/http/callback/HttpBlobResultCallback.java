@@ -1,8 +1,8 @@
-package com.vgaw.scaffolddemo.http.callback;
+package com.vgaw.scaffold.http.callback;
 
 import android.os.AsyncTask;
 
-import com.vgaw.scaffolddemo.http.ErrorMap;
+import com.vgaw.scaffold.http.ErrorMap;
 
 import java.io.File;
 import java.io.FileOutputStream;

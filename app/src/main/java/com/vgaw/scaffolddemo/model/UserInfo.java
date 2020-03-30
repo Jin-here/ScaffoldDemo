@@ -1,4 +1,4 @@
-package com.vgaw.scaffolddemo.data.user;
+package com.vgaw.scaffolddemo.model;
 
 public class UserInfo {
     private String id;

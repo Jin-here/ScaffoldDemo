@@ -1,4 +1,4 @@
-package com.vgaw.scaffolddemo.http.callback;
+package com.vgaw.scaffold.http.callback;
 
 public interface HttpResultInterface<T> {
     void onSuccess(T data);

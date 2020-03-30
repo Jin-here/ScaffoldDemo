@@ -1,9 +1,9 @@
-package com.vgaw.scaffolddemo.http;
+package com.vgaw.scaffold.http;
 
 import android.util.SparseArray;
 
+import com.vgaw.scaffold.R;
 import com.vgaw.scaffold.util.context.ContextManager;
-import com.vgaw.scaffolddemo.R;
 
 public class ErrorMap {
     private static final int ERROR_UNKNOWN = -1;
