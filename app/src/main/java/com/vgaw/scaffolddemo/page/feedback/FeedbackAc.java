@@ -55,7 +55,7 @@ public class FeedbackAc extends ScaffoldAc {
         });
         mFileChooserWebChromClient = new FileChooserWebChromClient(getSelf());
         mFeedbackWv.setWebChromeClient(mFileChooserWebChromClient);
-        String url = String.format("https://support.qq.com/product/%s", getString(R.string.tucao_product_id));
+        String url = String.format("https://support.qq.com/product/%s", getString(R.string.txc_product_id));
         mFeedbackWv.loadUrl(url);
     }
 

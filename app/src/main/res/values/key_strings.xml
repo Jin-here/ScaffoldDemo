@@ -2,6 +2,6 @@
 <resources>
     <!--bugly-->
     <string name="bugly_appid">1a08f2eb4e</string>
-    <!--吐槽（反馈）-->
-    <string name="tucao_product_id">96058</string>
+    <!--兔小巢（反馈）-->
+    <string name="txc_product_id">139169</string>
 </resources>
