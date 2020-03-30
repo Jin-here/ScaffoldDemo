@@ -10,7 +10,7 @@ import androidx.annotation.ColorInt;
 
 import com.vgaw.scaffold.R;
 import com.vgaw.scaffold.util.phone.DensityUtil;
-import com.vgaw.scaffold.view.tab.SlidingTabLayout;
+import com.vgaw.scaffold.view.tab.SlidingTabLayoutInternal;
 
 public class RectIndicator extends BaseIndicator {
     public RectIndicator(Context context) {
@@ -29,7 +29,7 @@ public class RectIndicator extends BaseIndicator {
     }
 
     @Override
-    public void onDraw(Canvas canvas, SlidingTabLayout parent, int selectedPos, float selectedOffset) {
+    public void onDraw(Canvas canvas, SlidingTabLayoutInternal parent, int selectedPos, float selectedOffset) {
         int childCount = parent.getChildCount();
         int height = parent.getHeight();
         boolean showIndicator = (mIndicatorColors != null);
