@@ -18,6 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import com.vgaw.scaffold.R
 import com.vgaw.scaffold.ScaffoldSetting
 import com.vgaw.scaffold.page.ScaffoldAc
+import com.vgaw.scaffold.util.FileUtil
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.size
