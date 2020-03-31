@@ -8,7 +8,7 @@
     <!--scan end-->
 
     <application>
-        <activity android:name=".page.common.ChooseImgAc"
+        <activity android:name=".page.common.chooseimg.ChooseImgAc"
             android:theme="@style/transparent_activity"/>
 
         <activity android:name=".page.qrcode.ScanAc"

@@ -1,4 +1,4 @@
-package com.vgaw.scaffold.page.common;
+package com.vgaw.scaffold.page.common.chooseimg;
 
 import android.os.Parcel;
 import android.os.Parcelable;

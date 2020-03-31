@@ -1,4 +1,4 @@
-package com.vgaw.scaffold.page.common
+package com.vgaw.scaffold.page.common.chooseimg
 
 import android.Manifest
 import android.app.Activity
@@ -14,18 +14,20 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.vgaw.scaffold.R
 import com.vgaw.scaffold.ScaffoldSetting
 import com.vgaw.scaffold.page.ScaffoldAc
-import com.vgaw.scaffold.util.FileUtil
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil
-import com.vgaw.scaffold.view.AppToast
+import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.size
 import kotlinx.android.synthetic.main.choose_img_ac.*
+import kotlinx.coroutines.launch
 import java.io.File
 
 class ChooseImgAc : ScaffoldAc() {
     companion object {
-        private val IMG_SUFFIX = ".png"
+        private val IMG_SUFFIX = ".jpeg"
         private val REQUEST_CODE_CHOOSE_IMG_FROM_FILE = 70
         private val REQUEST_CODE_CHOOSE_IMG_FROM_CAMERA = 71
         private val REQUEST_CODE_IMG_CLIP = 72
@@ -97,7 +99,7 @@ class ChooseImgAc : ScaffoldAc() {
                         if (mCropConfig != null) {
                             callCrop(data.getData(), false)
                         } else {
-                            onGetResult(FileUtil.getPath(getSelf(), data.getData()), false)
+                            onGetResult(FileUtil.from(getSelf(), data.getData()).absolutePath)
                         }
                     }
                 }
@@ -106,13 +108,13 @@ class ChooseImgAc : ScaffoldAc() {
                         callCrop(mCameraUri, true)
                     } else {
                         if (mCameraFile != null) {
-                            onGetResult(mCameraFile!!.getAbsolutePath()!!, false)
+                            onGetResult(mCameraFile!!.getAbsolutePath()!!)
                         }
                     }
                 }
                 REQUEST_CODE_IMG_CLIP -> {
                     if (mCropFileUri != null) {
-                        onGetResult(mCropFileUri.toString(), true)
+                        onGetResult(mCropFileUri.toString())
                     }
                 }
             }
@@ -121,25 +123,35 @@ class ChooseImgAc : ScaffoldAc() {
 
     override fun onStop() {
         super.onStop()
-        if (isFinishing()) {
+        if (isFinishing) {
             revokePermission()
         }
     }
 
-    private fun onGetResult(data: String, crop: Boolean) {
-        if (!crop) {
-            // 图片大小限制
-            val file = File(data)
-            val size = file.length()
-            if (size > ScaffoldSetting.MAX_IMG_UPLOAD_SIZE) {
-                AppToast.show(R.string.choose_img_size_limit)
-                finish()
-                return
+    private fun onGetResult(data: String) {
+        var resultPath: String? = data
+        // 压缩图片
+        val file = File(data)
+        val fileSize = file.length()
+        if (fileSize > ScaffoldSetting.MAX_IMG_UPLOAD_SIZE) {
+            lifecycleScope.launch {
+                val compressedFile = Compressor.compress(this@ChooseImgAc, file) {
+                    size(ScaffoldSetting.MAX_IMG_UPLOAD_SIZE)
+                }
+                resultPath = compressedFile.absolutePath
+                onGetResult1(resultPath)
             }
+        } else{
+            onGetResult1(resultPath)
         }
-        val intent = getIntent()
-        intent.putExtra("data", data)
-        setResult(Activity.RESULT_OK, intent)
+    }
+
+    private fun onGetResult1(path: String?) {
+        if (path != null) {
+            val intent = getIntent()
+            intent.putExtra("data", path)
+            setResult(Activity.RESULT_OK, intent)
+        }
         finish()
     }
 
@@ -205,7 +217,7 @@ class ChooseImgAc : ScaffoldAc() {
                     getApplicationContext().getPackageName() + ".scaffold.fileprovider", cropFile)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, mCropFileUri)
             intent.putExtra("return-data", false)
-            intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString())
+            intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString())
             intent.putExtra("noFaceDetection", true)
 
             if (fromCamera) {
@@ -252,12 +264,13 @@ class ChooseImgAc : ScaffoldAc() {
         startActivityForResult(takePictureIntent, REQUEST_CODE_CHOOSE_IMG_FROM_CAMERA)
     }
 
-    private fun createAppSpecificImgFile(): File {
+    private fun createAppSpecificImgFile() = File(getAppSpecificDir(), generateFileName())
+
+    private fun getAppSpecificDir(): File {
         val dir = getCacheDir()
         if (!dir.exists()) {
             dir.mkdirs()
         }
-        val image = File(dir, generateFileName())
-        return image
+        return dir
     }
 }

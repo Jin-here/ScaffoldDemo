@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import com.tencent.bugly.beta.Beta;
 import com.vgaw.scaffold.page.MockFrag;
 import com.vgaw.scaffold.page.ReqCodeConstant;
-import com.vgaw.scaffold.page.common.ChooseImgAc;
+import com.vgaw.scaffold.page.common.chooseimg.ChooseImgAc;
 import com.vgaw.scaffold.page.common.ImgPreviewAc;
 import com.vgaw.scaffold.page.common.PermissionAc;
 import com.vgaw.scaffold.page.qrcode.ScanAc;

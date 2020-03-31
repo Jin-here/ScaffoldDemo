@@ -397,6 +397,11 @@ public static final int *;
 -keep enum com.github.chrisbanes.photoview.** {*;}
 -keep interface com.github.chrisbanes.photoview.** {*;}
 
+## compressor
+-keep class id.zelory:compressor.** {*;}
+-keep interface id.zelory:compressor.** {*;}
+-keep enum id.zelory:compressor.** {*;}
+
 #scaffold
 -keep class com.vgaw.scaffold.view.webview.FileChooserWebChromClient {*;}
 -keep class com.vgaw.scaffold.util.statusbar.StatusBarUtil {*;}

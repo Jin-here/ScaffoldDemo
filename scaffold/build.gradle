@@ -35,8 +35,13 @@ dependencies {
     api 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
     api 'androidx.legacy:legacy-support-v4:1.0.0'
     api 'com.google.android.material:material:1.1.0-beta01'
-    api "androidx.core:core-ktx:1.0.1"
+    api "androidx.core:core-ktx:1.2.0"
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.kotlinVersion"
+    api "androidx.collection:collection-ktx:1.1.0"
+    api "androidx.fragment:fragment-ktx:1.2.3"
+    api "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+    api "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     // lifecycle
     def lifecycle_version = '2.1.0-alpha02'
     api "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
@@ -65,4 +70,5 @@ dependencies {
     api  'com.scwang.smart:refresh-footer-classics:2.0.0-alpha-1'
     // replacement for sharepreference
     api 'com.tencent:mmkv-static:1.0.24'
+    api 'id.zelory:compressor:3.0.0'
 }
