@@ -70,5 +70,6 @@ dependencies {
     api  'com.scwang.smart:refresh-footer-classics:2.0.0-alpha-1'
     // replacement for sharepreference
     api 'com.tencent:mmkv-static:1.0.24'
+    // compressor
     api 'id.zelory:compressor:3.0.0'
 }

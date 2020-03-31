@@ -37,8 +37,8 @@ app module
 
 |名称|版本|
 |---|---|
-|[bugly](https://bugly.qq.com/docs/)|最新|
-|[吐个槽](https://tucao.qq.com/dashboard/dev/index)|最新|
+|[bugly](https://bugly.qq.com/docs)|最新|
+|[兔小巢](https://txc.qq.com/helper/AndroidGuide)|最新|
 
 scaffold module
 
@@ -56,12 +56,25 @@ scaffold module
 |[MMKV](https://github.com/Tencent/MMKV)|1.0.24|用于替换SharePreference|
 |[UltraViewPager](https://github.com/alibaba/UltraViewPager)|1.0.7.7|原版本不支持androidx，因此已直接集成进包内|
 |[PhotoView](https://github.com/chrisbanes/PhotoView)|2.3.0|-|
+|[SmartRefreshLayout](https://github.com/chrisbanes/PhotoView)|2.0.0-alpha-1|上拉下拉|
+|[Compressor](https://github.com/chrisbanes/PhotoView)|3.0.0|图片压缩|
 
 
 ### 内置组件
 组件具体使用可下载源码查看；
-1. bottom nav：底部导航栏，支持气泡；
-2. recyclerview：
+1. checkable layout：支持单选多选
+2. bottom nav：基于checkable layout实现，支持气泡；
+3. tab，基于checkable layout实现：
+   1. 除基本功能，增加设置:
+      1. tab间分割线;
+      2. 底部分割线;
+      3. 底部indicator；
+      4. tab选中/非选中样式；
+      5. 气泡；
+   2. 底部indicator内置如下两种，开发者可通过实现BaseIndicator抽象类来自定义绘制；
+
+   ![](https://github.com/VolodymyrCj/ScaffoldDemo/blob/develop/gallery/compoment_tab_indicator_style.png)
+4. recyclerview：
    1. 内置LinearItemDecoration，等分GridItemDecoration；
    2. 封装adapter，方便使用，示例如下：
    ```java
@@ -89,16 +102,7 @@ scaffold module
                }
            };
    ```
-3. tab：
-   1. 除基本功能，增加设置:
-      1. tab间分割线;
-      2. 底部分割线;
-      3. 底部indicator；
-      4. tab选中/非选中样式；
-   2. 底部indicator内置如下两种，开发者可通过实现BaseIndicator抽象类来自定义绘制；
-
-   ![](https://github.com/VolodymyrCj/ScaffoldDemo/blob/develop/gallery/compoment_tab_indicator_style.png)
-4. viewpager：
+5. viewpager：
    1. 封装adapter，使用示例如下，仅需实现该方法即可：
    ```java
    @Override
@@ -110,7 +114,7 @@ scaffold module
            return view;
        }
    ```
-5. other：
+6. other：
    1. toolbar：支持以下四种样式：
 
    ![](https://github.com/VolodymyrCj/ScaffoldDemo/blob/develop/gallery/compoment_other_toolbar.png)
@@ -163,14 +167,11 @@ mvvm + livedata + lifecycle，具体使用请查阅源码；
     1. 获取当前Activity/当前Activity的FragmentManager；
     2. 在不能直接获取Context页面，获取string/dimen/color/drawable等；
     3. 获取当前应用是否在后台；
-2. FileManager：
-   1. 获取各种类型文件存储路径，如apk文件，debug文件，temp文件，picture文件，movie文件；
-   2. 清除apk文件；
-3. PreferenceManager；
+3. KVCache；
 3. DialogUtil：封装DialogFragment显示/移除；
 4. DensityUtil；
 5. StatusBarUtil：状态栏相关；
-6. ImageLoader：图片加载；
+6. ImgLoader：图片加载；
 7. JsonUtil：json处理；
 8. 其他；
 
