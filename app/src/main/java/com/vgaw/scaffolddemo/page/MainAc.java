@@ -39,6 +39,12 @@ public class MainAc extends ScaffoldAc {
 
     @Override
     public void onBackPressed() {
+        int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+        if (backStackEntryCount > 0) {
+            super.onBackPressed();
+            return;
+        }
+
         long crtTime = System.currentTimeMillis();
         if (crtTime - mLstBackTime > BACK_TO_EXIT_DURATION) {
             mLstBackTime = crtTime;
