@@ -115,7 +115,7 @@ class ChooseImgAc : ScaffoldAc() {
                 }
                 REQUEST_CODE_IMG_CLIP -> {
                     if (mCropFileUri != null) {
-                        onGetResult(mCropFileUri.toString())
+                        onGetResult(FileUtil.from(self, mCropFileUri).absolutePath)
                     }
                 }
             }
