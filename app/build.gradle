@@ -59,10 +59,7 @@ android {
     /*useLibrary 'org.apache.http.legacy'*/
     sourceSets {
         main {
-            res.srcDirs=[
-                    'src/main/res/layout/demo',
-                    'src/main/res/layout',
-                    'src/main/res']
+            res.srcDirs+=['src/main/res/layout/demo']
 
         }}
 
