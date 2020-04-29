@@ -1,5 +1,6 @@
 package com.vgaw.scaffold.util;
 
+import android.content.Context;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
@@ -10,116 +11,139 @@ import java.lang.reflect.Type;
 import java.util.Set;
 
 public class KVCache {
-    public static <T> T get(String key, Class<T> cls) {
+    private static final String DEFAULT_NAME = "main";
+    private MMKV mKv;
+
+    /**
+     * should initialized when app start
+     * @param context
+     */
+    public static void init(Context context) {
+        MMKV.initialize(context);
+    }
+
+    public static KVCache with() {
+        return with(DEFAULT_NAME, false);
+    }
+
+    public static KVCache with(String name) {
+        return with(name, false);
+    }
+
+    public static KVCache with(String name, boolean multiProcess) {
+        int mode = (multiProcess ? MMKV.MULTI_PROCESS_MODE : MMKV.SINGLE_PROCESS_MODE);
+        return new KVCache(MMKV.mmkvWithID(name, mode));
+    }
+
+    public <T> T getJson(String key, Class<T> cls) {
         if (!TextUtils.isEmpty(key)) {
             return JsonUtil.fromJson(getInstance().decodeString(key, null), cls);
         }
         return null;
     }
 
-    public static <T> T get(String key, Type type) {
+    public <T> T getJson(String key, Type type) {
         if (!TextUtils.isEmpty(key)) {
             return JsonUtil.fromJson(getInstance().decodeString(key, null), type);
         }
         return null;
     }
 
-    public static void set(String key, Object o) {
+    public void setJson(String key, Object o) {
         if (!TextUtils.isEmpty(key) && o != null) {
             getInstance().encode(key, JsonUtil.toJson(o));
         }
     }
 
-    public static void set(String key, Parcelable value) {
+    public void setParcelable(String key, Parcelable value) {
         getInstance().encode(key, value);
     }
 
-    public static void set(String key, String value) {
+    public void set(String key, String value) {
         getInstance().encode(key, value);
     }
 
-    public static void set(String key, Set<String> value) {
+    public void setSet(String key, Set<String> value) {
         getInstance().encode(key, value);
     }
 
-    public static void set(String key, boolean value) {
+    public void set(String key, boolean value) {
         getInstance().encode(key, value);
     }
 
-    public static void set(String key, byte[] value) {
+    public void setByteArray(String key, byte[] value) {
         getInstance().encode(key, value);
     }
 
-    public static void set(String key, int value) {
+    public void set(String key, int value) {
         getInstance().encode(key, value);
     }
 
-    public static void set(String key, long value) {
+    public void set(String key, long value) {
         getInstance().encode(key, value);
     }
 
-    public static void set(String key, float value) {
+    public void set(String key, float value) {
         getInstance().encode(key, value);
     }
 
-    public static void set(String key, double value) {
+    public void set(String key, double value) {
         getInstance().encode(key, value);
     }
 
-    public static <T extends Parcelable> T get(String key, Class<T> cls, T defaultValue) {
+    public <T extends Parcelable> T getParcelable(String key, Class<T> cls, T defaultValue) {
         return getInstance().decodeParcelable(key, cls, defaultValue);
     }
 
-    public static String get(String key, String defaultValue) {
+    public String get(String key, String defaultValue) {
         return getInstance().decodeString(key, defaultValue);
     }
 
-    public static Set<String> get(String key, Set<String> defaultValue) {
+    public Set<String> getSet(String key, Set<String> defaultValue) {
         return getInstance().decodeStringSet(key, defaultValue);
     }
 
-    public static boolean get(String key, boolean defaultValue) {
+    public boolean get(String key, boolean defaultValue) {
         return getInstance().decodeBool(key, defaultValue);
     }
 
-    public static byte[] get(String key, byte[] defaultValue) {
+    public byte[] getByteArray(String key, byte[] defaultValue) {
         return getInstance().decodeBytes(key, defaultValue);
     }
 
-    public static int get(String key, int defaultValue) {
+    public int get(String key, int defaultValue) {
         return getInstance().decodeInt(key, defaultValue);
     }
 
-    public static long get(String key, long defaultValue) {
+    public long get(String key, long defaultValue) {
         return getInstance().decodeLong(key, defaultValue);
     }
 
-    public static float get(String key, float defaultValue) {
+    public float get(String key, float defaultValue) {
         return getInstance().decodeFloat(key, defaultValue);
     }
 
-    public static double get(String key, double defaultValue) {
+    public double get(String key, double defaultValue) {
         return getInstance().decodeDouble(key, defaultValue);
     }
 
-    public static void remove(String key) {
+    public String[] keys() {
+        return getInstance().allKeys();
+    }
+
+    public void remove(String key) {
         getInstance().removeValueForKey(key);
     }
 
-    public static boolean contains(String key) {
+    public boolean contains(String key) {
         return getInstance().containsKey(key);
     }
 
-    private static MMKV getInstance() {
-        return getInstance(false);
+    private MMKV getInstance() {
+        return mKv;
     }
 
-    /**
-     * you can override it when need, for example if you need isolated storage
-     * @return
-     */
-    protected static MMKV getInstance(boolean multiProcess) {
-        int mode = (multiProcess ? MMKV.MULTI_PROCESS_MODE : MMKV.SINGLE_PROCESS_MODE);
-        return MMKV.mmkvWithID("main", mode);
+    private KVCache(MMKV kv) {
+        mKv = kv;
     }
 }

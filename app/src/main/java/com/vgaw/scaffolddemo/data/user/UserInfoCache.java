@@ -25,14 +25,14 @@ public class UserInfoCache {
 
     public UserInfo getUserInfo() {
         if (mUserInfo == null) {
-            mUserInfo = KVCache.get("user_info", UserInfo.class);
+            mUserInfo = KVCache.with().getJson("user_info", UserInfo.class);
         }
         return mUserInfo;
     }
 
     public AuthInfo getAuthInfo() {
         if (mAuthInfo == null) {
-            mAuthInfo = KVCache.get("auth_info", AuthInfo.class);
+            mAuthInfo = KVCache.with().getJson("auth_info", AuthInfo.class);
         }
         return mAuthInfo;
     }
@@ -40,14 +40,14 @@ public class UserInfoCache {
     public void setAuthInfo(AuthInfo info) {
         if (info != null) {
             mAuthInfo = info;
-            KVCache.set("auth_info", info);
+            KVCache.with().setJson("auth_info", info);
         }
     }
 
     public void setUserInfo(UserInfo info) {
         if (info != null) {
             mUserInfo = info;
-            KVCache.set("user_info", info);
+            KVCache.with().setJson("user_info", info);
         }
     }
 
