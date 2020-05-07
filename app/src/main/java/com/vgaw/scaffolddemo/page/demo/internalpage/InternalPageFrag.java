@@ -14,15 +14,14 @@ import androidx.annotation.Nullable;
 import com.tencent.bugly.beta.Beta;
 import com.vgaw.scaffold.page.MockFrag;
 import com.vgaw.scaffold.page.ReqCodeConstant;
-import com.vgaw.scaffold.page.common.chooseimg.ChooseImgAc;
 import com.vgaw.scaffold.page.common.ImgPreviewAc;
 import com.vgaw.scaffold.page.common.PermissionAc;
+import com.vgaw.scaffold.page.common.chooseimg.ChooseImgAc;
 import com.vgaw.scaffold.page.qrcode.ScanAc;
 import com.vgaw.scaffolddemo.R;
 import com.vgaw.scaffolddemo.page.feedback.FeedbackAc;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import timber.log.Timber;
 
@@ -34,14 +33,14 @@ public class InternalPageFrag extends MockFrag {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.internal_page_frag, container, false);
-        view.findViewById(R.id.internal_page_scan).setOnClickListener(v -> ScanAc.startActivityForResult(getSelf(), REQUEST_CODE_SCAN));
+        view.findViewById(R.id.internal_page_scan).setOnClickListener(v -> ScanAc.Companion.startActivityForResult(getSelf(), REQUEST_CODE_SCAN));
         view.findViewById(R.id.internal_page_choose_img).setOnClickListener(v -> ChooseImgAc.Companion.startActivityForResult(getSelf(), REQUEST_CODE_CHOOSE_IMG, null));
         view.findViewById(R.id.internal_page_check_version).setOnClickListener(v -> {
             Beta.checkUpgrade(true, false);
         });
         view.findViewById(R.id.internal_page_feedback).setOnClickListener(v -> FeedbackAc.startActivity(getSelf()));
         view.findViewById(R.id.internal_page_permission).setOnClickListener(v -> requestPermission());
-        view.findViewById(R.id.internal_page_img_preview).setOnClickListener(v -> ImgPreviewAc.startAc(getSelf(), buildImgList()));
+        view.findViewById(R.id.internal_page_img_preview).setOnClickListener(v -> ImgPreviewAc.Companion.startAc(getSelf(), buildImgList()));
         return view;
     }
 
@@ -57,8 +56,8 @@ public class InternalPageFrag extends MockFrag {
         }
     }
 
-    private List<String> buildImgList() {
-        List<String> imgList = new ArrayList<>();
+    private ArrayList<String> buildImgList() {
+        ArrayList<String> imgList = new ArrayList<>();
         imgList.add("https://img.xsnvshen.com/album/19572/13044/000.jpg");
         imgList.add("https://img.xsnvshen.com/album/19572/13044/001.jpg");
         imgList.add("https://img.xsnvshen.com/album/19572/13044/003.jpg");

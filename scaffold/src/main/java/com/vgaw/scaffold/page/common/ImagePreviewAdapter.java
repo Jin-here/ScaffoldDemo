@@ -31,7 +31,7 @@ public class ImagePreviewAdapter extends EasyPagerAdapter<String> {
         LoadingView imgPreviewItemLoading = view.findViewById(R.id.img_preview_item_loading);
         imgPreviewItemContent.setOnPhotoTapListener((view1, x, y) -> {
             if (mListener != null) {
-                mListener.OnPhotoTapListener(view1, x, y);
+                mListener.onPhotoTapListener(view1, x, y);
             }
         });
 
@@ -49,6 +49,6 @@ public class ImagePreviewAdapter extends EasyPagerAdapter<String> {
     }
 
     public interface PhotoViewClickListener {
-        void OnPhotoTapListener(View view, float v, float v1);
+        void onPhotoTapListener(View view, float v, float v1);
     }
 }

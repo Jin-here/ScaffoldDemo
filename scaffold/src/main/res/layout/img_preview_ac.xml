@@ -4,17 +4,17 @@
     android:background="@color/dark">
 
     <com.vgaw.scaffold.page.common.HackyProblematicViewGroup
-        android:id="@+id/img_preview_vp"
+        android:id="@+id/imgPreviewVp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <RelativeLayout
-        android:id="@+id/img_preview_back_layout"
+        android:id="@+id/imgPreviewBackLayout"
         android:layout_width="match_parent"
         android:layout_height="52dp">
 
         <ImageButton
-            android:id="@+id/img_preview_back"
+            android:id="@+id/imgPreviewBack"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_centerVertical="true"
@@ -24,7 +24,7 @@
             android:src="@drawable/back_white" />
 
         <TextView
-            android:id="@+id/img_preview_index_hint"
+            android:id="@+id/imgPreviewIndexHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
