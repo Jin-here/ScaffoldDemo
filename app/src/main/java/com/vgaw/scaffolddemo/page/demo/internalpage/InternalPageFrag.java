@@ -69,8 +69,8 @@ public class InternalPageFrag extends MockFrag {
     private void requestPermission() {
         String[] permissionArray = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA};
-        if (!PermissionAc.hasPermission(mActivity, permissionArray)) {
-            PermissionAc.startActivityForResult(mActivity, ReqCodeConstant.PERMISSION, permissionArray);
+        if (!PermissionAc.Companion.hasPermission(getActivity(), permissionArray)) {
+            PermissionAc.Companion.startActivityForResult(getActivity(), ReqCodeConstant.PERMISSION, permissionArray);
         }
     }
 }

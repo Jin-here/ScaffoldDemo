@@ -65,7 +65,7 @@ public class ImgPreviewAc extends ScaffoldAc {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mDarkMode = true;
+        makeDarkMode();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.img_preview_ac);
         mImgPreviewBackLayout = findViewById(R.id.img_preview_back_layout);

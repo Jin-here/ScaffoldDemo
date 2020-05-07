@@ -119,6 +119,6 @@ public class BottomNavFrag extends ScaffoldFrag {
 
         fragmentTransaction.commit();
 
-        StatusBarUtil.setColor(mActivity, getResources().getColor(fragment.getStatusBarColor()));
+        StatusBarUtil.setColor(getActivity(), getResources().getColor(fragment.getStatusBarColor()));
     }
 }

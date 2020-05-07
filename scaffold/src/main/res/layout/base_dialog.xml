@@ -7,7 +7,7 @@
     android:clickable="true">
 
     <LinearLayout
-        android:id="@+id/base_dialog_content"
+        android:id="@+id/baseDialogContent"
         android:layout_width="268dp"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
@@ -16,7 +16,7 @@
         android:background="@drawable/primary_small_corner_bg">
 
         <TextView
-            android:id="@+id/base_dialog_description"
+            android:id="@+id/baseDialogDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Body1.White.High.Left"
@@ -30,11 +30,11 @@
             android:layout_marginTop="24dp">
 
             <TextView
-                android:id="@+id/base_dialog_cancel"
+                android:id="@+id/baseDialogCancel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/base_dialog_ok"
+                app:layout_constraintEnd_toStartOf="@id/baseDialogOk"
                 android:background="@drawable/dialog_cancel_button_bg"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 android:textColor="@color/white1"
@@ -43,10 +43,10 @@
                 android:textAllCaps="true"/>
 
             <TextView
-                android:id="@+id/base_dialog_ok"
+                android:id="@+id/baseDialogOk"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                app:layout_constraintStart_toEndOf="@id/base_dialog_cancel"
+                app:layout_constraintStart_toEndOf="@id/baseDialogCancel"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@drawable/dialog_ok_button_bg"
                 android:textColor="@color/white1"
@@ -55,7 +55,7 @@
                 android:textAllCaps="true"/>
 
             <TextView
-                android:id="@+id/base_dialog_single"
+                android:id="@+id/baseDialogSingle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/dialog_single_bg"

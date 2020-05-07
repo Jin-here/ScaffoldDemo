@@ -60,7 +60,7 @@ public class TabFragment extends ScaffoldFrag {
 
     private void initView() {
         mTabVp.setAdapter(new EasyFragmentPagerAdapter(getChildFragmentManager(), mFragArray));
-        mTabTab.setAdapter(new DefaultTabAdapter(mActivity, mFragTitleArray, new DefaultTabStyleBuilder()
+        mTabTab.setAdapter(new DefaultTabAdapter(getActivity(), mFragTitleArray, new DefaultTabStyleBuilder()
                 .txtColor(R.color.black, R.color.black2)
                 .txtSize(16, 22).build()));
         mTabTab.setSelectedIndicator(new RoundRectShortIndicator(getContext()));
