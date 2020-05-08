@@ -18,7 +18,7 @@ import timber.log.Timber
 
 class ScanAc : ScaffoldAc(), CameraPreview.Delegate {
     companion object {
-        private val REQUEST_CODE_CAMERA_PERMISSION = 0x77
+        private const val REQUEST_CODE_CAMERA_PERMISSION = 0x77
 
         fun startActivityForResult(fragment: Fragment, requestCode: Int) {
             fragment.startActivityForResult(Intent(fragment.context, ScanAc::class.java), requestCode)

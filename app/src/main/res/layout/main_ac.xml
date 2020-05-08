@@ -7,13 +7,13 @@
     android:fitsSystemWindows="true">
 
     <FrameLayout
-        android:id="@+id/main_container"
+        android:id="@+id/mainContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
     <com.vgaw.scaffold.view.bottomnavigation.BottomNavigationLayout
-        android:id="@+id/main_bottom_nav_layout"
+        android:id="@+id/mainBottomNavLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

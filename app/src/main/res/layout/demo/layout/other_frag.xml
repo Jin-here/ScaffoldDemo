@@ -21,7 +21,7 @@
             android:text="toolbar"/>
 
         <com.vgaw.scaffold.view.TitleLayout
-            android:id="@+id/other_title_layout"
+            android:id="@+id/otherTitleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:titleCaption="示例1"/>
@@ -68,7 +68,7 @@
                 android:text="src:"/>
 
             <com.vgaw.scaffold.view.CheckedImageButton
-                android:id="@+id/other_checkedib"
+                android:id="@+id/otherCheckedib"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"/>
@@ -88,7 +88,7 @@
                 android:text="background:"/>
 
             <com.vgaw.scaffold.view.CheckedImageButton
-                android:id="@+id/other_checkedib1"
+                android:id="@+id/otherCheckedib1"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"/>

@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
 import com.vgaw.scaffold.R
-import kotlinx.android.synthetic.main.base_dialog.*
+import com.vgaw.scaffold.util.Util
 import kotlinx.android.synthetic.main.base_dialog.view.*
 
 /**
@@ -16,20 +15,8 @@ import kotlinx.android.synthetic.main.base_dialog.view.*
  */
 open class ScaffoldDialog : DialogFragment() {
     companion object {
-        private val DEFAULT_SHOW_DESCRIPTION = true
-
-        @StringRes
-        private val DEFAULT_DESCRIPTION = -1
-        private val DEFAULT_SINGLE_BTN = false
-
-        @StringRes
-        private val DEFAULT_SINGLE_BTN_DESCRIPTION = -1
-
-        @StringRes
-        private val DEFAULT_LEFT_BTN_DESCRIPTION = R.string.base_dialog_cancel
-
-        @StringRes
-        private val DEFAULT_RIGHT_BTN_DESCRIPTION = R.string.base_dialog_ok
+        private const val DEFAULT_SHOW_DESCRIPTION = true
+        private const val DEFAULT_SINGLE_BTN = false
 
         fun newInstance(description: String) = Companion.newInstance(true, description, false, null, null, null)
 
@@ -102,18 +89,18 @@ open class ScaffoldDialog : DialogFragment() {
         val args = arguments
         args?.let {
             mShowDescription = it.getBoolean("show_description", DEFAULT_SHOW_DESCRIPTION)
-            mDescription = it.getString("description", if (DEFAULT_DESCRIPTION == -1) null else getString(DEFAULT_DESCRIPTION))
+            mDescription = it.getString("description")
             mSingleBtn = it.getBoolean("single_btn", DEFAULT_SINGLE_BTN)
-            mSingleBtnDescription = it.getString("single_btn_description", if (DEFAULT_SINGLE_BTN_DESCRIPTION == -1) null else getString(DEFAULT_SINGLE_BTN_DESCRIPTION))
-            mLeftBtnDescription = it.getString("left_btn_description", if (DEFAULT_LEFT_BTN_DESCRIPTION == -1) null else getString(DEFAULT_LEFT_BTN_DESCRIPTION))
-            mRightBtnDescription = it.getString("right_btn_description", if (DEFAULT_RIGHT_BTN_DESCRIPTION == -1) null else getString(DEFAULT_RIGHT_BTN_DESCRIPTION))
+            mSingleBtnDescription = it.getString("single_btn_description", getString(R.string.base_dialog_ok))
+            mLeftBtnDescription = it.getString("left_btn_description", getString(R.string.base_dialog_cancel))
+            mRightBtnDescription = it.getString("right_btn_description", getString(R.string.base_dialog_ok))
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate (R.layout.base_dialog, container, false)
         if (mShowDescription) {
-            view.baseDialogDescription.text = mDescription
+            view.baseDialogDescription.text = Util.nullToEmpty(mDescription)
             view.baseDialogDescription.visibility = View.VISIBLE
         } else {
             view.baseDialogDescription.visibility = View.GONE

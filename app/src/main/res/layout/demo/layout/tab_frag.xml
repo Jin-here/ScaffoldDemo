@@ -11,25 +11,25 @@
         android:layout_height="wrap_content">
 
         <com.vgaw.scaffold.view.TitleLayout
-            android:id="@+id/tab_title_layout"
+            android:id="@+id/tabTitleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <com.vgaw.scaffold.view.tab.SlidingTabLayout
-            android:id="@+id/tab_tab"
+            android:id="@+id/tabTab"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/tab_vp"
+        android:id="@+id/tabVp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/tab_show_bubble"
+        android:id="@+id/tabShowBubble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -37,11 +37,11 @@
         android:text="显示气泡"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/tab_hide_bubble"
+        android:id="@+id/tabHideBubble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@id/bottom_nav_show_bubble"
+        android:layout_below="@id/tabShowBubble"
         android:layout_marginTop="10dp"
         android:text="隐藏气泡"/>
 </LinearLayout>

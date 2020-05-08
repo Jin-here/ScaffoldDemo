@@ -28,11 +28,11 @@ import java.io.File
 
 class ChooseImgAc : ScaffoldAc() {
     companion object {
-        private val IMG_SUFFIX = ".jpeg"
-        private val REQUEST_CODE_CHOOSE_IMG_FROM_FILE = 70
-        private val REQUEST_CODE_CHOOSE_IMG_FROM_CAMERA = 71
-        private val REQUEST_CODE_IMG_CLIP = 72
-        private val REQUEST_CODE_CAMERA_PERMISSION = 81
+        private const val IMG_SUFFIX = ".jpeg"
+        private const val REQUEST_CODE_CHOOSE_IMG_FROM_FILE = 70
+        private const val REQUEST_CODE_CHOOSE_IMG_FROM_CAMERA = 71
+        private const val REQUEST_CODE_IMG_CLIP = 72
+        private const val REQUEST_CODE_CAMERA_PERMISSION = 81
 
         /**
          * intent返回值：
