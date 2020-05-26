@@ -17,4 +17,6 @@
     <string name="errcode_unknown">Send error: Unknown</string>
 
     <string name="back_again_to_exit">Press back again to exit</string>
+
+    <string name="feedback_wx_not_installed">you need to have wchat app installed</string>
 </resources>

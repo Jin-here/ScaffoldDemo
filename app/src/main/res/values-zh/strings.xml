@@ -18,4 +18,6 @@
     <string name="errcode_unknown">发送返回</string>
 
     <string name="back_again_to_exit">再次点击退出应用</string>
+
+    <string name="feedback_wx_not_installed">你还未安装微信</string>
 </resources>
