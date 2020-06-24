@@ -22,11 +22,11 @@ class OtherFrag : ScaffoldFrag() {
         // checkable imagebutton
         view.otherCheckedib.setNormalImageId(android.R.drawable.checkbox_off_background)
         view.otherCheckedib.setCheckedImageId(android.R.drawable.checkbox_on_background)
-        view.otherCheckedib.setOnClickListener {otherCheckedib.isChecked = !otherCheckedib.isChecked}
+        view.otherCheckedib.setOnClickListener {otherCheckedib.setChecked(!otherCheckedib.isChecked())}
 
         view.otherCheckedib1.setNormalBkResId(android.R.drawable.checkbox_off_background)
         view.otherCheckedib1.setCheckedBkResId(android.R.drawable.checkbox_on_background)
-        view.otherCheckedib1.setOnClickListener {otherCheckedib1.isChecked = !otherCheckedib1.isChecked}
+        view.otherCheckedib1.setOnClickListener {otherCheckedib1.setChecked(!otherCheckedib1.isChecked())}
         return view
     }
 }
