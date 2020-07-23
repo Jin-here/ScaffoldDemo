@@ -1,16 +1,21 @@
 package com.vgaw.scaffolddemo.data.user;
 
-import com.vgaw.scaffold.util.KVCache;
+import com.vgaw.scaffold.util.cache.KVCache;
 import com.vgaw.scaffolddemo.model.AuthInfo;
 import com.vgaw.scaffolddemo.model.UserInfo;
 
 public class UserInfoCache {
+    private static final String NAME = "UserInfoCache";
     private static volatile UserInfoCache sInstance;
 
     private UserInfo mUserInfo;
     private AuthInfo mAuthInfo;
+    
+    private KVCache mCache;
 
-    private UserInfoCache() {}
+    private UserInfoCache() {
+        mCache = new KVCache(NAME);
+    }
 
     public static UserInfoCache getInstance() {
         if (sInstance == null) {
@@ -25,14 +30,14 @@ public class UserInfoCache {
 
     public UserInfo getUserInfo() {
         if (mUserInfo == null) {
-            mUserInfo = KVCache.with().getJson("user_info", UserInfo.class);
+            mUserInfo = mCache.getJson("user_info", UserInfo.class);
         }
         return mUserInfo;
     }
 
     public AuthInfo getAuthInfo() {
         if (mAuthInfo == null) {
-            mAuthInfo = KVCache.with().getJson("auth_info", AuthInfo.class);
+            mAuthInfo = mCache.getJson("auth_info", AuthInfo.class);
         }
         return mAuthInfo;
     }
@@ -40,14 +45,14 @@ public class UserInfoCache {
     public void setAuthInfo(AuthInfo info) {
         if (info != null) {
             mAuthInfo = info;
-            KVCache.with().setJson("auth_info", info);
+            mCache.setJson("auth_info", info);
         }
     }
 
     public void setUserInfo(UserInfo info) {
         if (info != null) {
             mUserInfo = info;
-            KVCache.with().setJson("user_info", info);
+            mCache.setJson("user_info", info);
         }
     }
 

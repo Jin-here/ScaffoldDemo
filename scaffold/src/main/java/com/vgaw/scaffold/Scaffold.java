@@ -2,7 +2,7 @@ package com.vgaw.scaffold;
 
 import android.app.Application;
 
-import com.vgaw.scaffold.util.KVCache;
+import com.tencent.mmkv.MMKV;
 import com.vgaw.scaffold.util.context.ContextManager;
 
 import timber.log.Timber;
@@ -13,6 +13,6 @@ public class Scaffold {
         if (debug) {
             Timber.plant(new Timber.DebugTree());
         }
-        KVCache.init(context);
+        MMKV.initialize(context);
     }
 }

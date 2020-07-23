@@ -1,6 +1,5 @@
-package com.vgaw.scaffold.util;
+package com.vgaw.scaffold.util.cache;
 
-import android.content.Context;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
@@ -14,25 +13,17 @@ public class KVCache {
     private static final String DEFAULT_NAME = "main";
     private MMKV mKv;
 
-    /**
-     * should initialized when app start
-     * @param context
-     */
-    public static void init(Context context) {
-        MMKV.initialize(context);
+    public KVCache() {
+        this(DEFAULT_NAME);
     }
 
-    public static KVCache with() {
-        return with(DEFAULT_NAME, false);
+    public KVCache(String name) {
+        this(name, false);
     }
 
-    public static KVCache with(String name) {
-        return with(name, false);
-    }
-
-    public static KVCache with(String name, boolean multiProcess) {
+    public KVCache(String name, boolean multiProcess) {
         int mode = (multiProcess ? MMKV.MULTI_PROCESS_MODE : MMKV.SINGLE_PROCESS_MODE);
-        return new KVCache(MMKV.mmkvWithID(name, mode));
+        mKv = MMKV.mmkvWithID(name, mode);
     }
 
     public <T> T getJson(String key, Class<T> cls) {
@@ -141,9 +132,5 @@ public class KVCache {
 
     private MMKV getInstance() {
         return mKv;
-    }
-
-    private KVCache(MMKV kv) {
-        mKv = kv;
     }
 }
