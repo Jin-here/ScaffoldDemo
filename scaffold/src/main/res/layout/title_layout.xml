@@ -25,4 +25,14 @@
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="8dp"/>
+
+    <ImageButton
+        android:id="@+id/title_layout_menu_icon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:padding="6dp"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"/>
 </merge>

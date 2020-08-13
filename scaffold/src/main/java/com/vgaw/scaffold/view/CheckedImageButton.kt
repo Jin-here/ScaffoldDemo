@@ -43,7 +43,7 @@ class CheckedImageButton : AppCompatImageButton {
         }
 
         val background = if (push) mCheckedBkResId else mNormalBkResId
-        if (background != 0) {
+        if (background != -1) {
             updateBackground(background)
         }
     }

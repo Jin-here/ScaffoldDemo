@@ -25,7 +25,7 @@ public abstract class EasyRcvAdapter<T> extends RecyclerView.Adapter<EasyRcvHold
     @NonNull
     @Override
     public EasyRcvHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        EasyRcvHolder<T> holder = getHolder(viewType);
+        EasyRcvHolder<T> holder = getHolder(parent, viewType);
         holder.onCreateView();
         holder.onGetExtraData(getExtraData());
         return holder;
@@ -36,7 +36,7 @@ public abstract class EasyRcvAdapter<T> extends RecyclerView.Adapter<EasyRcvHold
         holder.refreshView(position, getItem(position));
     }
 
-    protected abstract EasyRcvHolder<T> getHolder(int type);
+    protected abstract EasyRcvHolder<T> getHolder(@NonNull ViewGroup parent, int type);
 
     protected T getItem(int position) {
         if (mDataList != null) {

@@ -33,4 +33,6 @@
     <color name="dark">#FF1D1D2D</color>
 
     <color name="iconUnselected">@color/black4</color>
+
+    <color name="divider_bg">#C1C1C1</color>
 </resources>

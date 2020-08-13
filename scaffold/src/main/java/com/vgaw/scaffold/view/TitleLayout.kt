@@ -15,6 +15,7 @@ class TitleLayout : RelativeLayout {
     private lateinit var mTitleLayoutBack: ImageButton
     private lateinit var mTitleLayoutTitle: TextView
     private lateinit var mTitleLayoutMenu: TextView
+    private lateinit var mTitleLayoutMenuIcon: ImageButton
 
     private constructor(context: Context): super(context)
 
@@ -56,6 +57,14 @@ class TitleLayout : RelativeLayout {
         mTitleLayoutMenu.setTextColor(resources.getColor(if (enabled) R.color.black6 else R.color.black7))
     }
 
+    fun setMenuIcon(drawable: Drawable?) {
+        mTitleLayoutMenuIcon.setImageDrawable(drawable)
+    }
+
+    fun setMenuIconEnabled(enabled: Boolean) {
+        mTitleLayoutMenuIcon.isEnabled = enabled
+    }
+
     private fun init(attrs: AttributeSet) {
         val array = context.obtainStyledAttributes(attrs, R.styleable.TitleLayout)
         val title = array.getString(R.styleable.TitleLayout_titleCaption)
@@ -63,6 +72,8 @@ class TitleLayout : RelativeLayout {
         val menu = array.getString(R.styleable.TitleLayout_titleMenu)
         val menuEnabled = array.getBoolean(R.styleable.TitleLayout_titleMenuEnabled, false)
         val darkMode = array.getBoolean(R.styleable.TitleLayout_titleDarkMode, false)
+        val menuIconEnabled = array.getBoolean(R.styleable.TitleLayout_titleMenuIconEnabled, false)
+        var menuIcon = array.getDrawable(R.styleable.TitleLayout_titleMenuIcon)
 
         array.recycle()
 
@@ -70,6 +81,8 @@ class TitleLayout : RelativeLayout {
         mTitleLayoutBack = view.findViewById(R.id.title_layout_back)
         mTitleLayoutTitle = view.findViewById(R.id.title_layout_title)
         mTitleLayoutMenu = view.findViewById(R.id.title_layout_menu)
+        mTitleLayoutMenuIcon = view.findViewById(R.id.title_layout_menu_icon)
+
         if (darkMode) {
             setBackgroundColor(getResources().getColor(R.color.dark))
             mTitleLayoutTitle.setTextAppearance(getContext(), R.style.H5_White_High_Left)

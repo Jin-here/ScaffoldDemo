@@ -35,6 +35,8 @@
         <attr name="titleBackIcon" format="reference"/>
         <attr name="titleMenu" format="string"/>
         <attr name="titleMenuEnabled" format="boolean"/>
+        <attr name="titleMenuIconEnabled" format="boolean"/>
+        <attr name="titleMenuIcon" format="reference"/>
         <attr name="titleDarkMode" format="boolean"/>
     </declare-styleable>
 
@@ -47,6 +49,7 @@
         <attr name="settingName" format="string"/>
         <attr name="settingIcon" format="reference"/>
         <attr name="settingDes" format="string"/>
+        <attr name="settingHideArrow" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="SettingToggleView">
@@ -88,5 +91,15 @@
         <attr name="checkableMultiChoice" format="boolean"/>
         <attr name="checkableDividerSize" format="dimension"/>
         <attr name="checkableEqualization" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="DividerView">
+        <attr name="dividerOrientation" format="enum">
+            <enum name="horizontal" value="0"/>
+            <enum name="vertical" value="1"/>
+        </attr>
+        <attr name="dividerPadding" format="dimension"/>
+        <attr name="dividerLeftPadding" format="dimension"/>
+        <attr name="dividerRightPadding" format="dimension"/>
     </declare-styleable>
 </resources>
