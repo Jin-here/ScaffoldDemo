@@ -40,6 +40,10 @@ class TitleLayout : RelativeLayout {
         mTitleLayoutMenu.setOnClickListener(listener)
     }
 
+    fun setMenuIconClickListener(listener: (View) -> Unit) {
+        mTitleLayoutMenuIcon.setOnClickListener(listener)
+    }
+
     fun setBackIcon(drawable: Drawable?) {
         mTitleLayoutBack.setImageDrawable(drawable)
     }
@@ -100,5 +104,7 @@ class TitleLayout : RelativeLayout {
         setBackIcon(backIcon)
         setMenu(menu)
         setMenuEnabled(menuEnabled)
+        setMenuIcon(menuIcon)
+        setMenuIconEnabled(menuIconEnabled)
     }
 }

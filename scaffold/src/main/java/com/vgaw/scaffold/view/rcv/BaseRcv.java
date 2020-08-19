@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
-import com.vgaw.scaffold.view.rcv.decoration.BaseItemDecoration;
 import com.vgaw.scaffold.view.rcv.decoration.GridDividerItemDecoration;
 
 import java.util.ArrayList;
@@ -92,6 +91,10 @@ public abstract class BaseRcv<T> extends SmartRefreshLayout {
         }
     }
 
+    protected RecyclerView.ItemDecoration getItemDecoration() {
+        return new GridDividerItemDecoration(getContext(), getItemPadding());
+    }
+
     private void resetPage() {
         mCrtPage = 0;
     }
@@ -103,7 +106,7 @@ public abstract class BaseRcv<T> extends SmartRefreshLayout {
         LinearLayoutManager layoutManager = new GridLayoutManager(getContext(), getColCount());
         mContentView.setLayoutManager(layoutManager);
 
-        BaseItemDecoration gridDividerItemDecoration = new GridDividerItemDecoration(getContext(), getItemPadding());
+        RecyclerView.ItemDecoration gridDividerItemDecoration = getItemDecoration();
         mContentView.addItemDecoration(gridDividerItemDecoration);
 
         mAdapter = new EasyRcvAdapter<T>(getContext(), mDataList) {

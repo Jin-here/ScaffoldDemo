@@ -102,4 +102,11 @@
         <attr name="dividerLeftPadding" format="dimension"/>
         <attr name="dividerRightPadding" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="WaveView">
+        <attr name="waveMinRadius" format="dimension"/>
+        <attr name="waveMaxRadius" format="dimension"/>
+        <attr name="waveDivider" format="float"/>
+        <attr name="waveColor" format="color"/>
+    </declare-styleable>
 </resources>
