@@ -63,10 +63,6 @@ class ChooseImgAc : ScaffoldAc() {
                 activity.overridePendingTransition(0, 0);
             }
         }
-
-        private fun generateFileName(): String {
-            return String.format("%d%s", System.currentTimeMillis(), IMG_SUFFIX)
-        }
     }
 
     private var mCameraUri: Uri? = null
@@ -265,7 +261,7 @@ class ChooseImgAc : ScaffoldAc() {
         startActivityForResult(takePictureIntent, REQUEST_CODE_CHOOSE_IMG_FROM_CAMERA)
     }
 
-    private fun createAppSpecificImgFile() = File(getAppSpecificDir(), generateFileName())
+    private fun createAppSpecificImgFile() = File(getAppSpecificDir(), FileUtil.generateRandomFileName(IMG_SUFFIX))
 
     private fun getAppSpecificDir(): File {
         val dir = getCacheDir()

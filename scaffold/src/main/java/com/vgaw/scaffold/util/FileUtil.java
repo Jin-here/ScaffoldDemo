@@ -25,6 +25,10 @@ public class FileUtil {
 
     private FileUtil() {}
 
+    public static String generateRandomFileName(String prefix) {
+        return String.format("%d%s", System.currentTimeMillis(), prefix);
+    }
+
     public static File from(Context context, Uri uri) throws IOException {
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
         String fileName = getFileName(context, uri);

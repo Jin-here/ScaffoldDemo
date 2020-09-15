@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.tencent.bugly.beta.Beta
 import com.vgaw.scaffold.page.MockFrag
-import com.vgaw.scaffold.page.ReqCodeConstant
 import com.vgaw.scaffold.page.common.ImgPreviewAc
 import com.vgaw.scaffold.page.common.PermissionAc
 import com.vgaw.scaffold.page.common.chooseimg.ChooseImgAc
@@ -22,8 +21,9 @@ import java.util.*
 
 class InternalPageFrag : MockFrag() {
     companion object {
-        private const val REQUEST_CODE_CHOOSE_IMG = 2
-        private const val REQUEST_CODE_SCAN = 3
+        private const val REQUEST_CODE_PERMISSION = 0
+        private const val REQUEST_CODE_CHOOSE_IMG = 1
+        private const val REQUEST_CODE_SCAN = 2
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -58,12 +58,9 @@ class InternalPageFrag : MockFrag() {
     }
 
     private fun requestPermission() {
-        val permissionArray = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA)
         mActivity?.let {
-            if (!PermissionAc.Companion.hasPermission(it, permissionArray)) {
-                PermissionAc.Companion.startActivityForResult(it, ReqCodeConstant.PERMISSION, permissionArray)
-            }
+            PermissionAc.Companion.startActivityForResult(it, REQUEST_CODE_PERMISSION, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA))
         }
     }
 }
