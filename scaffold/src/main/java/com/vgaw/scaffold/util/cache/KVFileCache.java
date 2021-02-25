@@ -9,19 +9,19 @@ import com.vgaw.scaffold.json.JsonUtil;
 import java.lang.reflect.Type;
 import java.util.Set;
 
-public class KVCache {
+public class KVFileCache {
     private static final String DEFAULT_NAME = "main";
     private MMKV mKv;
 
-    public KVCache() {
+    public KVFileCache() {
         this(DEFAULT_NAME);
     }
 
-    public KVCache(String name) {
+    public KVFileCache(String name) {
         this(name, false);
     }
 
-    public KVCache(String name, boolean multiProcess) {
+    public KVFileCache(String name, boolean multiProcess) {
         int mode = (multiProcess ? MMKV.MULTI_PROCESS_MODE : MMKV.SINGLE_PROCESS_MODE);
         mKv = MMKV.mmkvWithID(name, mode);
     }

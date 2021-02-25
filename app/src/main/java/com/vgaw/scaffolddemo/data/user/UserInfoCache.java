@@ -1,6 +1,6 @@
 package com.vgaw.scaffolddemo.data.user;
 
-import com.vgaw.scaffold.util.cache.KVCache;
+import com.vgaw.scaffold.util.cache.KVFileCache;
 import com.vgaw.scaffolddemo.model.AuthInfo;
 import com.vgaw.scaffolddemo.model.UserInfo;
 
@@ -11,10 +11,10 @@ public class UserInfoCache {
     private UserInfo mUserInfo;
     private AuthInfo mAuthInfo;
     
-    private KVCache mCache;
+    private KVFileCache mCache;
 
     private UserInfoCache() {
-        mCache = new KVCache(NAME);
+        mCache = new KVFileCache(NAME);
     }
 
     public static UserInfoCache getInstance() {
