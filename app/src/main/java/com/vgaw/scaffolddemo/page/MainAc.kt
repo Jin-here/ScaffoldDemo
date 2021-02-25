@@ -1,8 +1,11 @@
 package com.vgaw.scaffolddemo.page
 
+import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import com.vgaw.scaffold.page.ScaffoldAc
 import com.vgaw.scaffold.page.ScaffoldFrag
+import com.vgaw.scaffold.page.common.PermissionAc
 import com.vgaw.scaffold.util.dialog.DialogUtil
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil
 import com.vgaw.scaffold.view.AppToast
@@ -27,6 +30,7 @@ class MainAc : ScaffoldAc() {
 
         initData()
         initView()
+        requestPermission()
     }
 
     override fun onBackPressed() {
@@ -81,5 +85,13 @@ class MainAc : ScaffoldAc() {
         fragmentTransaction.commit()
 
         StatusBarUtil.setColor(this, resources.getColor(fragment.getStatusBarColor()))
+    }
+
+    private fun requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                PermissionAc.Companion.startActivityForResult(getSelf(), 0, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE))
+            } else {}
+        }
     }
 }

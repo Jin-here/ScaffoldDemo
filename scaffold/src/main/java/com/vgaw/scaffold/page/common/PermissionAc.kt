@@ -14,7 +14,13 @@ import com.vgaw.scaffold.page.ScaffoldDialog
 import com.vgaw.scaffold.util.dialog.DialogUtil
 import com.vgaw.scaffold.util.phone.SystemPageUtil
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil
+import timber.log.Timber
 
+/**
+ * todo
+ * 1. 部分手机功能异常；
+ * 2. 先申请权限再弹出描述；
+ */
 class PermissionAc : ScaffoldAc() {
     companion object {
         private const val REQ_CODE_PERMISSION = 0
@@ -26,6 +32,9 @@ class PermissionAc : ScaffoldAc() {
             this[Manifest.permission.CAMERA] = "相机"
             this[Manifest.permission.ACCESS_COARSE_LOCATION] = "粗略位置信息"
             this[Manifest.permission.ACCESS_FINE_LOCATION] = "精确位置信息"
+            this[Manifest.permission.CALL_PHONE] = "拨打电话"
+            this[Manifest.permission.USE_SIP] = "使用SIP"
+            this[Manifest.permission.WRITE_CONTACTS] = "修改通讯录"
         }
 
         fun startActivityForResult(activity: Activity, reqCode: Int, perssionArray: Array<String>): Boolean {
@@ -131,14 +140,8 @@ class PermissionAc : ScaffoldAc() {
             }
         }
         if (permissionList.size > 0) {
-            val permission4DesList = ArrayList<String>()
-            permission4DesList.addAll(permissionList)
             val sb = StringBuilder()
-            if (permissionList.contains(Manifest.permission.ACCESS_COARSE_LOCATION) &&
-                    permissionList.contains(Manifest.permission.ACCESS_FINE_LOCATION)) {
-                permission4DesList.remove(Manifest.permission.ACCESS_COARSE_LOCATION)
-            }
-            permission4DesList.forEach { sb.append(sPermissionDesMap[it]).append("，") }
+            permissionList.forEach { sb.append(sPermissionDesMap[it]).append("，") }
 
             val des = mDes ?: String.format("为了正常使用%s，请授予以下权限", getString(R.string.app_name))
             val baseDialog = ScaffoldDialog.newInstance(String.format("%s：\n%s", des, sb.substring(0, sb.length - 1)), "取消", /*if hasAlwaysDenied "前往设置" else */"开始授权")
@@ -155,8 +158,13 @@ class PermissionAc : ScaffoldAc() {
                 if (finalHasAlwaysDenied) {
                     SystemPageUtil.jump2PermissoinPage(getSelf())
                 } else {
+                    val tempList = mutableListOf<String>()
+                    for (i in 0 until permissionList.size) {
+                        tempList.add(permissionList[i])
+                        tempList.add(sPermissionDesMap.get(permissionList[i])!!)
+                    }
                     ActivityCompat.requestPermissions(getSelf(),
-                            permissionList.toTypedArray(), REQ_CODE_PERMISSION)
+                            tempList.toTypedArray(), REQ_CODE_PERMISSION)
                 }
             })
             DialogUtil.showDialog(baseDialog, supportFragmentManager, "permission_dialog")
@@ -167,9 +175,15 @@ class PermissionAc : ScaffoldAc() {
 
     /**
      * 对于拒绝的权限，是否被永久拒绝（不再提示）
+     * @param activity
+     * @param permission
+     * @param permissionList
+     * @param sb
+     * @return
      */
     private fun proPermission(activity: Activity, permission: String, permissionList: ArrayList<String>): Boolean {
-        if (ActivityCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
+        val check = ActivityCompat.checkSelfPermission(activity, permission)
+        if (check != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(permission)
 
             if (mPermissionDeniedMap == null) {
