@@ -1,26 +1,20 @@
 package com.vgaw.scaffolddemo;
 
+import static android.os.Process.myPid;
+
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.view.View;
-import android.widget.TextView;
 
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
-import com.tencent.bugly.Bugly;
-import com.tencent.bugly.beta.Beta;
-import com.tencent.bugly.beta.UpgradeInfo;
-import com.tencent.bugly.beta.ui.UILifecycleListener;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.vgaw.scaffold.BuildConfig;
 import com.vgaw.scaffold.Scaffold;
 import com.vgaw.scaffold.util.Util;
-
-import static android.os.Process.myPid;
 
 /**
  * @author caojin
@@ -75,42 +69,6 @@ public class App extends Application {
     }
 
     private void initBugly() {
-        Beta.autoDownloadOnWifi = true;
-        Beta.upgradeDialogLayoutId = R.layout.upgrade_dialog_layout;
-        Beta.upgradeDialogLifecycleListener = new UILifecycleListener<UpgradeInfo>() {
-            @Override
-            public void onCreate(Context context, View view, UpgradeInfo upgradeInfo) {
-                TextView upgradeDialogTitle = view.findViewById(R.id.upgrade_dialog_title);
-                TextView upgradeDialogSize = view.findViewById(R.id.upgrade_dialog_size);
-                TextView upgradeDialogFeature = view.findViewById(R.id.upgrade_dialog_feature);
-                upgradeDialogTitle.setText(getString(R.string.upgrade_dialog_title, upgradeInfo.versionName));
-                int fileSize = (int) (upgradeInfo.fileSize / 1024 / 1024);
-                upgradeDialogSize.setText(getString(R.string.upgrade_dialog_size, fileSize));
-                upgradeDialogFeature.setText(upgradeInfo.newFeature);
-            }
-
-            @Override
-            public void onStart(Context context, View view, UpgradeInfo upgradeInfo) {}
-
-            @Override
-            public void onResume(Context context, View view, UpgradeInfo upgradeInfo) {}
-
-            @Override
-            public void onPause(Context context, View view, UpgradeInfo upgradeInfo) {}
-
-            @Override
-            public void onStop(Context context, View view, UpgradeInfo upgradeInfo) {}
-
-            @Override
-            public void onDestroy(Context context, View view, UpgradeInfo upgradeInfo) {}
-        };
-
-        // check for upgrade manually
-        // isManual: whether clicked by user.
-        // isSilence: whether showDialog dialog and toast.
-        // Beta.checkUpgrade(true, false);
-        Beta.enableHotfix = false;
-
         CrashReport.UserStrategy userStrategy = new CrashReport.UserStrategy(this);
         //userStrategy.setAppChannel();
         //userStrategy.setAppReportDelay(10 * 1000);
@@ -122,7 +80,6 @@ public class App extends Application {
             e.printStackTrace();
         }
         // for bugly bug report only
-        //CrashReport.initCrashReport(getApplicationContext(), getString(R.string.bugly_appid), BuildConfig.DEBUG, userStrategy);
-        Bugly.init(getApplicationContext(), getString(R.string.bugly_appid), false, userStrategy);
+        CrashReport.initCrashReport(getApplicationContext(), getString(R.string.bugly_appid), BuildConfig.DEBUG, userStrategy);
     }
 }
