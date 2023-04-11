@@ -7,10 +7,12 @@
         android:id="@+id/title_layout_back"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:padding="6dp"
+        android:padding="8dp"
         android:scaleType="fitXY"
         android:background="@android:color/transparent"
-        android:layout_centerVertical="true"/>
+        android:foreground="@drawable/selectable_item_bg"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="12dp"/>
 
     <TextView
         android:id="@+id/title_layout_title"
@@ -20,10 +22,12 @@
 
     <TextView
         android:id="@+id/title_layout_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="30dp"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:background="@drawable/title_menu_bg"
         android:layout_marginEnd="8dp"/>
 
     <ImageButton
@@ -33,6 +37,8 @@
         android:padding="6dp"
         android:scaleType="fitXY"
         android:background="@android:color/transparent"
+        android:foreground="@drawable/selectable_item_bg"
         android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"/>
 </merge>

@@ -1,23 +1,18 @@
 package com.vgaw.scaffold.view;
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.util.AttributeSet;
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-
-import com.vgaw.scaffold.R;
+import android.content.Context
+import android.graphics.drawable.Drawable
+import android.os.Build
+import android.util.AttributeSet
+import android.util.TypedValue
+import android.view.Gravity
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.annotation.ColorInt
+import com.vgaw.scaffold.R
 import com.vgaw.scaffold.util.Util
-import com.vgaw.scaffold.util.phone.DensityUtil;
+import com.vgaw.scaffold.util.phone.DensityUtil
 
 open class ImgTxtLayout : LinearLayout {
     protected var mIcon: Drawable? = null
@@ -55,6 +50,12 @@ open class ImgTxtLayout : LinearLayout {
 
     private fun init(attrs: AttributeSet) {
         val array = getContext().obtainStyledAttributes(attrs, R.styleable.ImgTxtLayout)
+        val ignoreSelectWave = array.getBoolean(R.styleable.ImgTxtLayout_imgTxtIgnoreSelectWave, false)
+        if (!ignoreSelectWave) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                foreground = resources.getDrawable(R.drawable.selectable_item_bg)
+            }
+        }
         mIcon = array.getDrawable(R.styleable.ImgTxtLayout_imgTxtIcon)
         mIconBackground = array.getDrawable(R.styleable.ImgTxtLayout_imgTxtIconBackground)
         mIconSize = array.getDimensionPixelSize(R.styleable.ImgTxtLayout_imgTxtIconSize, DensityUtil.dp2px(getContext(), 48F))

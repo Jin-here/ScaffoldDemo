@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import com.vgaw.scaffold.page.ScaffoldFrag
 import com.vgaw.scaffold.util.dialog.DialogUtil
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil
+import com.vgaw.scaffold.view.CheckedImageButton
+import com.vgaw.scaffold.view.TitleLayout
 import com.vgaw.scaffolddemo.R
-import kotlinx.android.synthetic.main.other_frag.*
-import kotlinx.android.synthetic.main.other_frag.view.*
 
 class OtherFrag : ScaffoldFrag() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -17,16 +17,18 @@ class OtherFrag : ScaffoldFrag() {
         StatusBarUtil.addStatusbarHeight(context, view)
 
         // toolbar
-        view.otherTitleLayout.setBackClickListener {DialogUtil.dismissDialog(getSelf())}
+        view.findViewById<TitleLayout>(R.id.other_title_layout).setBackClickListener {DialogUtil.dismissDialog(getSelf())}
 
         // checkable imagebutton
-        view.otherCheckedib.setNormalImageId(android.R.drawable.checkbox_off_background)
-        view.otherCheckedib.setCheckedImageId(android.R.drawable.checkbox_on_background)
-        view.otherCheckedib.setOnClickListener {otherCheckedib.setChecked(!otherCheckedib.isChecked())}
+        val otherCheckedib = view.findViewById<CheckedImageButton>(R.id.other_checkedib)
+        otherCheckedib.setNormalImageId(android.R.drawable.checkbox_off_background)
+        otherCheckedib.setCheckedImageId(android.R.drawable.checkbox_on_background)
+        otherCheckedib.setOnClickListener {otherCheckedib.setChecked(!otherCheckedib.isChecked())}
 
-        view.otherCheckedib1.setNormalBkResId(android.R.drawable.checkbox_off_background)
-        view.otherCheckedib1.setCheckedBkResId(android.R.drawable.checkbox_on_background)
-        view.otherCheckedib1.setOnClickListener {otherCheckedib1.setChecked(!otherCheckedib1.isChecked())}
+        val otherCheckedib1 = view.findViewById<CheckedImageButton>(R.id.other_checkedib1)
+        otherCheckedib1.setNormalBkResId(android.R.drawable.checkbox_off_background)
+        otherCheckedib1.setCheckedBkResId(android.R.drawable.checkbox_on_background)
+        otherCheckedib1.setOnClickListener {otherCheckedib1.setChecked(!otherCheckedib1.isChecked())}
         return view
     }
 }

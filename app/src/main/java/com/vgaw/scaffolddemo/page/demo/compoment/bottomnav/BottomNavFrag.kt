@@ -14,7 +14,6 @@ import com.vgaw.scaffolddemo.R
 import com.vgaw.scaffolddemo.page.demo.compoment.Tab0Frag
 import com.vgaw.scaffolddemo.page.demo.compoment.Tab1Frag
 import com.vgaw.scaffolddemo.page.demo.compoment.Tab2Frag
-import kotlinx.android.synthetic.main.bottom_nav_frag.view.*
 
 class BottomNavFrag : ScaffoldFrag() {
     private lateinit var mFragmentArray: Array<ScaffoldFrag>
@@ -40,10 +39,10 @@ class BottomNavFrag : ScaffoldFrag() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.bottom_nav_frag, container, false)
         StatusBarUtil.addStatusbarHeight(context, view)
-        bottomNavBottomNavLayout = view.bottomNavBottomNavLayout
-        bottomNavTitleLayout = view.bottomNavTitleLayout
-        bottomNavShowBubble = view.bottomNavShowBubble
-        bottomNavHideBubble = view.bottomNavHideBubble
+        bottomNavBottomNavLayout = view.findViewById(R.id.bottom_nav_bottom_nav_layout)
+        bottomNavTitleLayout = view.findViewById(R.id.bottom_nav_title_layout)
+        bottomNavShowBubble = view.findViewById(R.id.bottom_nav_show_bubble)
+        bottomNavHideBubble = view.findViewById(R.id.bottom_nav_hide_bubble)
 
         initView()
         return view

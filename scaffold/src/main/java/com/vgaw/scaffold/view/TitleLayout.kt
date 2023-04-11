@@ -2,6 +2,7 @@ package com.vgaw.scaffold.view;
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageButton
@@ -16,6 +17,14 @@ class TitleLayout : RelativeLayout {
     private lateinit var mTitleLayoutTitle: TextView
     private lateinit var mTitleLayoutMenu: TextView
     private lateinit var mTitleLayoutMenuIcon: ImageButton
+
+    private var mDarkMode: Boolean = false
+    private var mMenuStyle = MENU_STYLE_TEXT
+
+    companion object {
+        private const val MENU_STYLE_TEXT = 0
+        private const val MENU_STYLE_BUTTON = 1
+    }
 
     private constructor(context: Context): super(context)
 
@@ -37,15 +46,19 @@ class TitleLayout : RelativeLayout {
     }
 
     fun setMenuClickListener(listener: (View) -> Unit) {
-        mTitleLayoutMenu.setOnClickListener(listener)
-    }
-
-    fun setMenuIconClickListener(listener: (View) -> Unit) {
-        mTitleLayoutMenuIcon.setOnClickListener(listener)
+        if (mMenuStyle == MENU_STYLE_TEXT) {
+            mTitleLayoutMenu.setOnClickListener(listener)
+        } else {
+            mTitleLayoutMenuIcon.setOnClickListener(listener)
+        }
     }
 
     fun setBackIcon(drawable: Drawable?) {
         mTitleLayoutBack.setImageDrawable(drawable)
+    }
+
+    fun setHideBackIcon(hide: Boolean) {
+        mTitleLayoutBack.visibility = if (hide) View.GONE else View.VISIBLE
     }
 
     fun setCaption(title: String?) {
@@ -54,11 +67,20 @@ class TitleLayout : RelativeLayout {
 
     fun setMenu(menu: String?) {
         mTitleLayoutMenu.text = Util.nullToEmpty(menu)
+        mTitleLayoutMenu.visibility = if (TextUtils.isEmpty(menu)) GONE else VISIBLE
     }
 
     fun setMenuEnabled(enabled: Boolean) {
-        mTitleLayoutMenu.isEnabled = enabled
-        mTitleLayoutMenu.setTextColor(resources.getColor(if (enabled) R.color.black6 else R.color.black7))
+        if (mMenuStyle == MENU_STYLE_TEXT) {
+            mTitleLayoutMenu.isEnabled = enabled
+            if (mDarkMode) {
+                mTitleLayoutMenu.setTextColor(resources.getColor(if (enabled) R.color.black6 else R.color.black7))
+            } else {
+                mTitleLayoutMenu.setTextColor(resources.getColor(if (enabled) R.color.white else R.color.white2))
+            }
+        } else {
+            mTitleLayoutMenuIcon.isEnabled = enabled
+        }
     }
 
     fun setMenuIcon(drawable: Drawable?) {
@@ -73,11 +95,12 @@ class TitleLayout : RelativeLayout {
         val array = context.obtainStyledAttributes(attrs, R.styleable.TitleLayout)
         val title = array.getString(R.styleable.TitleLayout_titleCaption)
         var backIcon = array.getDrawable(R.styleable.TitleLayout_titleBackIcon)
+        val hideBackIcon = array.getBoolean(R.styleable.TitleLayout_titleHideBackIcon, false)
         val menu = array.getString(R.styleable.TitleLayout_titleMenu)
-        val menuEnabled = array.getBoolean(R.styleable.TitleLayout_titleMenuEnabled, false)
-        val darkMode = array.getBoolean(R.styleable.TitleLayout_titleDarkMode, false)
-        val menuIconEnabled = array.getBoolean(R.styleable.TitleLayout_titleMenuIconEnabled, false)
         var menuIcon = array.getDrawable(R.styleable.TitleLayout_titleMenuIcon)
+        val menuEnabled = array.getBoolean(R.styleable.TitleLayout_titleMenuEnabled, false)
+        mMenuStyle = array.getInt(R.styleable.TitleLayout_titleMenuStyle, MENU_STYLE_TEXT)
+        mDarkMode = array.getBoolean(R.styleable.TitleLayout_titleDarkMode, false)
 
         array.recycle()
 
@@ -87,7 +110,7 @@ class TitleLayout : RelativeLayout {
         mTitleLayoutMenu = view.findViewById(R.id.title_layout_menu)
         mTitleLayoutMenuIcon = view.findViewById(R.id.title_layout_menu_icon)
 
-        if (darkMode) {
+        if (mDarkMode) {
             setBackgroundColor(getResources().getColor(R.color.dark))
             mTitleLayoutTitle.setTextAppearance(getContext(), R.style.H5_White_High_Left)
             mTitleLayoutMenu.setTextAppearance(getContext(), R.style.Subtitle1_White_High_Right)
@@ -99,12 +122,17 @@ class TitleLayout : RelativeLayout {
 
         setCaption(title)
         if (backIcon == null) {
-            backIcon = resources.getDrawable(if (darkMode) R.drawable.back_white else R.drawable.back)
+            backIcon = resources.getDrawable(if (mDarkMode) R.drawable.back_white else R.drawable.back)
         }
         setBackIcon(backIcon)
+        setHideBackIcon(hideBackIcon)
+        if (mMenuStyle == MENU_STYLE_TEXT) {
+            mTitleLayoutMenuIcon.visibility = GONE
+        } else {
+            mTitleLayoutMenuIcon.visibility = VISIBLE
+        }
         setMenu(menu)
-        setMenuEnabled(menuEnabled)
         setMenuIcon(menuIcon)
-        setMenuIconEnabled(menuIconEnabled)
+        setMenuEnabled(menuEnabled)
     }
 }

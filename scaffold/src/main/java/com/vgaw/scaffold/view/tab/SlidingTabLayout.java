@@ -70,6 +70,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
 
     private void init(AttributeSet attrs) {
+        setFillViewport(true);
         setHorizontalScrollBarEnabled(false);
 
         mSlidingTabLayoutInternal = new SlidingTabLayoutInternal(getContext());

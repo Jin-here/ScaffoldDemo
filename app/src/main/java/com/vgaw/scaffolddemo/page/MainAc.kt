@@ -8,17 +8,19 @@ import com.vgaw.scaffold.page.ScaffoldFrag
 import com.vgaw.scaffold.page.common.PermissionAc
 import com.vgaw.scaffold.util.dialog.DialogUtil
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil
-import com.vgaw.scaffold.view.AppToast
+import com.vgaw.scaffold.view.ScaffoldToast
+import com.vgaw.scaffold.view.bottomnavigation.BottomNavigationLayout
 import com.vgaw.scaffolddemo.R
 import com.vgaw.scaffolddemo.page.demo.compoment.CompomentFrag
 import com.vgaw.scaffolddemo.page.demo.example.ExampleFrag
 import com.vgaw.scaffolddemo.page.demo.internalpage.InternalPageFrag
-import kotlinx.android.synthetic.main.main_ac.*
 
 class MainAc : ScaffoldAc() {
     companion object {
         private const val BACK_TO_EXIT_DURATION = 1400L
     }
+
+    private lateinit var mMainBottomNavLayout: BottomNavigationLayout
     
     private var mLstBackTime: Long = 0
 
@@ -27,6 +29,8 @@ class MainAc : ScaffoldAc() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_ac)
+        mMainBottomNavLayout = findViewById(R.id.main_bottom_navLayout)
+
 
         initData()
         initView()
@@ -43,7 +47,7 @@ class MainAc : ScaffoldAc() {
         val crtTime = System.currentTimeMillis()
         if (crtTime - mLstBackTime > BACK_TO_EXIT_DURATION) {
             mLstBackTime = crtTime
-            AppToast.show(R.string.back_again_to_exit)
+            ScaffoldToast.show(R.string.back_again_to_exit)
         } else {
             super.onBackPressed()
         }
@@ -54,8 +58,8 @@ class MainAc : ScaffoldAc() {
     }
 
     private fun initView() {
-        mainBottomNavLayout.setOnItemCheckedListener(this::showFragment)
-        mainBottomNavLayout.check(0)
+        mMainBottomNavLayout.setOnItemCheckedListener(this::showFragment)
+        mMainBottomNavLayout.check(0)
     }
 
     private fun showFragment(index: Int) {
@@ -77,7 +81,7 @@ class MainAc : ScaffoldAc() {
         // showDialog index fragment
         if (fragment == null) {
             fragment = mFragmentArray[index]
-            fragmentTransaction.add(R.id.mainContainer, fragment, tag)
+            fragmentTransaction.add(R.id.main_container, fragment, tag)
         } else {
             fragmentTransaction.show(fragment)
         }

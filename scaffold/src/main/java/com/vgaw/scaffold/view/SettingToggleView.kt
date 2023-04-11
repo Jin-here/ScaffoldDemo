@@ -1,17 +1,15 @@
 package com.vgaw.scaffold.view;
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import com.vgaw.scaffold.R;
+import android.content.Context
+import android.graphics.drawable.Drawable
+import android.util.AttributeSet
+import android.view.View
+import android.widget.ImageView
+import android.widget.RelativeLayout
+import android.widget.TextView
+import com.vgaw.scaffold.R
 import com.vgaw.scaffold.util.Util
-import com.vgaw.scaffold.util.phone.DensityUtil;
+import com.vgaw.scaffold.util.phone.DensityUtil
 
 class SettingToggleView : RelativeLayout {
     private lateinit var mSetToggleIcon: ImageView
@@ -72,13 +70,21 @@ class SettingToggleView : RelativeLayout {
 
         array.recycle()
 
-        if (style == 0) {
-            mSetToggleSw.setCheckedImageId(R.drawable.toggle_on)
-            mSetToggleSw.setNormalImageId(R.drawable.toggle_off)
-        } else {
-            mSetToggleSw.setCheckedImageId(R.drawable.check_box_on)
-            mSetToggleSw.setNormalImageId(R.drawable.check_box_off)
-            mSetToggleSw.setPadding(DensityUtil.dp2px(context, 6F))
+        when (style) {
+            0 -> {
+                mSetToggleSw.setCheckedImageId(R.drawable.toggle_on)
+                mSetToggleSw.setNormalImageId(R.drawable.toggle_off)
+            }
+            1 -> {
+                mSetToggleSw.setCheckedImageId(R.drawable.check_normal)
+                mSetToggleSw.setNormalImageId(R.drawable.check_checked)
+                mSetToggleSw.setPadding(DensityUtil.dp2px(context, 8F))
+            }
+            2 -> {
+                mSetToggleSw.setCheckedImageId(R.drawable.radio_normal)
+                mSetToggleSw.setNormalImageId(R.drawable.radio_checked)
+                mSetToggleSw.setPadding(DensityUtil.dp2px(context, 8F))
+            }
         }
         mSetToggleSw.setOnClickListener { onClicked() }
         setOnClickListener { onClicked() }

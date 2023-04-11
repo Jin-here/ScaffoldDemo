@@ -45,7 +45,7 @@ public class DialogUtil {
             fragmentTransaction
                     .addToBackStack(name)
                     .replace(containerId, dialogFragment, name)
-                    .commit();
+                    .commitAllowingStateLoss();
         }
     }
 

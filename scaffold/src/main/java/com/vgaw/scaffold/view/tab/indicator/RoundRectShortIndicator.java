@@ -25,7 +25,7 @@ public class RoundRectShortIndicator extends BaseIndicator {
             mIndicatorColors[i] = color;
         }
 
-        mSelectedIndicatorThickness = DensityUtil.dp2px(mContext, 6);
+        mSelectedIndicatorThickness = DensityUtil.dp2px(mContext, 4);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class RoundRectShortIndicator extends BaseIndicator {
 
                 mSelectedIndicatorPaint.setColor(color);
 
-                int indicatorWidth = DensityUtil.dp2px(mContext, 12);
+                int indicatorWidth = DensityUtil.dp2px(mContext, 20);
                 int middle = (left + right) / 2;
                 int r = (mSelectedIndicatorThickness / 2);
                 canvas.drawRoundRect(new RectF(middle - (indicatorWidth / 2), height - mSelectedIndicatorThickness,

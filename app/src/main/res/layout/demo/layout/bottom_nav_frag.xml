@@ -8,7 +8,7 @@
     android:clickable="true">
 
     <com.vgaw.scaffold.view.TitleLayout
-        android:id="@+id/bottomNavTitleLayout"
+        android:id="@+id/bottom_nav_title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -16,11 +16,11 @@
         android:id="@+id/bottomNavContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@id/bottomNavTitleLayout"
-        android:layout_above="@id/bottomNavBottomNavLayout"/>
+        android:layout_below="@id/bottom_nav_title_layout"
+        android:layout_above="@id/bottom_nav_bottom_nav_layout"/>
 
     <com.vgaw.scaffold.view.bottomnavigation.BottomNavigationLayout
-        android:id="@+id/bottomNavBottomNavLayout"
+        android:id="@+id/bottom_nav_bottom_nav_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
@@ -51,7 +51,7 @@
     </com.vgaw.scaffold.view.bottomnavigation.BottomNavigationLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/bottomNavShowBubble"
+        android:id="@+id/bottom_nav_show_bubble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -59,11 +59,11 @@
         android:text="显示气泡"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/bottomNavHideBubble"
+        android:id="@+id/bottom_nav_hide_bubble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@id/bottomNavShowBubble"
+        android:layout_below="@id/bottom_nav_show_bubble"
         android:layout_marginTop="10dp"
         android:text="隐藏气泡"/>
 </RelativeLayout>

@@ -1,6 +1,6 @@
 package com.vgaw.scaffold.http.callback
 
-import com.vgaw.scaffold.view.AppToast
+import com.vgaw.scaffold.view.ScaffoldToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -27,7 +27,7 @@ class Result<T>(val code: ResultCode, private val _data: T? = null, val error: S
             }
             if (error != null) {
                 withContext(Dispatchers.Main) {
-                    AppToast.show(error)
+                    ScaffoldToast.show(error)
                 }
             }
             return Result<T>(ResultCode.ERROR, error = error)

@@ -33,10 +33,14 @@
     <declare-styleable name="TitleLayout">
         <attr name="titleCaption" format="string"/>
         <attr name="titleBackIcon" format="reference"/>
+        <attr name="titleHideBackIcon" format="boolean"/>
         <attr name="titleMenu" format="string"/>
-        <attr name="titleMenuEnabled" format="boolean"/>
-        <attr name="titleMenuIconEnabled" format="boolean"/>
         <attr name="titleMenuIcon" format="reference"/>
+        <attr name="titleMenuEnabled" format="boolean"/>
+        <attr name="titleMenuStyle" format="enum">
+            <enum name="text" value="0"/>
+            <enum name="button" value="1"/>
+        </attr>
         <attr name="titleDarkMode" format="boolean"/>
     </declare-styleable>
 
@@ -60,6 +64,7 @@
         <attr name="settingToggleStyle" format="enum">
             <enum name="toggle" value="0"/>
             <enum name="checkbox" value="1"/>
+            <enum name="radio" value="2"/>
         </attr>
     </declare-styleable>
 
@@ -71,6 +76,18 @@
         <attr name="imgTxtNameColor" format="color"/>
         <attr name="imgTxtNameSize" format="dimension"/>
         <attr name="imgTxtPadding" format="dimension"/>
+        <attr name="imgTxtIgnoreSelectWave" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="CheckedImgTxtLayout">
+        <attr name="checkedImgTxtIcon" format="reference"/>
+        <attr name="checkedImgTxtIconOn" format="reference"/>
+        <attr name="checkedImgTxtIconBackground" format="reference"/>
+        <attr name="checkedImgTxtIconSize" format="dimension"/>
+        <attr name="checkedImgTxtName" format="string"/>
+        <attr name="checkedImgTxtNameColor" format="color"/>
+        <attr name="checkedImgTxtNameSize" format="dimension"/>
+        <attr name="checkedImgTxtPadding" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="TxtTxtLayout">
@@ -108,5 +125,11 @@
         <attr name="waveMaxRadius" format="dimension"/>
         <attr name="waveDivider" format="float"/>
         <attr name="waveColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="CheckRadioBtn">
+        <attr name="checkRadioHideTitle" format="boolean"/>
+        <attr name="checkRadioTitle" format="string"/>
+        <attr name="checkRadioMultiChoice" format="boolean"/>
     </declare-styleable>
 </resources>

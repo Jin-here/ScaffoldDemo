@@ -10,12 +10,13 @@ import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import com.vgaw.scaffold.page.ScaffoldAc
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil
-import com.vgaw.scaffold.view.AppToast
+import com.vgaw.scaffold.view.ScaffoldToast
+import com.vgaw.scaffold.view.TitleLayout
 import com.vgaw.scaffold.view.webview.FileChooserWebChromClient
 import com.vgaw.scaffolddemo.R
-import kotlinx.android.synthetic.main.feedback_ac.*
 
 class FeedbackAc : ScaffoldAc() {
+    private lateinit var mFeedbackWv: WebView
     private lateinit var mFileChooserWebChromClient: FileChooserWebChromClient
 
     companion object {
@@ -34,18 +35,19 @@ class FeedbackAc : ScaffoldAc() {
         setContentView(R.layout.feedback_ac)
         StatusBarUtil.setColor(this, Color.WHITE)
 
-        feedbackTitleLayout.setBackClickListener {onBackPressed()}
+        findViewById<TitleLayout>(R.id.feedback_title_layout).setBackClickListener {onBackPressed()}
+        mFeedbackWv = findViewById(R.id.feedback_wv)
 
-        feedbackWv.settings.javaScriptEnabled = true
-        feedbackWv.settings.domStorageEnabled = true
-        feedbackWv.webViewClient = object : WebViewClient() {
+        mFeedbackWv.settings.javaScriptEnabled = true
+        mFeedbackWv.settings.domStorageEnabled = true
+        mFeedbackWv.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 if (url != null && url.startsWith("weixin://")) {
                     try {
                         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                         view!!.context.startActivity(intent)
                     } catch (e: Exception) {
-                        AppToast.show(R.string.feedback_wx_not_installed)
+                        ScaffoldToast.show(R.string.feedback_wx_not_installed)
                     }
                     return true
                 }
@@ -53,9 +55,9 @@ class FeedbackAc : ScaffoldAc() {
             }
         }
         mFileChooserWebChromClient = FileChooserWebChromClient(getSelf())
-        feedbackWv.webChromeClient = mFileChooserWebChromClient
+        mFeedbackWv.webChromeClient = mFileChooserWebChromClient
         val url = String.format("https://support.qq.com/product/%s", getString(R.string.txc_product_id))
-        feedbackWv.loadUrl(url)
+        mFeedbackWv.loadUrl(url)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -64,8 +66,8 @@ class FeedbackAc : ScaffoldAc() {
     }
 
     override fun onBackPressed() {
-        if (feedbackWv.canGoBack()) {
-            feedbackWv.goBack()
+        if (mFeedbackWv.canGoBack()) {
+            mFeedbackWv.goBack()
         } else {
             super.onBackPressed()
         }

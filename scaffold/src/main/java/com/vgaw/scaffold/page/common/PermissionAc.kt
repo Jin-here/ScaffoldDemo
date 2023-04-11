@@ -18,15 +18,19 @@ import timber.log.Timber
 
 /**
  * todo
- * 1. 部分手机功能异常；
- * 2. 先申请权限再弹出描述；
+ * 1. 多个权限同一个描述；
+ * 2. 不分手机功能异常；
+ * 3. 先申请权限再弹出描述；
+ *
+ * 1. 读写权限自动适配
  */
 class PermissionAc : ScaffoldAc() {
     companion object {
         private const val REQ_CODE_PERMISSION = 0
 
         private val sPermissionDesMap = HashMap<String, String>().apply {
-            this[Manifest.permission.WRITE_EXTERNAL_STORAGE] = "存储位置"
+            this[Manifest.permission.READ_EXTERNAL_STORAGE] = "读取文件"
+            this[Manifest.permission.WRITE_EXTERNAL_STORAGE] = "存储文件"
             this[Manifest.permission.RECORD_AUDIO] = "麦克风"
             this[Manifest.permission.READ_PHONE_STATE] = "设备信息"
             this[Manifest.permission.CAMERA] = "相机"
@@ -35,6 +39,7 @@ class PermissionAc : ScaffoldAc() {
             this[Manifest.permission.CALL_PHONE] = "拨打电话"
             this[Manifest.permission.USE_SIP] = "使用SIP"
             this[Manifest.permission.WRITE_CONTACTS] = "修改通讯录"
+            this[Manifest.permission.ACCESS_BACKGROUND_LOCATION] = "后台获取位置【请点击始终允许】"
         }
 
         fun startActivityForResult(activity: Activity, reqCode: Int, perssionArray: Array<String>): Boolean {
@@ -59,7 +64,7 @@ class PermissionAc : ScaffoldAc() {
             return true
         }
 
-        private fun hasPermission(activity: Activity, permissionArray: Array<String>): Boolean {
+        fun hasPermission(activity: Activity, permissionArray: Array<String>): Boolean {
             for (item in permissionArray) {
                 if (ActivityCompat.checkSelfPermission(activity, item) != PackageManager.PERMISSION_GRANTED) {
                     return false
@@ -87,7 +92,7 @@ class PermissionAc : ScaffoldAc() {
         StatusBarUtil.setColor(this, Color.TRANSPARENT)
 
         val intent = intent
-        mPermissionArray = intent.getStringArrayExtra("permission_array")
+        mPermissionArray = intent.getStringArrayExtra("permission_array")!!
         mDes = intent.getStringExtra("des")
         requestPermission()
     }
@@ -164,7 +169,7 @@ class PermissionAc : ScaffoldAc() {
                         tempList.add(sPermissionDesMap.get(permissionList[i])!!)
                     }
                     ActivityCompat.requestPermissions(getSelf(),
-                            tempList.toTypedArray(), REQ_CODE_PERMISSION)
+                        tempList.toTypedArray(), REQ_CODE_PERMISSION)
                 }
             })
             DialogUtil.showDialog(baseDialog, supportFragmentManager, "permission_dialog")
@@ -183,6 +188,9 @@ class PermissionAc : ScaffoldAc() {
      */
     private fun proPermission(activity: Activity, permission: String, permissionList: ArrayList<String>): Boolean {
         val check = ActivityCompat.checkSelfPermission(activity, permission)
+        if (Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permission)) {
+            Timber.d("grant: %s", check)
+        }
         if (check != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(permission)
 

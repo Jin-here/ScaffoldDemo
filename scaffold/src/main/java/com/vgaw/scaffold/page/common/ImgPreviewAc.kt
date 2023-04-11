@@ -5,15 +5,17 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.vgaw.scaffold.R
 import com.vgaw.scaffold.page.ScaffoldAc
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil
-import kotlinx.android.synthetic.main.img_preview_ac.*
 import timber.log.Timber
 
 class ImgPreviewAc : ScaffoldAc() {
+    private lateinit var imgPreviewIndexHint: TextView
+
     private lateinit var mDataList: ArrayList<String>
     private var mCrtPosition = 0
     private lateinit var mAdapter: ImagePreviewAdapter
@@ -21,6 +23,10 @@ class ImgPreviewAc : ScaffoldAc() {
     companion object {
         fun startAc(fragment: Fragment, imgList: ArrayList<String>) = startAc(fragment, imgList, 0)
 
+        /**
+         * @param imgList 文件路径/图片url
+         * @param selectIndex 默认显示第几张
+         */
         fun startAc(fragment: Fragment, imgList: ArrayList<String>, selectIndex: Int) {
             if (imgList.size > 0) {
                 val intent = Intent(fragment.getContext(), ImgPreviewAc::class.java)
@@ -56,6 +62,11 @@ class ImgPreviewAc : ScaffoldAc() {
         makeDarkMode()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.img_preview_ac)
+        val imgPreviewBack = findViewById<View>(R.id.img_preview_back)
+        val imgPreviewBackLayout = findViewById<View>(R.id.img_preview_back_layout)
+        val imgPreviewVp = findViewById<ViewPager>(R.id.img_preview_vp)
+        imgPreviewIndexHint = findViewById(R.id.img_preview_index_hint)
+
         StatusBarUtil.addStatusbarHeight(this, imgPreviewBackLayout)
         StatusBarUtil.setColor(this, Color.TRANSPARENT)
         imgPreviewBack.setOnClickListener {finish()}
@@ -95,9 +106,11 @@ class ImgPreviewAc : ScaffoldAc() {
 
     private fun getIntentData() {
         mCrtPosition = intent.getIntExtra("select_index", 0)
-        mDataList = intent.getStringArrayListExtra("img_list")
-        if (mCrtPosition > mDataList.size - 1 || mCrtPosition < 0) {
+        mDataList = intent.getStringArrayListExtra("img_list")!!
+        if (mCrtPosition < 0) {
             mCrtPosition = 0
+        } else if (mCrtPosition > mDataList.size - 1) {
+            mCrtPosition = mDataList.size - 1
         }
     }
 }

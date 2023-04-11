@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -49,12 +48,6 @@ android {
             signingConfig signingConfigs.keystore_default
         }
     }
-    lintOptions {
-        checkReleaseBuilds false
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
-        abortOnError false
-    }
     /*use old http*/
     /*useLibrary 'org.apache.http.legacy'*/
     sourceSets {
@@ -67,6 +60,11 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+    namespace 'com.vgaw.scaffolddemo'
 }
 
 dependencies {

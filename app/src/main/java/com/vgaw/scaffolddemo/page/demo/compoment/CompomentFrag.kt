@@ -17,7 +17,6 @@ import com.vgaw.scaffolddemo.page.demo.compoment.bottomnav.BottomNavFrag
 import com.vgaw.scaffolddemo.page.demo.compoment.other.OtherFrag
 import com.vgaw.scaffolddemo.page.demo.compoment.tab.TabFragment
 import com.vgaw.scaffolddemo.page.demo.compoment.viewpager.ViewPagerFrag
-import kotlinx.android.synthetic.main.compoment_frag.view.*
 import java.util.*
 
 class CompomentFrag : MockFrag() {
@@ -49,7 +48,7 @@ class CompomentFrag : MockFrag() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.compoment_frag, container, false)
-        compomentContainer = view.compomentContainer
+        compomentContainer = view.findViewById(R.id.compoment_container)
         initView()
         return view
     }

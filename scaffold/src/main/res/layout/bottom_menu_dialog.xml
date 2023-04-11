@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black3">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_mid_corner_bg"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/bottom_menu_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black6"
+            android:textSize="18sp"
+            android:layout_marginTop="14dp"
+            android:visibility="gone"/>
+
+        <com.vgaw.scaffold.view.DividerView
+            android:id="@+id/bottom_menu_dialog_divider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerOrientation="vertical"
+            android:layout_below="@id/bottom_menu_dialog_title"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"/>
+        
+        <ImageButton
+            android:id="@+id/bottom_menu_dialog_close"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:padding="4dp"
+            android:src="@drawable/close"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@android:color/transparent"
+            android:foreground="@drawable/selectable_item_bg"
+            android:visibility="gone"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bottom_menu_dialog_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/bottom_menu_dialog_title"/>
+    </RelativeLayout>
+</RelativeLayout>

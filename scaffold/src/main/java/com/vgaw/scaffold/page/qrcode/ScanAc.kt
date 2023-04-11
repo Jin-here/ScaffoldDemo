@@ -7,16 +7,19 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Vibrator
+import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.vgaw.scaffold.R
 import com.vgaw.scaffold.page.ScaffoldAc
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil
-import kotlinx.android.synthetic.main.scan_ac.*
+import com.vgaw.scaffold.view.TitleLayout
 import timber.log.Timber
 
 class ScanAc : ScaffoldAc(), CameraPreview.Delegate {
+    private lateinit var mScanRoot: ViewGroup
+
     companion object {
         private const val REQUEST_CODE_CAMERA_PERMISSION = 0x77
 
@@ -34,6 +37,9 @@ class ScanAc : ScaffoldAc(), CameraPreview.Delegate {
         setContentView(R.layout.scan_ac)
         StatusBarUtil.setColor(this, Color.TRANSPARENT)
         StatusBarUtil.setDarkMode(this)
+        mScanRoot = findViewById(R.id.scan_root)
+        val scanTitleLayout = findViewById<TitleLayout>(R.id.scan_title_layout)
+        scanTitleLayout.setBackgroundColor(Color.TRANSPARENT)
         scanTitleLayout.setBackClickListener {finish()}
         StatusBarUtil.addStatusbarHeight(this, scanTitleLayout)
 
@@ -83,7 +89,7 @@ class ScanAc : ScaffoldAc(), CameraPreview.Delegate {
         val qrCodeView = QRCodeView(this)
         qrCodeView.setDelegate(this)
 
-        scanRoot.addView(qrCodeView, 0)
+        mScanRoot.addView(qrCodeView, 0)
     }
 
     private fun checkPermission(): Boolean {

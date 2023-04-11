@@ -1,60 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.vgaw.scaffold.view.NoScrollbarScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/internalPageScan"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        style="@style/Body1.Black.High"
-        android:gravity="center_vertical|start"
-        android:paddingStart="10dp"
-        android:text="二维码识别"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/internalPageChooseImg"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        style="@style/Body1.Black.High"
-        android:gravity="center_vertical|start"
-        android:paddingStart="10dp"
-        android:text="选择相册/拍照"/>
+        <TextView
+            android:id="@+id/internal_page_scan"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            style="@style/Body1.Black.High"
+            android:gravity="center_vertical|start"
+            android:paddingStart="10dp"
+            android:text="二维码识别"/>
 
-    <TextView
-        android:id="@+id/internalPagePermission"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        style="@style/Body1.Black.High"
-        android:gravity="center_vertical|start"
-        android:paddingStart="10dp"
-        android:text="权限申请"/>
+        <TextView
+            android:id="@+id/internal_page_choose_img"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            style="@style/Body1.Black.High"
+            android:gravity="center_vertical|start"
+            android:paddingStart="10dp"
+            android:text="选择相册/拍照"/>
 
-    <TextView
-        android:id="@+id/internalPageCheckVersion"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        style="@style/Body1.Black.High"
-        android:gravity="center_vertical|start"
-        android:paddingStart="10dp"
-        android:text="检查更新"/>
+        <TextView
+            android:id="@+id/internal_page_permission"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            style="@style/Body1.Black.High"
+            android:gravity="center_vertical|start"
+            android:paddingStart="10dp"
+            android:text="权限申请"/>
 
-    <TextView
-        android:id="@+id/internalPageFeedback"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        style="@style/Body1.Black.High"
-        android:gravity="center_vertical|start"
-        android:paddingStart="10dp"
-        android:text="用户反馈"/>
+        <TextView
+            android:id="@+id/internal_page_check_version"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            style="@style/Body1.Black.High"
+            android:gravity="center_vertical|start"
+            android:paddingStart="10dp"
+            android:text="检查更新"/>
 
-    <TextView
-        android:id="@+id/internalPageImgPreview"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        style="@style/Body1.Black.High"
-        android:gravity="center_vertical|start"
-        android:paddingStart="10dp"
-        android:text="图片预览"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/internal_page_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            style="@style/Body1.Black.High"
+            android:gravity="center_vertical|start"
+            android:paddingStart="10dp"
+            android:text="用户反馈"/>
+
+        <TextView
+            android:id="@+id/internal_page_img_preview"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            style="@style/Body1.Black.High"
+            android:gravity="center_vertical|start"
+            android:paddingStart="10dp"
+            android:text="图片预览"/>
+
+        <TextView
+            android:id="@+id/internal_page_base_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            style="@style/Body1.Black.High"
+            android:gravity="center_vertical|start"
+            android:paddingStart="10dp"
+            android:text="基础dialog 样式1"/>
+
+        <TextView
+            android:id="@+id/internal_page_base_dialog1"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            style="@style/Body1.Black.High"
+            android:gravity="center_vertical|start"
+            android:paddingStart="10dp"
+            android:text="基础dialog 样式2"/>
+
+        <TextView
+            android:id="@+id/internal_page_base_dialog2"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            style="@style/Body1.Black.High"
+            android:gravity="center_vertical|start"
+            android:paddingStart="10dp"
+            android:text="基础dialog 样式3"/>
+
+        <TextView
+            android:id="@+id/internal_page_bottom_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            style="@style/Body1.Black.High"
+            android:gravity="center_vertical|start"
+            android:paddingStart="10dp"
+            android:text="底部菜单dialog 样式1"/>
+
+        <TextView
+            android:id="@+id/internal_page_bottom_dialog1"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            style="@style/Body1.Black.High"
+            android:gravity="center_vertical|start"
+            android:paddingStart="10dp"
+            android:text="底部菜单dialog 样式2"/>
+
+        <TextView
+            android:id="@+id/internal_page_progress_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            style="@style/Body1.Black.High"
+            android:gravity="center_vertical|start"
+            android:paddingStart="10dp"
+            android:text="progress dialog"/>
+    </LinearLayout>
+</com.vgaw.scaffold.view.NoScrollbarScrollView>

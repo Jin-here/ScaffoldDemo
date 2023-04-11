@@ -10,6 +10,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -19,11 +20,15 @@ import com.vgaw.scaffold.R
 import com.vgaw.scaffold.ScaffoldSetting
 import com.vgaw.scaffold.page.ScaffoldAc
 import com.vgaw.scaffold.util.FileUtil
+import com.vgaw.scaffold.util.dialog.ProgressDialogUtil
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil
+import com.vgaw.scaffold.view.ScaffoldToast
 import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.destination
 import id.zelory.compressor.constraint.size
-import kotlinx.android.synthetic.main.choose_img_ac.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 
 class ChooseImgAc : ScaffoldAc() {
@@ -34,29 +39,35 @@ class ChooseImgAc : ScaffoldAc() {
         private const val REQUEST_CODE_IMG_CLIP = 72
         private const val REQUEST_CODE_CAMERA_PERMISSION = 81
 
+        const val AUTO_DIRECT_NONE = -1
+        const val AUTO_DIRECT_CAMERA = 0
+        const val AUTO_DIRECT_ALBUM = 1
+
         /**
          * intent返回值：
          * data:文件路径，字符串类型
          *
-         * 默认对图片进行裁剪
-         *
          * @param activity
          * @param requestCode
+         * @param cropConfig 裁剪配置
+         * @param autoDirect 自动跳转拍照/相册，默认不跳转
          */
-        fun startActivityForResult(activity: Activity, requestCode: Int, cropConfig: CropConfig? = null) {
+        fun startActivityForResult(activity: Activity, requestCode: Int, cropConfig: CropConfig? = null, autoDirect: Int? = AUTO_DIRECT_NONE) {
             val intent = Intent(activity, ChooseImgAc::class.java)
             if (CropConfig.valid(cropConfig)) {
                 intent.putExtra("crop_config", cropConfig)
             }
+            intent.putExtra("auto_direct", autoDirect)
             activity.startActivityForResult(intent, requestCode)
             activity.overridePendingTransition(0, 0)
         }
 
-        fun startActivityForResult(fragment: Fragment, requestCode: Int, cropConfig: CropConfig? = null) {
+        fun startActivityForResult(fragment: Fragment, requestCode: Int, cropConfig: CropConfig? = null, autoDirect: Int? = AUTO_DIRECT_NONE) {
             val intent = Intent(fragment.context, ChooseImgAc::class.java)
             if (CropConfig.valid(cropConfig)) {
                 intent.putExtra("crop_config", cropConfig)
             }
+            intent.putExtra("auto_direct", autoDirect)
             fragment.startActivityForResult(intent, requestCode)
             val activity = fragment.activity
             if (activity != null && !activity.isDestroyed) {
@@ -69,6 +80,7 @@ class ChooseImgAc : ScaffoldAc() {
     private var mCameraFile: File? = null
 
     private var mCropConfig: CropConfig? = null
+    private var mAutoDirect = AUTO_DIRECT_NONE
 
     private var mCropFileUri: Uri? = null
     private var mPermissionMap: MutableMap<Uri, Int>? = null
@@ -80,10 +92,23 @@ class ChooseImgAc : ScaffoldAc() {
 
         val intent = getIntent()
         mCropConfig = intent.getParcelableExtra("crop_config")
+        mAutoDirect = intent.getIntExtra("auto_direct", AUTO_DIRECT_NONE)
 
-        chooseImgBg.setOnClickListener { finish() }
-        chooseImgFromAlbum.setOnClickListener { callFile() }
-        chooseImgFromCamera.setOnClickListener { callCamera() }
+        findViewById<View>(R.id.choose_img_root).setOnClickListener { finish() }
+        if (mAutoDirect == AUTO_DIRECT_NONE) {
+            findViewById<View>(R.id.choose_img_container).visibility = View.VISIBLE
+
+            findViewById<View>(R.id.choose_img_from_album).setOnClickListener { callFile() }
+            findViewById<View>(R.id.choose_img_from_camera).setOnClickListener { callCamera() }
+        } else {
+            findViewById<View>(R.id.choose_img_container).visibility = View.GONE
+
+            if (mAutoDirect == AUTO_DIRECT_CAMERA) {
+                callCamera()
+            } else {
+                callFile()
+            }
+        }
     }
 
 
@@ -115,6 +140,10 @@ class ChooseImgAc : ScaffoldAc() {
                     }
                 }
             }
+        } else {
+            if (mAutoDirect != AUTO_DIRECT_NONE) {
+                finish()
+            }
         }
     }
 
@@ -126,20 +155,29 @@ class ChooseImgAc : ScaffoldAc() {
     }
 
     private fun onGetResult(data: String) {
-        var resultPath: String? = data
         // 压缩图片
         val file = File(data)
         val fileSize = file.length()
+        if (fileSize > ScaffoldSetting.MAX_IMG_RAW_SIZE) {
+            ScaffoldToast.show("图片过大")
+            onGetResult1(null)
+            return
+        }
         if (fileSize > ScaffoldSetting.MAX_IMG_UPLOAD_SIZE) {
+            ProgressDialogUtil.showDialog("图片压缩中...", supportFragmentManager)
             lifecycleScope.launch {
-                val compressedFile = Compressor.compress(this@ChooseImgAc, file) {
+                val resultFile = createAppSpecificImgFile()
+                Compressor.compress(this@ChooseImgAc, file) {
                     size(ScaffoldSetting.MAX_IMG_UPLOAD_SIZE)
+                    destination(resultFile)
                 }
-                resultPath = compressedFile.absolutePath
-                onGetResult1(resultPath)
+                withContext(Dispatchers.Main) {
+                    ProgressDialogUtil.dismissDialog(supportFragmentManager)
+                }
+                onGetResult1(resultFile.absolutePath)
             }
         } else{
-            onGetResult1(resultPath)
+            onGetResult1(data)
         }
     }
 

@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -8,8 +7,6 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -25,6 +22,7 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+    namespace 'com.vgaw.scaffold'
 }
 
 dependencies {
@@ -39,12 +37,11 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.kotlinVersion"
     api "androidx.collection:collection-ktx:1.1.0"
     api "androidx.fragment:fragment-ktx:1.2.3"
-    api "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
-    api "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     // lifecycle
-    def lifecycle_version = '2.1.0-alpha02'
-    api "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    def lifecycle_version = '2.5.1'
+    api "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     // timber
     api 'com.jakewharton.timber:timber:4.7.1'

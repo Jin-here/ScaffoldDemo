@@ -3,15 +3,18 @@ package com.vgaw.scaffold.page.common
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.webkit.WebSettings
+import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import com.vgaw.scaffold.R
 import com.vgaw.scaffold.page.ScaffoldAc
 import com.vgaw.scaffold.util.statusbar.StatusBarUtil
-import kotlinx.android.synthetic.main.web_ac.*
 
 class WebAc : ScaffoldAc() {
+    private lateinit var mWebContent: WebView
+
     companion object {
         fun startActivity(fragment: Fragment, url: String) {
             val intent = Intent(fragment.context, WebAc::class.java)
@@ -40,24 +43,25 @@ class WebAc : ScaffoldAc() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.web_ac)
         StatusBarUtil.setColor(getSelf(), getResources().getColor(R.color.white))
-        webBack.setOnClickListener {onBackPressed()}
+        findViewById<View>(R.id.web_back).setOnClickListener {onBackPressed()}
+        mWebContent = findViewById(R.id.web_content)
 
         val noCache = intent.getBooleanExtra("no_cache", false)
         if (noCache) {
-            webContent.settings.cacheMode = WebSettings.LOAD_NO_CACHE
+            mWebContent.settings.cacheMode = WebSettings.LOAD_NO_CACHE
         }
-        webContent.webViewClient = WebViewClient()
-        webContent.requestFocusFromTouch()
-        val webSettings = webContent.settings
+        mWebContent.webViewClient = WebViewClient()
+        mWebContent.requestFocusFromTouch()
+        val webSettings = mWebContent.settings
         webSettings.javaScriptEnabled = true
 
-        val url = intent.getStringExtra("url")
-        webContent.loadUrl(url)
+        val url = intent.getStringExtra("url")!!
+        mWebContent.loadUrl(url)
     }
 
     override fun onBackPressed() {
-        if (webContent.canGoBack()) {
-            webContent.goBack()
+        if (mWebContent.canGoBack()) {
+            mWebContent.goBack()
         } else {
             super.onBackPressed()
         }

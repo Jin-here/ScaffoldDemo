@@ -3,7 +3,7 @@ package com.vgaw.scaffold.http.callback;
 import com.vgaw.scaffold.R;
 import com.vgaw.scaffold.http.ErrorMap;
 import com.vgaw.scaffold.util.context.ContextManager;
-import com.vgaw.scaffold.view.AppToast;
+import com.vgaw.scaffold.view.ScaffoldToast;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -23,7 +23,7 @@ public abstract class HttpResultCallback<T> implements Callback<T>, HttpResultIn
 
     @Override
     public void onFail(String msg) {
-        AppToast.show(msg);
+        ScaffoldToast.show(msg);
     }
 
     @Override

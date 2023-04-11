@@ -15,7 +15,7 @@ public abstract class BaseIndicator {
     public BaseIndicator(Context context) {
         mContext = context;
 
-        mSelectedIndicatorPaint = new Paint();
+        mSelectedIndicatorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     }
 
     public abstract void init(int count);

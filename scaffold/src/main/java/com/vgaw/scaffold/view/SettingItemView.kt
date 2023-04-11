@@ -2,6 +2,7 @@ package com.vgaw.scaffold.view
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
@@ -53,6 +54,10 @@ class SettingItemView : LinearLayout {
     }
 
     private fun init(attrs: AttributeSet) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            foreground = resources.getDrawable(R.drawable.selectable_item_bg)
+        }
+
         orientation = HORIZONTAL
         gravity = Gravity.CENTER_VERTICAL
 
@@ -62,7 +67,7 @@ class SettingItemView : LinearLayout {
         val des = array.getString(R.styleable.SettingItemView_settingDes)
         val hideArrow = array.getBoolean(R.styleable.SettingItemView_settingHideArrow, false)
 
-        array.recycle();
+        array.recycle()
 
         val view = View.inflate(getContext(), R.layout.setting_item_layout, this)
         mSettingItemLayoutTitle = view.findViewById(R.id.setting_item_layout_title)

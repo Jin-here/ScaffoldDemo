@@ -2,34 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/white"
-    android:clickable="true">
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.vgaw.scaffold.view.TitleLayout
-            android:id="@+id/tabTitleLayout"
+            android:id="@+id/tab_title_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <com.vgaw.scaffold.view.tab.SlidingTabLayout
-            android:id="@+id/tabTab"
+            android:id="@+id/tab_tab"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:layout_centerInParent="true"/>
+            android:layout_below="@id/tab_title_layout"
+            android:layout_centerHorizontal="true"/>
+
+        <com.vgaw.scaffold.view.tab.SlidingTabLayout
+            android:id="@+id/tab_tab1"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_below="@id/tab_tab"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"/>
+
+        <com.vgaw.scaffold.view.tab.SlidingTabLayout
+            android:id="@+id/tab_tab2"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            app:tabEqualization="true"
+            android:layout_below="@id/tab_tab1"
+            android:layout_marginTop="10dp"/>
     </RelativeLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/tabVp"
+        android:id="@+id/tab_vp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/tabShowBubble"
+        android:id="@+id/tab_show_bubble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -37,11 +54,11 @@
         android:text="显示气泡"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/tabHideBubble"
+        android:id="@+id/tab_hide_bubble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@id/tabShowBubble"
+        android:layout_below="@id/tab_show_bubble"
         android:layout_marginTop="10dp"
         android:text="隐藏气泡"/>
 </LinearLayout>
