@@ -50,8 +50,8 @@ open class ImgTxtLayout : LinearLayout {
 
     private fun init(attrs: AttributeSet) {
         val array = getContext().obtainStyledAttributes(attrs, R.styleable.ImgTxtLayout)
-        val ignoreSelectWave = array.getBoolean(R.styleable.ImgTxtLayout_imgTxtIgnoreSelectWave, false)
-        if (!ignoreSelectWave) {
+        val disableSelectWave = array.getBoolean(R.styleable.ImgTxtLayout_imgTxtDisableSelectWave, false)
+        if (!disableSelectWave) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 foreground = resources.getDrawable(R.drawable.selectable_item_bg)
             }

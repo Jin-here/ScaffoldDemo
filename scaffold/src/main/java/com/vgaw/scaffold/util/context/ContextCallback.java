@@ -24,7 +24,9 @@ public class ContextCallback implements Application.ActivityLifecycleCallbacks {
 
     @Override
     public void onActivityStarted(Activity activity) {
-        sCount.incrementAndGet();
+        int before = sCount.get();
+        int now = sCount.incrementAndGet();
+        onValueChanged(before, now);
     }
 
     @Override
@@ -37,7 +39,9 @@ public class ContextCallback implements Application.ActivityLifecycleCallbacks {
 
     @Override
     public void onActivityStopped(Activity activity) {
-        sCount.decrementAndGet();
+        int before = sCount.get();
+        int now = sCount.decrementAndGet();
+        onValueChanged(before, now);
     }
 
     @Override
@@ -46,5 +50,15 @@ public class ContextCallback implements Application.ActivityLifecycleCallbacks {
     @Override
     public void onActivityDestroyed(Activity activity) {
         ContextManager.getInstance().removeActivity(activity);
+    }
+
+    private void onValueChanged(int before, int now) {
+        if (before < 1 && now > 0) {
+            InBackgroundObserver.getInstance().notify(false);
+            return;
+        }
+        if (before > 0 && now < 1) {
+            InBackgroundObserver.getInstance().notify(true);
+        }
     }
 }

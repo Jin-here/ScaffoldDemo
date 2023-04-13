@@ -65,11 +65,6 @@ class TitleLayout : RelativeLayout {
         mTitleLayoutTitle.text = Util.nullToEmpty(title)
     }
 
-    fun setMenu(menu: String?) {
-        mTitleLayoutMenu.text = Util.nullToEmpty(menu)
-        mTitleLayoutMenu.visibility = if (TextUtils.isEmpty(menu)) GONE else VISIBLE
-    }
-
     fun setMenuEnabled(enabled: Boolean) {
         if (mMenuStyle == MENU_STYLE_TEXT) {
             mTitleLayoutMenu.isEnabled = enabled
@@ -83,23 +78,14 @@ class TitleLayout : RelativeLayout {
         }
     }
 
-    fun setMenuIcon(drawable: Drawable?) {
-        mTitleLayoutMenuIcon.setImageDrawable(drawable)
-    }
-
-    fun setMenuIconEnabled(enabled: Boolean) {
-        mTitleLayoutMenuIcon.isEnabled = enabled
-    }
-
     private fun init(attrs: AttributeSet) {
         val array = context.obtainStyledAttributes(attrs, R.styleable.TitleLayout)
         val title = array.getString(R.styleable.TitleLayout_titleCaption)
         var backIcon = array.getDrawable(R.styleable.TitleLayout_titleBackIcon)
         val hideBackIcon = array.getBoolean(R.styleable.TitleLayout_titleHideBackIcon, false)
-        val menu = array.getString(R.styleable.TitleLayout_titleMenu)
-        var menuIcon = array.getDrawable(R.styleable.TitleLayout_titleMenuIcon)
-        val menuEnabled = array.getBoolean(R.styleable.TitleLayout_titleMenuEnabled, false)
         mMenuStyle = array.getInt(R.styleable.TitleLayout_titleMenuStyle, MENU_STYLE_TEXT)
+        val menu = if (mMenuStyle == MENU_STYLE_TEXT) array.getString(R.styleable.TitleLayout_titleMenu) else array.getDrawable(R.styleable.TitleLayout_titleMenu)
+        val menuEnabled = array.getBoolean(R.styleable.TitleLayout_titleMenuEnabled, false)
         mDarkMode = array.getBoolean(R.styleable.TitleLayout_titleDarkMode, false)
 
         array.recycle()
@@ -128,11 +114,13 @@ class TitleLayout : RelativeLayout {
         setHideBackIcon(hideBackIcon)
         if (mMenuStyle == MENU_STYLE_TEXT) {
             mTitleLayoutMenuIcon.visibility = GONE
+            mTitleLayoutMenu.text = Util.nullToEmpty(menu as String?)
+            mTitleLayoutMenu.visibility = if (TextUtils.isEmpty(menu)) GONE else VISIBLE
         } else {
+            mTitleLayoutMenuIcon.setImageDrawable(menu as Drawable?)
             mTitleLayoutMenuIcon.visibility = VISIBLE
+            mTitleLayoutMenu.visibility = GONE
         }
-        setMenu(menu)
-        setMenuIcon(menuIcon)
         setMenuEnabled(menuEnabled)
     }
 }

@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             app:titleCaption="示例3"
             app:titleMenuEnabled="true"
+            app:titleMenuStyle="text"
             app:titleMenu="提交"/>
 
         <com.vgaw.scaffold.view.TitleLayout
@@ -44,7 +45,7 @@
             app:titleCaption="示例4"
             app:titleMenuEnabled="true"
             app:titleMenuStyle="button"
-            app:titleMenuIcon="@android:drawable/ic_menu_close_clear_cancel"/>
+            app:titleMenu="@android:drawable/ic_menu_close_clear_cancel"/>
 
         <com.vgaw.scaffold.view.TitleLayout
             android:layout_width="match_parent"
@@ -130,7 +131,6 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             app:settingToggleName="示例4"
-            app:settingToggleDes="描述"
             app:settingToggled="true"
             app:settingToggleStyle="checkbox"/>
 

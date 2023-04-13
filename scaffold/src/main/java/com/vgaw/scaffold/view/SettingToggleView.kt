@@ -2,16 +2,17 @@ package com.vgaw.scaffold.view;
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.vgaw.scaffold.R
 import com.vgaw.scaffold.util.Util
 import com.vgaw.scaffold.util.phone.DensityUtil
 
-class SettingToggleView : RelativeLayout {
+class SettingToggleView : ConstraintLayout {
     private lateinit var mSetToggleIcon: ImageView
     private lateinit var mSetToggleTitle: TextView
     private lateinit var mSetToggleDes: TextView
@@ -32,7 +33,12 @@ class SettingToggleView : RelativeLayout {
     }
 
     fun setDescription(description: String?) {
-        mSetToggleDes.text = Util.nullToEmpty(description)
+        if (TextUtils.isEmpty(description)) {
+            mSetToggleDes.visibility = View.GONE
+        } else {
+            mSetToggleDes.text = Util.nullToEmpty(description)
+            mSetToggleDes.visibility = View.VISIBLE
+        }
     }
 
     fun check(check: Boolean) {

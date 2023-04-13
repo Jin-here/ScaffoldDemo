@@ -149,7 +149,7 @@ class PermissionAc : ScaffoldAc() {
             permissionList.forEach { sb.append(sPermissionDesMap[it]).append("，") }
 
             val des = mDes ?: String.format("为了正常使用%s，请授予以下权限", getString(R.string.app_name))
-            val baseDialog = ScaffoldDialog.newInstance(String.format("%s：\n%s", des, sb.substring(0, sb.length - 1)), "取消", /*if hasAlwaysDenied "前往设置" else */"开始授权")
+            val baseDialog = ScaffoldDialog.newInstance(String.format("%s：\n%s", des, sb.substring(0, sb.length - 1)), "取消", if (hasAlwaysDenied) "前往设置" else "开始授权")
 
             baseDialog.setOnLeftBtnClickListener(View.OnClickListener {
                 DialogUtil.dismissDialog(supportFragmentManager, "permission_dialog")

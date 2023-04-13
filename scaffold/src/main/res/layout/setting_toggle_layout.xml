@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/setting_toggle_icon"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginEnd="8dp"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/setting_toggle_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Body1.Black.High.Left"
-        android:layout_toEndOf="@id/setting_toggle_icon"/>
+        app:layout_constraintStart_toEndOf="@id/setting_toggle_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/setting_toggle_des"
+        android:layout_marginStart="8dp"/>
 
     <TextView
         android:id="@+id/setting_toggle_des"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/setting_toggle_title"
-        android:layout_alignStart="@id/setting_toggle_title"
         android:layout_marginTop="10dp"
-        style="@style/Caption.Black.Medium.Left"/>
+        style="@style/Caption.Black.Medium.Left"
+        app:layout_constraintStart_toStartOf="@id/setting_toggle_title"
+        app:layout_constraintTop_toBottomOf="@id/setting_toggle_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
 
     <com.vgaw.scaffold.view.CheckedImageButton
         android:id="@+id/setting_toggle_sw"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </merge>

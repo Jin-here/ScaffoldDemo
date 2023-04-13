@@ -46,7 +46,7 @@
             android:launchMode="singleTop"/>
         <!--base activity end-->
 
-        <activity android:name=".page.MainAc"
+        <activity android:name=".page.main.MainAc"
             android:screenOrientation="userPortrait"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="adjustPan">

@@ -12,19 +12,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
+import com.vgaw.scaffold.ScaffoldSetting;
 import com.vgaw.scaffold.view.rcv.decoration.GridDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseRcv<T> extends SmartRefreshLayout {
-    protected static final int PAGE_SIZE = 50;
-    private RecyclerView mContentView;
+    protected RecyclerView mContentView;
 
-    private List<T> mDataList = new ArrayList<>();
-    private EasyRcvAdapter<T> mAdapter;
+    protected List<T> mDataList = new ArrayList<>();
+    protected EasyRcvAdapter<T> mAdapter;
 
-    private int mCrtPage;
+    protected int mCrtPage;
+    protected boolean mLoadMore;
+
+    private OnItemClickListener<T> mItemClickListener;
+
+    public void setItemClickListener(OnItemClickListener<T> listener) {
+        mItemClickListener = listener;
+    }
 
     public BaseRcv(Context context) {
         super(context);
@@ -36,28 +43,51 @@ public abstract class BaseRcv<T> extends SmartRefreshLayout {
         init();
     }
 
+    public void refreshSilently() {
+        if (mListener != null) {
+            resetPage();
+            mListener.fetchData(mCrtPage);
+        }
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         setOnRefreshListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                fetchData(true);
+                mLoadMore = true;
+                fetchData();
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                mLoadMore = false;
                 resetPage();
-                fetchData(false);
+                fetchData();
             }
         });
 
-        autoRefresh(300);
+        if (startWithLoad()) {
+            autoRefresh(300);
+        }
     }
 
-    protected abstract void fetchData(boolean loadMore);
+    protected boolean startWithLoad() {
+        return true;
+    }
 
-    protected abstract EasyRcvHolder<T> getItemHolder(int type);
+    protected void fetchData() {
+        if (mListener != null) {
+            mListener.fetchData(mCrtPage);
+        }
+    }
+
+    protected abstract EasyRcvHolder<T> getItemHolder(@NonNull ViewGroup parent, int type);
+
+    protected int getItemType(int position, T item) {
+        return 0;
+    }
 
     protected int getColCount() {
         return 1;
@@ -67,27 +97,48 @@ public abstract class BaseRcv<T> extends SmartRefreshLayout {
         return 8;
     }
 
-    protected void notifyFetchDataSuc(boolean loadMore, List<T> dataList) {
-        if (!loadMore) {
-            mDataList.clear();
-        }
-        mCrtPage++;
-        mDataList.addAll(dataList);
+    protected void filterList() {}
+
+    public void updateWithoutRefresh(List<T> list) {
+        mDataList.clear();
+        mDataList.addAll(list);
+
         mAdapter.notifyDataSetChanged();
-        boolean noMoreData = (dataList.size() < PAGE_SIZE);
-        if (loadMore) {
-            finishLoadMore();
-        } else {
-            finishRefresh();
+    }
+    public void updateRefresh() {
+        mAdapter.notifyDataSetChanged();
+    }
+    public void notifyFetchDataSuc(List<T> dataList) {
+        if(dataList!= null){
+            if (!mLoadMore) {
+                mDataList.clear();
+            }
+            mCrtPage++;
+            mDataList.addAll(dataList);
+            filterList();
+            mAdapter.notifyDataSetChanged();
+            boolean noMoreData = (dataList.size() < ScaffoldSetting.PAGE_SIZE);
+            if (mLoadMore) {
+                finishLoadMore();
+            } else {
+                finishRefresh();
+            }
+            setNoMoreData(noMoreData);
         }
-        setNoMoreData(noMoreData);
+
     }
 
-    protected void notifyFetchDataFail(boolean loadMore) {
-        if (loadMore) {
+    public void notifyFetchDataFail() {
+        if (mLoadMore) {
             finishLoadMore();
         } else {
             finishRefresh();
+        }
+    }
+
+    protected void callItemClick(T item, int position) {
+        if (mItemClickListener != null) {
+            mItemClickListener.onItemClicked(item, position);
         }
     }
 
@@ -95,13 +146,13 @@ public abstract class BaseRcv<T> extends SmartRefreshLayout {
         return new GridDividerItemDecoration(getContext(), getItemPadding());
     }
 
-    private void resetPage() {
+    protected void resetPage() {
         mCrtPage = 0;
     }
 
     private void init() {
         mContentView = new RecyclerView(getContext());
-        addView(mContentView);
+        addView(mContentView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         LinearLayoutManager layoutManager = new GridLayoutManager(getContext(), getColCount());
         mContentView.setLayoutManager(layoutManager);
@@ -111,10 +162,25 @@ public abstract class BaseRcv<T> extends SmartRefreshLayout {
 
         mAdapter = new EasyRcvAdapter<T>(getContext(), mDataList) {
             @Override
+            public int getItemViewType(int position) {
+                return getItemType(position, mDataList.get(position));
+            }
+
+            @Override
             protected EasyRcvHolder getHolder(@NonNull ViewGroup parent, int type) {
-                return getItemHolder(type);
+                return getItemHolder(parent, type);
             }
         };
         mContentView.setAdapter(mAdapter);
+    }
+
+    private FetchDataListener mListener;
+
+    public void setFetchDataListener(FetchDataListener listener) {
+        mListener = listener;
+    }
+
+    public interface FetchDataListener {
+        void fetchData(int crtPage);
     }
 }

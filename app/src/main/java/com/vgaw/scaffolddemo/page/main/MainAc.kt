@@ -1,4 +1,4 @@
-package com.vgaw.scaffolddemo.page
+package com.vgaw.scaffolddemo.page.main
 
 import android.Manifest
 import android.os.Build

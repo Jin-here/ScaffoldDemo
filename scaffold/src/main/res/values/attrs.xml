@@ -31,16 +31,22 @@
     </declare-styleable>
 
     <declare-styleable name="TitleLayout">
+        <!--标题-->
         <attr name="titleCaption" format="string"/>
+        <!--返回图标-->
         <attr name="titleBackIcon" format="reference"/>
+        <!--是否隐藏返回图标，默认不隐藏-->
         <attr name="titleHideBackIcon" format="boolean"/>
-        <attr name="titleMenu" format="string"/>
-        <attr name="titleMenuIcon" format="reference"/>
-        <attr name="titleMenuEnabled" format="boolean"/>
+        <!--菜单样式：文字/图标-->
         <attr name="titleMenuStyle" format="enum">
             <enum name="text" value="0"/>
             <enum name="button" value="1"/>
         </attr>
+        <!--菜单内容：文字/图标-->
+        <attr name="titleMenu" format="string|reference"/>
+        <!--菜单enabled-->
+        <attr name="titleMenuEnabled" format="boolean"/>
+        <!--是否是黑夜模式-->
         <attr name="titleDarkMode" format="boolean"/>
     </declare-styleable>
 
@@ -50,17 +56,26 @@
     </declare-styleable>
 
     <declare-styleable name="SettingItemView">
+        <!--标题-->
         <attr name="settingName" format="string"/>
+        <!--图标-->
         <attr name="settingIcon" format="reference"/>
+        <!--描述-->
         <attr name="settingDes" format="string"/>
+        <!--是否隐藏右侧箭头，默认不隐藏-->
         <attr name="settingHideArrow" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="SettingToggleView">
+        <!--标题-->
         <attr name="settingToggleName" format="string"/>
+        <!--图标-->
         <attr name="settingToggleIcon" format="reference"/>
+        <!--描述-->
         <attr name="settingToggleDes" format="string"/>
+        <!--开关状态：开启/关闭-->
         <attr name="settingToggled" format="boolean"/>
+        <!--样式：toggle，多选，单选-->
         <attr name="settingToggleStyle" format="enum">
             <enum name="toggle" value="0"/>
             <enum name="checkbox" value="1"/>
@@ -69,14 +84,22 @@
     </declare-styleable>
 
     <declare-styleable name="ImgTxtLayout">
+        <!--图标-->
         <attr name="imgTxtIcon" format="reference"/>
+        <!--图标背景-->
         <attr name="imgTxtIconBackground" format="reference"/>
+        <!--图标大小-->
         <attr name="imgTxtIconSize" format="dimension"/>
+        <!--标题-->
         <attr name="imgTxtName" format="string"/>
+        <!--标题颜色-->
         <attr name="imgTxtNameColor" format="color"/>
+        <!--标题字号-->
         <attr name="imgTxtNameSize" format="dimension"/>
+        <!--文字图片间距-->
         <attr name="imgTxtPadding" format="dimension"/>
-        <attr name="imgTxtIgnoreSelectWave" format="boolean"/>
+        <!--是否禁用点击波纹效果，默认不禁用-->
+        <attr name="imgTxtDisableSelectWave" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="CheckedImgTxtLayout">
